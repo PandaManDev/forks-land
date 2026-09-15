@@ -3,41 +3,89 @@
 <head>
   <meta charset="UTF-8">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-  <meta name="theme-color" content="#8b00ff">
+  <meta
+    name="theme-color"
+    content="#8b00ff"
+  >
 
   <meta
     name="description"
     content="Forks Land — Friends, Gaming, Chill & Good Vibes. Join the Forks Land Discord community."
   >
 
-  <meta property="og:title" content="Forks Land • Community">
+  <meta
+    property="og:title"
+    content="Forks Land • Community"
+  >
+
   <meta
     property="og:description"
     content="Friends • Gaming • Chill • Good Vibes • More"
   >
-  <meta property="og:image" content="banner.png">
-  <meta property="og:type" content="website">
+
+  <meta
+    property="og:image"
+    content="banner.png"
+  >
+
+  <meta
+    property="og:type"
+    content="website"
+  >
+
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  >
+
+  <meta
+    name="twitter:title"
+    content="Forks Land • Community"
+  >
+
+  <meta
+    name="twitter:description"
+    content="Friends • Gaming • Chill • Good Vibes • More"
+  >
+
+  <meta
+    name="twitter:image"
+    content="banner.png"
+  >
 
   <title>Forks Land • Community</title>
 
+
   <style>
+
+    /* =========================================
+       RESET
+    ========================================= */
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
+
     html {
       scroll-behavior: smooth;
     }
 
+
     body {
+
       min-height: 100vh;
+
       overflow-x: hidden;
 
-      color: white;
+      color: #ffffff;
 
       font-family:
         Inter,
@@ -50,47 +98,59 @@
         sans-serif;
 
       background:
+
         radial-gradient(
-          circle at 15% 15%,
-          rgba(180, 0, 255, 0.22),
+          circle at 15% 10%,
+          rgba(180, 0, 255, 0.23),
+          transparent 28%
+        ),
+
+        radial-gradient(
+          circle at 85% 25%,
+          rgba(75, 0, 255, 0.20),
           transparent 30%
         ),
-        radial-gradient(
-          circle at 85% 30%,
-          rgba(80, 0, 255, 0.18),
-          transparent 30%
-        ),
+
         radial-gradient(
           circle at 50% 100%,
-          rgba(255, 0, 220, 0.12),
+          rgba(255, 0, 220, 0.13),
           transparent 35%
         ),
+
         linear-gradient(
           135deg,
           #030006,
-          #0a0013 45%,
+          #0b0015 45%,
           #040007
         );
+
     }
 
+
+    /* Grid overlay */
+
     body::before {
+
       content: "";
 
       position: fixed;
+
       inset: 0;
 
       pointer-events: none;
 
-      opacity: 0.25;
+      opacity: 0.23;
 
       background-image:
+
         linear-gradient(
-          rgba(255, 255, 255, 0.025) 1px,
+          rgba(255,255,255,0.025) 1px,
           transparent 1px
         ),
+
         linear-gradient(
           90deg,
-          rgba(255, 255, 255, 0.025) 1px,
+          rgba(255,255,255,0.025) 1px,
           transparent 1px
         );
 
@@ -102,99 +162,163 @@
           black,
           transparent 90%
         );
+
+      z-index: -1;
+
     }
+
+
+    /* =========================================
+       CONTAINER
+    ========================================= */
 
     .container {
+
       width: min(1120px, 92%);
+
       margin: auto;
+
     }
 
-    /* =========================
+
+    /* =========================================
        NAVIGATION
-    ========================= */
+    ========================================= */
 
     nav {
+
       position: sticky;
+
       top: 0;
-      z-index: 100;
 
-      background: rgba(4, 0, 9, 0.75);
+      z-index: 1000;
 
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      background:
+        rgba(4, 0, 9, 0.78);
+
+      backdrop-filter:
+        blur(18px);
+
+      -webkit-backdrop-filter:
+        blur(18px);
 
       border-bottom:
-        1px solid rgba(210, 70, 255, 0.25);
+        1px solid
+        rgba(210, 70, 255, 0.25);
+
     }
 
+
     .nav-inner {
+
       height: 72px;
 
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
+
     }
 
+
     .brand {
+
       display: flex;
+
       align-items: center;
+
       gap: 12px;
 
       font-weight: 900;
+
       letter-spacing: 1px;
+
     }
 
+
     .brand img {
+
       width: 44px;
+
       height: 44px;
 
       object-fit: cover;
 
       border-radius: 50%;
 
-      border: 2px solid #b700ff;
+      border:
+        2px solid
+        #b700ff;
 
       box-shadow:
-        0 0 12px #9c00ff,
-        0 0 28px rgba(174, 0, 255, 0.5);
+
+        0 0 12px
+        #9c00ff,
+
+        0 0 28px
+        rgba(174, 0, 255, 0.5);
+
     }
+
 
     .brand span {
+
       font-size: 1.05rem;
+
     }
+
 
     .nav-links {
+
       display: flex;
-      gap: 26px;
+
+      gap: 25px;
+
     }
 
+
     .nav-links a {
+
       color: #ddd;
 
       text-decoration: none;
 
-      font-size: 0.92rem;
-      font-weight: 600;
+      font-size: 0.9rem;
+
+      font-weight: 650;
 
       transition: 0.2s;
+
     }
 
+
     .nav-links a:hover {
+
       color: #f04dff;
 
       text-shadow:
-        0 0 12px rgba(240, 77, 255, 0.7);
+        0 0 12px
+        rgba(240, 77, 255, 0.7);
+
     }
 
-    /* =========================
+
+    /* =========================================
        HERO
-    ========================= */
+    ========================================= */
 
     .hero {
-      padding: 42px 0 80px;
+
+      padding:
+        42px 0
+        80px;
+
     }
 
+
     .banner {
+
       position: relative;
 
       overflow: hidden;
@@ -202,16 +326,44 @@
       border-radius: 28px;
 
       border:
-        1px solid rgba(220, 76, 255, 0.4);
+        1px solid
+        rgba(220, 76, 255, 0.4);
 
       background: #06000c;
 
       box-shadow:
-        0 0 45px rgba(143, 0, 255, 0.25),
-        inset 0 0 40px rgba(0, 0, 0, 0.3);
+
+        0 0 45px
+        rgba(143, 0, 255, 0.25),
+
+        inset 0 0 40px
+        rgba(0,0,0,0.3);
+
     }
 
+
+    .banner::after {
+
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      background:
+        linear-gradient(
+          180deg,
+          transparent 55%,
+          rgba(0,0,0,0.3)
+        );
+
+      pointer-events: none;
+
+    }
+
+
     .banner img {
+
       display: block;
 
       width: 100%;
@@ -219,23 +371,32 @@
       aspect-ratio: 1024 / 325;
 
       object-fit: cover;
+
     }
+
 
     .hero-content {
+
       text-align: center;
 
-      padding: 38px 16px 0;
+      padding:
+        38px 16px 0;
+
     }
 
+
     .badge {
+
       display: inline-block;
 
-      padding: 8px 15px;
+      padding:
+        8px 15px;
 
       border-radius: 999px;
 
       border:
-        1px solid rgba(255, 72, 255, 0.4);
+        1px solid
+        rgba(255, 72, 255, 0.4);
 
       background:
         rgba(145, 0, 255, 0.12);
@@ -249,25 +410,40 @@
       letter-spacing: 2px;
 
       box-shadow:
-        0 0 18px rgba(174, 0, 255, 0.12);
+        0 0 18px
+        rgba(174,0,255,0.12);
+
     }
 
+
     h1 {
-      margin: 20px 0 16px;
+
+      margin:
+        20px 0
+        16px;
 
       font-size:
-        clamp(2.5rem, 7vw, 5.5rem);
+        clamp(
+          2.5rem,
+          7vw,
+          5.5rem
+        );
 
       line-height: 0.95;
 
       font-weight: 950;
 
       text-shadow:
-        0 0 30px rgba(213, 0, 255, 0.55);
+        0 0 30px
+        rgba(213,0,255,0.55);
+
     }
 
+
     .gradient-text {
+
       background:
+
         linear-gradient(
           90deg,
           #ffffff,
@@ -277,6 +453,7 @@
         );
 
       -webkit-background-clip: text;
+
       background-clip: text;
 
       color: transparent;
@@ -285,15 +462,22 @@
 
       animation:
         gradientMove 5s linear infinite;
+
     }
+
 
     @keyframes gradientMove {
+
       to {
-        background-position: 250% center;
+        background-position:
+          250% center;
       }
+
     }
 
+
     .description {
+
       max-width: 720px;
 
       margin: auto;
@@ -303,25 +487,33 @@
       font-size: 1.08rem;
 
       line-height: 1.7;
+
     }
 
-    /* =========================
+
+    /* =========================================
        BUTTONS
-    ========================= */
+    ========================================= */
 
     .buttons {
+
       display: flex;
 
       justify-content: center;
+
+      align-items: center;
 
       gap: 12px;
 
       flex-wrap: wrap;
 
       margin-top: 28px;
+
     }
 
+
     .button {
+
       display: inline-flex;
 
       align-items: center;
@@ -330,7 +522,8 @@
 
       gap: 9px;
 
-      padding: 14px 23px;
+      padding:
+        14px 23px;
 
       border-radius: 13px;
 
@@ -344,16 +537,25 @@
         transform 0.2s,
         filter 0.2s,
         box-shadow 0.2s;
+
     }
+
 
     .button:hover {
-      transform: translateY(-3px);
 
-      filter: brightness(1.12);
+      transform:
+        translateY(-3px);
+
+      filter:
+        brightness(1.12);
+
     }
 
+
     .primary {
+
       background:
+
         linear-gradient(
           135deg,
           #8500ff,
@@ -361,18 +563,26 @@
         );
 
       box-shadow:
-        0 0 25px rgba(210, 0, 255, 0.4);
+        0 0 25px
+        rgba(210,0,255,0.4);
+
     }
+
 
     .secondary {
+
       background:
-        rgba(255, 255, 255, 0.05);
+        rgba(255,255,255,0.05);
 
       border:
-        1px solid rgba(255, 255, 255, 0.13);
+        1px solid
+        rgba(255,255,255,0.13);
+
     }
 
+
     .status {
+
       display: inline-flex;
 
       align-items: center;
@@ -384,10 +594,15 @@
       color: #bcefc7;
 
       font-size: 0.85rem;
+
     }
 
-    .status-dot {
+
+    .status-dot,
+    .online-dot {
+
       width: 9px;
+
       height: 9px;
 
       border-radius: 50%;
@@ -395,52 +610,74 @@
       background: #48df72;
 
       box-shadow:
-        0 0 12px #48df72;
+        0 0 12px
+        #48df72;
+
     }
 
-    /* =========================
+
+    /* =========================================
        SECTIONS
-    ========================= */
+    ========================================= */
 
     section {
-      padding: 65px 0;
+
+      padding:
+        65px 0;
+
     }
 
+
     .section-title {
+
       text-align: center;
 
       margin-bottom: 30px;
+
     }
+
 
     .section-title h2 {
-      font-size: 2.1rem;
+
+      font-size:
+        2.1rem;
 
       margin-bottom: 8px;
+
     }
+
 
     .section-title p {
+
       color: #aaa;
+
     }
 
-    /* =========================
-       CARDS
-    ========================= */
+
+    /* =========================================
+       ABOUT CARDS
+    ========================================= */
 
     .cards {
+
       display: grid;
 
       grid-template-columns:
         repeat(3, 1fr);
 
       gap: 18px;
+
     }
 
+
     .card {
+
       padding: 26px;
 
       border-radius: 20px;
 
       background:
+
         linear-gradient(
           180deg,
           rgba(255,255,255,0.055),
@@ -448,232 +685,648 @@
         );
 
       border:
-        1px solid rgba(213, 80, 255, 0.18);
+        1px solid
+        rgba(213,80,255,0.18);
 
       box-shadow:
-        0 12px 35px rgba(0,0,0,0.25);
+        0 12px 35px
+        rgba(0,0,0,0.25);
 
       transition:
         transform 0.25s,
         border-color 0.25s,
         box-shadow 0.25s;
+
     }
+
 
     .card:hover {
-      transform: translateY(-5px);
+
+      transform:
+        translateY(-5px);
 
       border-color:
-        rgba(222, 85, 255, 0.45);
+        rgba(222,85,255,0.45);
 
       box-shadow:
-        0 15px 40px rgba(145, 0, 255, 0.16);
+        0 15px 40px
+        rgba(145,0,255,0.16);
+
     }
+
 
     .card-icon {
-      font-size: 2rem;
 
-      margin-bottom: 13px;
+      font-size:
+        2rem;
+
+      margin-bottom:
+        13px;
+
     }
+
 
     .card h3 {
-      margin-bottom: 9px;
+
+      margin-bottom:
+        9px;
+
     }
+
 
     .card p {
+
       color: #aaa;
 
-      line-height: 1.6;
+      line-height:
+        1.6;
+
     }
 
-    /* =========================
+
+    /* =========================================
+       LIVE DISCORD
+    ========================================= */
+
+    .discord-card {
+
+      width:
+        min(950px, 100%);
+
+      margin:
+        auto;
+
+      padding:
+        28px;
+
+      border-radius:
+        24px;
+
+      background:
+
+        linear-gradient(
+          135deg,
+          rgba(110,0,190,0.16),
+          rgba(20,5,35,0.75)
+        );
+
+      border:
+        1px solid
+        rgba(180,70,255,0.3);
+
+      box-shadow:
+        0 0 45px
+        rgba(120,0,255,0.12);
+
+    }
+
+
+    .discord-header {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 17px;
+
+      margin-bottom:
+        25px;
+
+    }
+
+
+    .discord-header img {
+
+      width: 78px;
+
+      height: 78px;
+
+      object-fit: cover;
+
+      border-radius: 22px;
+
+      border:
+        2px solid
+        rgba(200,80,255,0.55);
+
+      box-shadow:
+        0 0 25px
+        rgba(150,0,255,0.3);
+
+    }
+
+
+    .discord-header h3 {
+
+      margin:
+        0 0 7px;
+
+      font-size:
+        1.4rem;
+
+    }
+
+
+    .discord-status {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      color: #b8efc5;
+
+      font-size:
+        0.88rem;
+
+    }
+
+
+    .discord-stats {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 12px;
+
+    }
+
+
+    .discord-stat {
+
+      padding:
+        18px;
+
+      border-radius:
+        16px;
+
+      background:
+        rgba(0,0,0,0.25);
+
+      border:
+        1px solid
+        rgba(255,255,255,0.07);
+
+    }
+
+
+    .discord-stat-icon {
+
+      font-size:
+        1.35rem;
+
+    }
+
+
+    .discord-stat strong {
+
+      display: block;
+
+      margin-top:
+        6px;
+
+      font-size:
+        1.35rem;
+
+    }
+
+
+    .discord-stat span {
+
+      color: #8f8994;
+
+      font-size:
+        0.8rem;
+
+    }
+
+
+    .online-users {
+
+      margin-top:
+        24px;
+
+      padding-top:
+        22px;
+
+      border-top:
+        1px solid
+        rgba(255,255,255,0.08);
+
+    }
+
+
+    .online-users h4 {
+
+      margin-bottom:
+        14px;
+
+    }
+
+
+    .user-list {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 9px;
+
+    }
+
+
+    .discord-user {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      padding:
+        7px 11px 7px 7px;
+
+      border-radius:
+        999px;
+
+      background:
+        rgba(255,255,255,0.045);
+
+      border:
+        1px solid
+        rgba(255,255,255,0.08);
+
+      color: #ddd;
+
+      font-size:
+        0.84rem;
+
+    }
+
+
+    .discord-user img {
+
+      width:
+        29px;
+
+      height:
+        29px;
+
+      border-radius:
+        50%;
+
+      object-fit:
+        cover;
+
+    }
+
+
+    .discord-error {
+
+      color:
+        #999;
+
+      font-size:
+        0.88rem;
+
+      line-height:
+        1.5;
+
+    }
+
+
+    .discord-join {
+
+      display: flex;
+
+      width:
+        fit-content;
+
+      margin:
+        25px auto 0;
+
+      padding:
+        14px 25px;
+
+      border-radius:
+        13px;
+
+      color: white;
+
+      text-decoration:
+        none;
+
+      font-weight:
+        850;
+
+      background:
+
+        linear-gradient(
+          135deg,
+          #8500ff,
+          #ff18d4
+        );
+
+      box-shadow:
+        0 0 25px
+        rgba(210,0,255,0.35);
+
+      transition:
+        0.2s;
+
+    }
+
+
+    .discord-join:hover {
+
+      transform:
+        translateY(-3px);
+
+      filter:
+        brightness(1.12);
+
+    }
+
+
+    .refresh-text {
+
+      margin-top:
+        15px;
+
+      text-align:
+        center;
+
+      color:
+        #666;
+
+      font-size:
+        0.72rem;
+
+    }
+
+
+    /* =========================================
        RULES
-    ========================= */
+    ========================================= */
 
     .rules {
+
       display: grid;
 
       grid-template-columns:
         repeat(2, 1fr);
 
       gap: 14px;
+
     }
 
-    .rule {
-      padding: 20px;
 
-      border-radius: 16px;
+    .rule {
+
+      padding:
+        20px;
+
+      border-radius:
+        16px;
 
       background:
         rgba(255,255,255,0.035);
 
       border:
-        1px solid rgba(255,255,255,0.08);
+        1px solid
+        rgba(255,255,255,0.08);
 
-      transition: 0.2s;
+      transition:
+        0.2s;
+
     }
+
 
     .rule:hover {
+
       border-color:
-        rgba(213, 70, 255, 0.35);
+        rgba(213,70,255,0.35);
 
       background:
-        rgba(150, 0, 255, 0.06);
+        rgba(150,0,255,0.06);
+
     }
+
 
     .rule-title {
-      display: block;
 
-      margin-bottom: 7px;
+      display:
+        block;
 
-      color: #f1c6ff;
+      margin-bottom:
+        7px;
 
-      font-weight: 850;
+      color:
+        #f1c6ff;
 
-      font-size: 1rem;
+      font-weight:
+        850;
+
+      font-size:
+        1rem;
+
     }
+
 
     .rule-text {
-      color: #aaa;
 
-      line-height: 1.55;
+      color:
+        #aaa;
+
+      line-height:
+        1.55;
+
     }
 
-    /* =========================
-       HONEYPOT
-    ========================= */
+
+    /* =========================================
+       HONEYPOT BOX
+    ========================================= */
 
     .honeypot {
-      margin-top: 30px;
 
-      padding: 28px;
+      margin-top:
+        30px;
 
-      text-align: center;
+      padding:
+        30px;
 
-      border-radius: 22px;
+      text-align:
+        center;
+
+      border-radius:
+        22px;
 
       border:
-        1px solid rgba(255, 190, 50, 0.3);
+        1px solid
+        rgba(255,190,50,0.3);
 
       background:
+
         radial-gradient(
           circle at center,
-          rgba(255, 170, 0, 0.1),
+          rgba(255,170,0,0.1),
           transparent 65%
         ),
+
         rgba(255,255,255,0.025);
 
       box-shadow:
-        0 0 35px rgba(255, 170, 0, 0.07);
+        0 0 35px
+        rgba(255,170,0,0.07);
+
     }
+
 
     .honeypot h3 {
-      margin-bottom: 10px;
 
-      font-size: 1.35rem;
+      margin-bottom:
+        10px;
+
+      font-size:
+        1.35rem;
+
     }
+
 
     .honeypot p {
-      max-width: 700px;
 
-      margin: auto;
+      max-width:
+        720px;
 
-      color: #aaa;
+      margin:
+        auto;
 
-      line-height: 1.6;
+      color:
+        #aaa;
+
+      line-height:
+        1.6;
+
     }
 
-    /* =========================
-       JOIN
-    ========================= */
+
+    /* =========================================
+       JOIN SECTION
+    ========================================= */
 
     .join-box {
-      position: relative;
 
-      overflow: hidden;
+      position:
+        relative;
 
-      text-align: center;
+      overflow:
+        hidden;
 
-      padding: 60px 25px;
+      text-align:
+        center;
 
-      border-radius: 28px;
+      padding:
+        60px 25px;
+
+      border-radius:
+        28px;
 
       border:
-        1px solid rgba(222, 87, 255, 0.3);
+        1px solid
+        rgba(222,87,255,0.3);
 
       background:
+
         radial-gradient(
           circle at center,
-          rgba(164, 0, 255, 0.2),
+          rgba(164,0,255,0.2),
           transparent 65%
         ),
+
         rgba(255,255,255,0.035);
+
     }
 
-    .join-box::before {
-      content: "";
-
-      position: absolute;
-
-      width: 300px;
-      height: 300px;
-
-      top: -160px;
-      left: -100px;
-
-      border-radius: 50%;
-
-      background:
-        rgba(255, 0, 255, 0.08);
-
-      filter: blur(50px);
-    }
 
     .join-logo {
-      width: 105px;
-      height: 105px;
 
-      object-fit: cover;
+      width:
+        105px;
 
-      border-radius: 50%;
+      height:
+        105px;
+
+      object-fit:
+        cover;
+
+      border-radius:
+        50%;
 
       border:
-        3px solid #d83cff;
+        3px solid
+        #d83cff;
 
       box-shadow:
-        0 0 30px #9d00ff;
+        0 0 30px
+        #9d00ff;
 
-      margin-bottom: 18px;
+      margin-bottom:
+        18px;
+
     }
+
 
     .join-box h2 {
-      font-size: 2rem;
 
-      margin-bottom: 10px;
+      font-size:
+        2rem;
+
+      margin-bottom:
+        10px;
+
     }
 
-    /* =========================
+
+    /* =========================================
        FOOTER
-    ========================= */
+    ========================================= */
 
     footer {
-      padding: 35px 0 55px;
 
-      text-align: center;
+      padding:
+        35px 0
+        55px;
 
-      color: #777;
+      text-align:
+        center;
 
-      font-size: 0.9rem;
+      color:
+        #777;
+
+      font-size:
+        0.9rem;
+
     }
+
 
     .footer-name {
-      color: #b75cff;
 
-      font-weight: 800;
+      color:
+        #b75cff;
+
+      font-weight:
+        800;
+
     }
 
-    /* =========================
+
+    /* =========================================
        MOBILE
-    ========================= */
+    ========================================= */
 
     @media (max-width: 760px) {
 
@@ -681,79 +1334,175 @@
         display: none;
       }
 
+
       .hero {
-        padding-top: 22px;
+        padding-top:
+          22px;
       }
+
 
       .banner {
-        border-radius: 18px;
+        border-radius:
+          18px;
       }
+
 
       .hero-content {
-        padding-top: 28px;
+        padding-top:
+          28px;
       }
+
 
       .cards {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
+
       }
+
 
       .rules {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
+
       }
+
+
+      .discord-stats {
+
+        grid-template-columns:
+          repeat(2, 1fr);
+
+      }
+
+
+      .discord-card {
+
+        padding:
+          20px;
+
+      }
+
+
+      .discord-header {
+
+        align-items:
+          flex-start;
+
+      }
+
 
       h1 {
-        font-size: 3rem;
+
+        font-size:
+          3rem;
+
       }
+
 
       .description {
-        font-size: 1rem;
+
+        font-size:
+          1rem;
+
       }
 
+
       .button {
-        width: 100%;
-        max-width: 330px;
+
+        width:
+          100%;
+
+        max-width:
+          330px;
+
       }
+
+
+      .discord-join {
+
+        width:
+          100%;
+
+        justify-content:
+          center;
+
+      }
+
     }
+
+
   </style>
+
 </head>
+
 
 <body>
 
-  <!-- =========================
+
+  <!-- =========================================
        NAVIGATION
-  ========================== -->
+  ========================================== -->
 
   <nav>
+
     <div class="container nav-inner">
 
       <div class="brand">
+
         <img
           src="logo.webp"
           alt="Forks Land Logo"
         >
 
-        <span>FORKS LAND</span>
+        <span>
+          FORKS LAND
+        </span>
+
       </div>
 
+
       <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#rules">Rules</a>
-        <a href="#join">Join</a>
+
+        <a href="#about">
+          About
+        </a>
+
+        <a href="#discord">
+          Discord
+        </a>
+
+        <a href="#rules">
+          Rules
+        </a>
+
+        <a href="#join">
+          Join
+        </a>
+
       </div>
 
     </div>
+
   </nav>
 
 
-  <!-- =========================
-       HERO
-  ========================== -->
+  <!-- =========================================
+       MAIN
+  ========================================== -->
 
   <main>
+
+
+    <!-- =======================================
+         HERO
+    ======================================== -->
 
     <section class="hero">
 
       <div class="container">
+
 
         <div class="banner">
 
@@ -767,24 +1516,34 @@
 
         <div class="hero-content">
 
+
           <span class="badge">
             PANDA • COMMUNITY • GOOD VIBES
           </span>
 
+
           <h1>
+
             <span class="gradient-text">
               Welcome to Forks Land
             </span>
+
           </h1>
 
+
           <p class="description">
+
             Friends, gaming, chilling, and good vibes.
-            Come hang out, meet new people, share your interests,
-            and become part of the Forks Land community.
+
+            Come hang out, meet new people, share your
+            interests, and become part of the Forks Land
+            community.
+
           </p>
 
 
           <div class="buttons">
+
 
             <a
               class="button primary"
@@ -792,15 +1551,21 @@
               target="_blank"
               rel="noopener noreferrer"
             >
+
               💜 Join Forks Land
+
             </a>
+
 
             <a
               class="button secondary"
               href="#rules"
             >
+
               🍯 View Server Rules
+
             </a>
+
 
           </div>
 
@@ -813,6 +1578,7 @@
 
           </div>
 
+
         </div>
 
       </div>
@@ -820,13 +1586,15 @@
     </section>
 
 
-    <!-- =========================
+
+    <!-- =======================================
          ABOUT
-    ========================== -->
+    ======================================== -->
 
     <section id="about">
 
       <div class="container">
+
 
         <div class="section-title">
 
@@ -843,6 +1611,7 @@
 
         <div class="cards">
 
+
           <div class="card">
 
             <div class="card-icon">
@@ -855,10 +1624,12 @@
 
             <p>
               Find people to play with, share clips,
-              talk about games, and hang out in voice channels.
+              talk about games, and hang out in voice
+              channels.
             </p>
 
           </div>
+
 
 
           <div class="card">
@@ -873,10 +1644,12 @@
 
             <p>
               Meet new people, chat about your interests,
-              share content, and become part of the community.
+              share content, and become part of the
+              community.
             </p>
 
           </div>
+
 
 
           <div class="card">
@@ -896,6 +1669,7 @@
 
           </div>
 
+
         </div>
 
       </div>
@@ -903,13 +1677,211 @@
     </section>
 
 
-    <!-- =========================
+
+    <!-- =======================================
+         LIVE DISCORD
+    ======================================== -->
+
+    <section id="discord">
+
+      <div class="container">
+
+
+        <div class="section-title">
+
+          <h2>
+            🟣 Forks Land Live Discord
+          </h2>
+
+          <p>
+            Live information from the Forks Land Discord server.
+          </p>
+
+        </div>
+
+
+        <div class="discord-card">
+
+
+          <!-- SERVER HEADER -->
+
+          <div class="discord-header">
+
+
+            <img
+              id="discordIcon"
+              src="logo.webp"
+              alt="Forks Land Server Icon"
+            >
+
+
+            <div>
+
+              <h3 id="discordName">
+                Forks Land
+              </h3>
+
+
+              <div class="discord-status">
+
+                <span class="online-dot"></span>
+
+                <span id="discordStatus">
+                  Checking Discord...
+                </span>
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+
+
+          <!-- STATS -->
+
+          <div class="discord-stats">
+
+
+            <div class="discord-stat">
+
+              <div class="discord-stat-icon">
+                🟢
+              </div>
+
+              <strong id="onlineCount">
+                —
+              </strong>
+
+              <span>
+                Online Members
+              </span>
+
+            </div>
+
+
+
+            <div class="discord-stat">
+
+              <div class="discord-stat-icon">
+                👥
+              </div>
+
+              <strong id="shownCount">
+                —
+              </strong>
+
+              <span>
+                Users Shown
+              </span>
+
+            </div>
+
+
+
+            <div class="discord-stat">
+
+              <div class="discord-stat-icon">
+                🚀
+              </div>
+
+              <strong id="serverStatus">
+                —
+              </strong>
+
+              <span>
+                Server Status
+              </span>
+
+            </div>
+
+
+
+            <div class="discord-stat">
+
+              <div class="discord-stat-icon">
+                📅
+              </div>
+
+              <strong id="serverCreated">
+                —
+              </strong>
+
+              <span>
+                Server Created
+              </span>
+
+            </div>
+
+
+          </div>
+
+
+
+          <!-- ONLINE USERS -->
+
+          <div class="online-users">
+
+
+            <h4>
+              👤 Online in Forks Land
+            </h4>
+
+
+            <div
+              id="onlineUsers"
+              class="user-list"
+            >
+
+              <span class="discord-error">
+                Loading online members...
+              </span>
+
+            </div>
+
+
+          </div>
+
+
+
+          <!-- JOIN -->
+
+          <a
+            class="discord-join"
+            href="https://dc.gg/fork-lands"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+
+            💜 Join Forks Land
+
+          </a>
+
+
+          <div class="refresh-text">
+
+            Live data refreshes automatically.
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =======================================
          RULES
-    ========================== -->
+    ======================================== -->
 
     <section id="rules">
 
       <div class="container">
+
 
         <div class="section-title">
 
@@ -926,6 +1898,7 @@
 
         <div class="rules">
 
+
           <div class="rule">
 
             <span class="rule-title">
@@ -933,11 +1906,14 @@
             </span>
 
             <span class="rule-text">
+
               🚨 Think you found a secret channel?
               Think again.
+
             </span>
 
           </div>
+
 
 
           <div class="rule">
@@ -947,12 +1923,15 @@
             </span>
 
             <span class="rule-text">
+
               Forks Land has an active Honeypot System
               designed to catch unauthorized access,
               suspicious activity, and rule-breakers.
+
             </span>
 
           </div>
+
 
 
           <div class="rule">
@@ -962,11 +1941,14 @@
             </span>
 
             <span class="rule-text">
+
               Honeypot channels are monitored.
               Activity may be logged for Staff review.
+
             </span>
 
           </div>
+
 
 
           <div class="rule">
@@ -976,11 +1958,14 @@
             </span>
 
             <span class="rule-text">
+
               Activity inside monitored areas may be
               reviewed by the Forks Land Staff Team.
+
             </span>
 
           </div>
+
 
 
           <div class="rule">
@@ -990,11 +1975,14 @@
             </span>
 
             <span class="rule-text">
+
               Attempting to bypass permissions or access
               restricted areas may result in moderation action.
+
             </span>
 
           </div>
+
 
 
           <div class="rule">
@@ -1004,46 +1992,60 @@
             </span>
 
             <span class="rule-text">
+
               Stay safe. Follow the rules.
               Enjoy Forks Land!
+
             </span>
 
           </div>
 
+
         </div>
+
 
 
         <!-- HONEYPOT NOTICE -->
 
         <div class="honeypot">
 
+
           <h3>
             🍯 You might already be in the trap...
           </h3>
 
+
           <p>
+
             Forks Land uses monitored honeypot areas to help
             identify unauthorized access and suspicious activity.
+
             If you found this message unexpectedly,
             remember that restricted areas are monitored.
+
           </p>
 
+
         </div>
+
 
       </div>
 
     </section>
 
 
-    <!-- =========================
+
+    <!-- =======================================
          JOIN
-    ========================== -->
+    ======================================== -->
 
     <section id="join">
 
       <div class="container">
 
+
         <div class="join-box">
+
 
           <img
             class="join-logo"
@@ -1051,17 +2053,22 @@
             alt="Forks Land Logo"
           >
 
+
           <h2>
             Ready to join the Land?
           </h2>
 
+
           <p class="description">
+
             Grab an invite and come hang out
             with the Forks Land community.
+
           </p>
 
 
           <div class="buttons">
+
 
             <a
               class="button primary"
@@ -1069,10 +2076,14 @@
               target="_blank"
               rel="noopener noreferrer"
             >
+
               💜 Join the Discord
+
             </a>
 
+
           </div>
+
 
         </div>
 
@@ -1080,18 +2091,21 @@
 
     </section>
 
+
   </main>
 
 
-  <!-- =========================
+
+  <!-- =========================================
        FOOTER
-  ========================== -->
+  ========================================== -->
 
   <footer>
 
     <div class="container">
 
-      © <span id="year"></span>
+      ©
+      <span id="year"></span>
 
       <span class="footer-name">
         Forks Land
@@ -1104,12 +2118,425 @@
   </footer>
 
 
+
+  <!-- =========================================
+       DISCORD JAVASCRIPT
+  ========================================== -->
+
   <script>
+
+
+    /*
+    ============================================
+    FORKS LAND DISCORD SETTINGS
+    ============================================
+    */
+
+
+    const FORKS_LAND_SERVER_ID =
+      "1544159911875707003";
+
+
+    const FORKS_LAND_INVITE =
+      "https://dc.gg/fork-lands";
+
+
+
+    /*
+    ============================================
+    CURRENT YEAR
+    ============================================
+    */
 
     document.getElementById("year").textContent =
       new Date().getFullYear();
 
+
+
+    /*
+    ============================================
+    SERVER CREATION DATE
+
+    Discord server IDs are Snowflakes.
+    The creation date can be calculated from
+    the server ID.
+    ============================================
+    */
+
+    function getServerCreationDate(id) {
+
+      try {
+
+        const snowflake =
+          BigInt(id);
+
+
+        const discordEpoch =
+          1420070400000n;
+
+
+        const timestamp =
+          Number(
+            (snowflake >> 22n) +
+            discordEpoch
+          );
+
+
+        return new Date(timestamp)
+          .toLocaleDateString(
+            undefined,
+            {
+              year: "numeric",
+              month: "short",
+              day: "numeric"
+            }
+          );
+
+
+      } catch {
+
+        return "Unknown";
+
+      }
+
+    }
+
+
+
+    /*
+    ============================================
+    DISCORD OFFLINE STATE
+    ============================================
+    */
+
+    function showDiscordOffline() {
+
+      document.getElementById(
+        "discordStatus"
+      ).textContent =
+        "Widget unavailable";
+
+
+      document.getElementById(
+        "serverStatus"
+      ).textContent =
+        "Offline";
+
+
+      document.getElementById(
+        "serverCreated"
+      ).textContent =
+        getServerCreationDate(
+          FORKS_LAND_SERVER_ID
+        );
+
+
+      document.getElementById(
+        "onlineUsers"
+      ).innerHTML =
+
+        `
+          <span class="discord-error">
+            Discord live data is unavailable.
+            Make sure the Discord Server Widget
+            is enabled in Forks Land server settings.
+          </span>
+        `;
+
+    }
+
+
+
+    /*
+    ============================================
+    LOAD DISCORD SERVER DATA
+    ============================================
+    */
+
+    async function loadForksLandDiscord() {
+
+
+      const endpoint =
+
+        `https://discord.com/api/guilds/${FORKS_LAND_SERVER_ID}/widget.json`;
+
+
+
+      try {
+
+
+        const response =
+          await fetch(
+            endpoint,
+            {
+              cache: "no-store"
+            }
+          );
+
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            "Discord widget unavailable"
+          );
+
+        }
+
+
+
+        const data =
+          await response.json();
+
+
+
+        /*
+        SERVER NAME
+        */
+
+        document.getElementById(
+          "discordName"
+        ).textContent =
+          data.name ||
+          "Forks Land";
+
+
+
+        /*
+        SERVER ICON
+        */
+
+        if (data.icon_url) {
+
+          document.getElementById(
+            "discordIcon"
+          ).src =
+            data.icon_url;
+
+        }
+
+
+
+        /*
+        ONLINE MEMBER COUNT
+        */
+
+        document.getElementById(
+          "onlineCount"
+        ).textContent =
+
+          typeof data.presence_count ===
+          "number"
+
+            ? data.presence_count
+
+            : "—";
+
+
+
+        /*
+        USERS DISCORD IS SHOWING
+        */
+
+        const users =
+
+          Array.isArray(data.members)
+
+            ? data.members
+
+            : [];
+
+
+
+        document.getElementById(
+          "shownCount"
+        ).textContent =
+          users.length;
+
+
+
+        /*
+        SERVER STATUS
+        */
+
+        document.getElementById(
+          "serverStatus"
+        ).textContent =
+          "Online";
+
+
+
+        document.getElementById(
+          "discordStatus"
+        ).textContent =
+          "Discord server online";
+
+
+
+        /*
+        SERVER CREATION DATE
+        */
+
+        document.getElementById(
+          "serverCreated"
+        ).textContent =
+          getServerCreationDate(
+            FORKS_LAND_SERVER_ID
+          );
+
+
+
+        /*
+        ONLINE USER LIST
+        */
+
+        const userContainer =
+          document.getElementById(
+            "onlineUsers"
+          );
+
+
+
+        /*
+        Discord only exposes a limited
+        number of users through the widget.
+        */
+
+        const visibleUsers =
+          users.slice(0, 10);
+
+
+
+        if (
+          visibleUsers.length === 0
+        ) {
+
+
+          userContainer.innerHTML =
+
+            `
+              <span class="discord-error">
+                No online users are currently
+                shown by Discord.
+              </span>
+            `;
+
+
+        } else {
+
+
+          userContainer.innerHTML =
+            "";
+
+
+
+          visibleUsers.forEach(
+            user => {
+
+
+              const userElement =
+                document.createElement(
+                  "div"
+                );
+
+
+              userElement.className =
+                "discord-user";
+
+
+
+              const avatar =
+                document.createElement(
+                  "img"
+                );
+
+
+              avatar.src =
+                user.avatar_url ||
+                "logo.webp";
+
+
+              avatar.alt =
+                "";
+
+
+
+              const username =
+                document.createElement(
+                  "span"
+                );
+
+
+              username.textContent =
+                user.username ||
+                "Discord User";
+
+
+
+              userElement.appendChild(
+                avatar
+              );
+
+
+              userElement.appendChild(
+                username
+              );
+
+
+              userContainer.appendChild(
+                userElement
+              );
+
+
+            }
+          );
+
+
+        }
+
+
+      } catch (error) {
+
+
+        console.error(
+          "Forks Land Discord:",
+          error
+        );
+
+
+        showDiscordOffline();
+
+
+      }
+
+    }
+
+
+
+    /*
+    ============================================
+    LOAD DISCORD DATA
+    ============================================
+    */
+
+    loadForksLandDiscord();
+
+
+
+    /*
+    ============================================
+    REFRESH EVERY 60 SECONDS
+    ============================================
+    */
+
+    setInterval(
+      loadForksLandDiscord,
+      60000
+    );
+
+
   </script>
+
 
 </body>
 </html>
