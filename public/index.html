@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -18,6 +19,7 @@
     content="Forks Land — Friends, Gaming, Chill & Good Vibes. Join the Forks Land Discord community."
   >
 
+  <!-- Open Graph -->
   <meta
     property="og:title"
     content="Forks Land • Community"
@@ -38,6 +40,7 @@
     content="website"
   >
 
+  <!-- Twitter -->
   <meta
     name="twitter:card"
     content="summary_large_image"
@@ -63,14 +66,14 @@
 
   <style>
 
-    /* =========================================
+    /* ==================================================
        RESET
-    ========================================= */
+    ================================================== */
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
 
@@ -100,14 +103,14 @@
       background:
 
         radial-gradient(
-          circle at 15% 10%,
-          rgba(180, 0, 255, 0.23),
+          circle at 10% 5%,
+          rgba(180, 0, 255, 0.24),
           transparent 28%
         ),
 
         radial-gradient(
-          circle at 85% 25%,
-          rgba(75, 0, 255, 0.20),
+          circle at 90% 20%,
+          rgba(80, 0, 255, 0.20),
           transparent 30%
         ),
 
@@ -127,7 +130,9 @@
     }
 
 
-    /* Grid overlay */
+    /* ==================================================
+       BACKGROUND GRID
+    ================================================== */
 
     body::before {
 
@@ -139,7 +144,9 @@
 
       pointer-events: none;
 
-      opacity: 0.23;
+      z-index: -1;
+
+      opacity: 0.2;
 
       background-image:
 
@@ -156,21 +163,12 @@
 
       background-size: 42px 42px;
 
-      mask-image:
-        linear-gradient(
-          to bottom,
-          black,
-          transparent 90%
-        );
-
-      z-index: -1;
-
     }
 
 
-    /* =========================================
+    /* ==================================================
        CONTAINER
-    ========================================= */
+    ================================================== */
 
     .container {
 
@@ -181,9 +179,9 @@
     }
 
 
-    /* =========================================
+    /* ==================================================
        NAVIGATION
-    ========================================= */
+    ================================================== */
 
     nav {
 
@@ -273,6 +271,8 @@
 
       display: flex;
 
+      align-items: center;
+
       gap: 25px;
 
     }
@@ -304,15 +304,14 @@
     }
 
 
-    /* =========================================
+    /* ==================================================
        HERO
-    ========================================= */
+    ================================================== */
 
     .hero {
 
       padding:
-        42px 0
-        80px;
+        42px 0 80px;
 
     }
 
@@ -342,26 +341,6 @@
     }
 
 
-    .banner::after {
-
-      content: "";
-
-      position: absolute;
-
-      inset: 0;
-
-      background:
-        linear-gradient(
-          180deg,
-          transparent 55%,
-          rgba(0,0,0,0.3)
-        );
-
-      pointer-events: none;
-
-    }
-
-
     .banner img {
 
       display: block;
@@ -371,6 +350,26 @@
       aspect-ratio: 1024 / 325;
 
       object-fit: cover;
+
+    }
+
+
+    .banner::after {
+
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      background:
+        linear-gradient(
+          180deg,
+          transparent 55%,
+          rgba(0,0,0,0.3)
+        );
 
     }
 
@@ -396,10 +395,10 @@
 
       border:
         1px solid
-        rgba(255, 72, 255, 0.4);
+        rgba(255,72,255,0.4);
 
       background:
-        rgba(145, 0, 255, 0.12);
+        rgba(145,0,255,0.12);
 
       color: #e9bdff;
 
@@ -419,8 +418,7 @@
     h1 {
 
       margin:
-        20px 0
-        16px;
+        20px 0 16px;
 
       font-size:
         clamp(
@@ -452,13 +450,14 @@
           #ffffff
         );
 
+      background-size:
+        250% auto;
+
       -webkit-background-clip: text;
 
       background-clip: text;
 
       color: transparent;
-
-      background-size: 250% auto;
 
       animation:
         gradientMove 5s linear infinite;
@@ -469,8 +468,10 @@
     @keyframes gradientMove {
 
       to {
+
         background-position:
           250% center;
+
       }
 
     }
@@ -491,9 +492,9 @@
     }
 
 
-    /* =========================================
+    /* ==================================================
        BUTTONS
-    ========================================= */
+    ================================================== */
 
     .buttons {
 
@@ -598,8 +599,7 @@
     }
 
 
-    .status-dot,
-    .online-dot {
+    .status-dot {
 
       width: 9px;
 
@@ -616,9 +616,9 @@
     }
 
 
-    /* =========================================
+    /* ==================================================
        SECTIONS
-    ========================================= */
+    ================================================== */
 
     section {
 
@@ -642,21 +642,23 @@
       font-size:
         2.1rem;
 
-      margin-bottom: 8px;
+      margin-bottom:
+        8px;
 
     }
 
 
     .section-title p {
 
-      color: #aaa;
+      color:
+        #aaa;
 
     }
 
 
-    /* =========================================
+    /* ==================================================
        ABOUT CARDS
-    ========================================= */
+    ================================================== */
 
     .cards {
 
@@ -672,9 +674,11 @@
 
     .card {
 
-      padding: 26px;
+      padding:
+        26px;
 
-      border-radius: 20px;
+      border-radius:
+        20px;
 
       background:
 
@@ -736,7 +740,8 @@
 
     .card p {
 
-      color: #aaa;
+      color:
+        #aaa;
 
       line-height:
         1.6;
@@ -744,9 +749,9 @@
     }
 
 
-    /* =========================================
-       LIVE DISCORD
-    ========================================= */
+    /* ==================================================
+       DISCORD WIDGET
+    ================================================== */
 
     .discord-card {
 
@@ -762,6 +767,10 @@
       border-radius:
         24px;
 
+      border:
+        1px solid
+        rgba(180,70,255,0.3);
+
       background:
 
         linear-gradient(
@@ -769,10 +778,6 @@
           rgba(110,0,190,0.16),
           rgba(20,5,35,0.75)
         );
-
-      border:
-        1px solid
-        rgba(180,70,255,0.3);
 
       box-shadow:
         0 0 45px
@@ -790,20 +795,24 @@
       gap: 17px;
 
       margin-bottom:
-        25px;
+        24px;
 
     }
 
 
     .discord-header img {
 
-      width: 78px;
+      width:
+        78px;
 
-      height: 78px;
+      height:
+        78px;
 
-      object-fit: cover;
+      object-fit:
+        cover;
 
-      border-radius: 22px;
+      border-radius:
+        22px;
 
       border:
         2px solid
@@ -822,20 +831,23 @@
         0 0 7px;
 
       font-size:
-        1.4rem;
+        1.45rem;
 
     }
 
 
     .discord-status {
 
-      display: flex;
+      display:
+        flex;
 
-      align-items: center;
+      align-items:
+        center;
 
       gap: 8px;
 
-      color: #b8efc5;
+      color:
+        #b8efc5;
 
       font-size:
         0.88rem;
@@ -843,164 +855,73 @@
     }
 
 
-    .discord-stats {
-
-      display: grid;
-
-      grid-template-columns:
-        repeat(4, 1fr);
-
-      gap: 12px;
-
-    }
-
-
-    .discord-stat {
-
-      padding:
-        18px;
-
-      border-radius:
-        16px;
-
-      background:
-        rgba(0,0,0,0.25);
-
-      border:
-        1px solid
-        rgba(255,255,255,0.07);
-
-    }
-
-
-    .discord-stat-icon {
-
-      font-size:
-        1.35rem;
-
-    }
-
-
-    .discord-stat strong {
-
-      display: block;
-
-      margin-top:
-        6px;
-
-      font-size:
-        1.35rem;
-
-    }
-
-
-    .discord-stat span {
-
-      color: #8f8994;
-
-      font-size:
-        0.8rem;
-
-    }
-
-
-    .online-users {
-
-      margin-top:
-        24px;
-
-      padding-top:
-        22px;
-
-      border-top:
-        1px solid
-        rgba(255,255,255,0.08);
-
-    }
-
-
-    .online-users h4 {
-
-      margin-bottom:
-        14px;
-
-    }
-
-
-    .user-list {
-
-      display: flex;
-
-      flex-wrap: wrap;
-
-      gap: 9px;
-
-    }
-
-
-    .discord-user {
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 8px;
-
-      padding:
-        7px 11px 7px 7px;
-
-      border-radius:
-        999px;
-
-      background:
-        rgba(255,255,255,0.045);
-
-      border:
-        1px solid
-        rgba(255,255,255,0.08);
-
-      color: #ddd;
-
-      font-size:
-        0.84rem;
-
-    }
-
-
-    .discord-user img {
+    .online-dot {
 
       width:
-        29px;
+        9px;
 
       height:
-        29px;
+        9px;
 
       border-radius:
         50%;
 
-      object-fit:
-        cover;
+      background:
+        #48df72;
+
+      box-shadow:
+        0 0 12px
+        #48df72;
 
     }
 
 
-    .discord-error {
+    .discord-widget-wrapper {
 
-      color:
-        #999;
+      width:
+        100%;
 
-      font-size:
-        0.88rem;
+      overflow:
+        hidden;
 
-      line-height:
-        1.5;
+      border-radius:
+        18px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.08);
+
+      background:
+        #18191c;
+
+      box-shadow:
+        0 0 30px
+        rgba(0,0,0,0.35);
+
+    }
+
+
+    .discord-widget-wrapper iframe {
+
+      display:
+        block;
+
+      width:
+        100%;
+
+      height:
+        500px;
+
+      border:
+        0;
 
     }
 
 
     .discord-join {
 
-      display: flex;
+      display:
+        flex;
 
       width:
         fit-content;
@@ -1014,7 +935,8 @@
       border-radius:
         13px;
 
-      color: white;
+      color:
+        white;
 
       text-decoration:
         none;
@@ -1068,18 +990,20 @@
     }
 
 
-    /* =========================================
+    /* ==================================================
        RULES
-    ========================================= */
+    ================================================== */
 
     .rules {
 
-      display: grid;
+      display:
+        grid;
 
       grid-template-columns:
         repeat(2, 1fr);
 
-      gap: 14px;
+      gap:
+        14px;
 
     }
 
@@ -1147,9 +1071,9 @@
     }
 
 
-    /* =========================================
-       HONEYPOT BOX
-    ========================================= */
+    /* ==================================================
+       HONEYPOT
+    ================================================== */
 
     .honeypot {
 
@@ -1214,9 +1138,9 @@
     }
 
 
-    /* =========================================
-       JOIN SECTION
-    ========================================= */
+    /* ==================================================
+       JOIN
+    ================================================== */
 
     .join-box {
 
@@ -1291,15 +1215,14 @@
     }
 
 
-    /* =========================================
+    /* ==================================================
        FOOTER
-    ========================================= */
+    ================================================== */
 
     footer {
 
       padding:
-        35px 0
-        55px;
+        35px 0 55px;
 
       text-align:
         center;
@@ -1324,32 +1247,42 @@
     }
 
 
-    /* =========================================
+    /* ==================================================
        MOBILE
-    ========================================= */
+    ================================================== */
 
     @media (max-width: 760px) {
 
+
       .nav-links {
-        display: none;
+
+        display:
+          none;
+
       }
 
 
       .hero {
+
         padding-top:
           22px;
+
       }
 
 
       .banner {
+
         border-radius:
           18px;
+
       }
 
 
       .hero-content {
+
         padding-top:
           28px;
+
       }
 
 
@@ -1369,14 +1302,6 @@
       }
 
 
-      .discord-stats {
-
-        grid-template-columns:
-          repeat(2, 1fr);
-
-      }
-
-
       .discord-card {
 
         padding:
@@ -1389,6 +1314,14 @@
 
         align-items:
           flex-start;
+
+      }
+
+
+      .discord-widget-wrapper iframe {
+
+        height:
+          500px;
 
       }
 
@@ -1441,13 +1374,14 @@
 <body>
 
 
-  <!-- =========================================
+  <!-- ==================================================
        NAVIGATION
-  ========================================== -->
+  ================================================== -->
 
   <nav>
 
     <div class="container nav-inner">
+
 
       <div class="brand">
 
@@ -1483,21 +1417,23 @@
 
       </div>
 
+
     </div>
 
   </nav>
 
 
-  <!-- =========================================
+
+  <!-- ==================================================
        MAIN
-  ========================================== -->
+  ================================================== -->
 
   <main>
 
 
-    <!-- =======================================
+    <!-- ==================================================
          HERO
-    ======================================== -->
+    ================================================== -->
 
     <section class="hero">
 
@@ -1559,10 +1495,10 @@
 
             <a
               class="button secondary"
-              href="#rules"
+              href="#discord"
             >
 
-              🍯 View Server Rules
+              🟣 Live Discord
 
             </a>
 
@@ -1581,15 +1517,16 @@
 
         </div>
 
+
       </div>
 
     </section>
 
 
 
-    <!-- =======================================
+    <!-- ==================================================
          ABOUT
-    ======================================== -->
+    ================================================== -->
 
     <section id="about">
 
@@ -1623,9 +1560,11 @@
             </h3>
 
             <p>
+
               Find people to play with, share clips,
               talk about games, and hang out in voice
               channels.
+
             </p>
 
           </div>
@@ -1643,9 +1582,11 @@
             </h3>
 
             <p>
+
               Meet new people, chat about your interests,
               share content, and become part of the
               community.
+
             </p>
 
           </div>
@@ -1663,8 +1604,10 @@
             </h3>
 
             <p>
+
               Relax, listen to music, joke around,
               and enjoy your time in Forks Land.
+
             </p>
 
           </div>
@@ -1672,15 +1615,16 @@
 
         </div>
 
+
       </div>
 
     </section>
 
 
 
-    <!-- =======================================
+    <!-- ==================================================
          LIVE DISCORD
-    ======================================== -->
+    ================================================== -->
 
     <section id="discord">
 
@@ -1694,7 +1638,7 @@
           </h2>
 
           <p>
-            Live information from the Forks Land Discord server.
+            Live information directly from the Forks Land Discord.
           </p>
 
         </div>
@@ -1703,21 +1647,20 @@
         <div class="discord-card">
 
 
-          <!-- SERVER HEADER -->
+          <!-- Server Header -->
 
           <div class="discord-header">
 
 
             <img
-              id="discordIcon"
               src="logo.webp"
-              alt="Forks Land Server Icon"
+              alt="Forks Land Discord"
             >
 
 
             <div>
 
-              <h3 id="discordName">
+              <h3>
                 Forks Land
               </h3>
 
@@ -1726,9 +1669,7 @@
 
                 <span class="online-dot"></span>
 
-                <span id="discordStatus">
-                  Checking Discord...
-                </span>
+                Discord Community
 
               </div>
 
@@ -1739,113 +1680,27 @@
 
 
 
-          <!-- STATS -->
+          <!-- Official Discord Widget -->
 
-          <div class="discord-stats">
-
-
-            <div class="discord-stat">
-
-              <div class="discord-stat-icon">
-                🟢
-              </div>
-
-              <strong id="onlineCount">
-                —
-              </strong>
-
-              <span>
-                Online Members
-              </span>
-
-            </div>
+          <div class="discord-widget-wrapper">
 
 
-
-            <div class="discord-stat">
-
-              <div class="discord-stat-icon">
-                👥
-              </div>
-
-              <strong id="shownCount">
-                —
-              </strong>
-
-              <span>
-                Users Shown
-              </span>
-
-            </div>
-
-
-
-            <div class="discord-stat">
-
-              <div class="discord-stat-icon">
-                🚀
-              </div>
-
-              <strong id="serverStatus">
-                —
-              </strong>
-
-              <span>
-                Server Status
-              </span>
-
-            </div>
-
-
-
-            <div class="discord-stat">
-
-              <div class="discord-stat-icon">
-                📅
-              </div>
-
-              <strong id="serverCreated">
-                —
-              </strong>
-
-              <span>
-                Server Created
-              </span>
-
-            </div>
+            <iframe
+              src="https://discord.com/widget?id=1544159911875707003&theme=dark"
+              width="100%"
+              height="500"
+              allowtransparency="true"
+              frameborder="0"
+              sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+              title="Forks Land Discord Widget"
+            ></iframe>
 
 
           </div>
 
 
 
-          <!-- ONLINE USERS -->
-
-          <div class="online-users">
-
-
-            <h4>
-              👤 Online in Forks Land
-            </h4>
-
-
-            <div
-              id="onlineUsers"
-              class="user-list"
-            >
-
-              <span class="discord-error">
-                Loading online members...
-              </span>
-
-            </div>
-
-
-          </div>
-
-
-
-          <!-- JOIN -->
+          <!-- Join Button -->
 
           <a
             class="discord-join"
@@ -1861,12 +1716,13 @@
 
           <div class="refresh-text">
 
-            Live data refreshes automatically.
+            Powered by the official Discord server widget.
 
           </div>
 
 
         </div>
+
 
       </div>
 
@@ -1874,9 +1730,9 @@
 
 
 
-    <!-- =======================================
+    <!-- ==================================================
          RULES
-    ======================================== -->
+    ================================================== -->
 
     <section id="rules">
 
@@ -1894,6 +1750,7 @@
           </p>
 
         </div>
+
 
 
         <div class="rules">
@@ -2005,7 +1862,7 @@
 
 
 
-        <!-- HONEYPOT NOTICE -->
+        <!-- Honeypot Notice -->
 
         <div class="honeypot">
 
@@ -2035,9 +1892,9 @@
 
 
 
-    <!-- =======================================
+    <!-- ==================================================
          JOIN
-    ======================================== -->
+    ================================================== -->
 
     <section id="join">
 
@@ -2087,6 +1944,7 @@
 
         </div>
 
+
       </div>
 
     </section>
@@ -2096,9 +1954,9 @@
 
 
 
-  <!-- =========================================
+  <!-- ==================================================
        FOOTER
-  ========================================== -->
+  ================================================== -->
 
   <footer>
 
@@ -2119,420 +1977,39 @@
 
 
 
-  <!-- =========================================
-       DISCORD JAVASCRIPT
-  ========================================== -->
+  <!-- ==================================================
+       JAVASCRIPT
+  ================================================== -->
 
   <script>
 
-
     /*
-    ============================================
-    FORKS LAND DISCORD SETTINGS
-    ============================================
-    */
-
-
-    const FORKS_LAND_SERVER_ID =
-      "1544159911875707003";
-
-
-    const FORKS_LAND_INVITE =
-      "https://dc.gg/fork-lands";
-
-
-
-    /*
-    ============================================
+    ================================================
     CURRENT YEAR
-    ============================================
+    ================================================
     */
 
     document.getElementById("year").textContent =
       new Date().getFullYear();
 
 
-
     /*
-    ============================================
-    SERVER CREATION DATE
+    ================================================
+    DISCORD SERVER
+    ================================================
 
-    Discord server IDs are Snowflakes.
-    The creation date can be calculated from
-    the server ID.
-    ============================================
+    Server ID:
+    1544159911875707003
+
+    Invite:
+    https://dc.gg/fork-lands
+
+    The live Discord information is loaded through
+    Discord's official widget iframe above.
+
+    No Discord bot token is exposed here.
+    ================================================
     */
-
-    function getServerCreationDate(id) {
-
-      try {
-
-        const snowflake =
-          BigInt(id);
-
-
-        const discordEpoch =
-          1420070400000n;
-
-
-        const timestamp =
-          Number(
-            (snowflake >> 22n) +
-            discordEpoch
-          );
-
-
-        return new Date(timestamp)
-          .toLocaleDateString(
-            undefined,
-            {
-              year: "numeric",
-              month: "short",
-              day: "numeric"
-            }
-          );
-
-
-      } catch {
-
-        return "Unknown";
-
-      }
-
-    }
-
-
-
-    /*
-    ============================================
-    DISCORD OFFLINE STATE
-    ============================================
-    */
-
-    function showDiscordOffline() {
-
-      document.getElementById(
-        "discordStatus"
-      ).textContent =
-        "Widget unavailable";
-
-
-      document.getElementById(
-        "serverStatus"
-      ).textContent =
-        "Offline";
-
-
-      document.getElementById(
-        "serverCreated"
-      ).textContent =
-        getServerCreationDate(
-          FORKS_LAND_SERVER_ID
-        );
-
-
-      document.getElementById(
-        "onlineUsers"
-      ).innerHTML =
-
-        `
-          <span class="discord-error">
-            Discord live data is unavailable.
-            Make sure the Discord Server Widget
-            is enabled in Forks Land server settings.
-          </span>
-        `;
-
-    }
-
-
-
-    /*
-    ============================================
-    LOAD DISCORD SERVER DATA
-    ============================================
-    */
-
-    async function loadForksLandDiscord() {
-
-
-      const endpoint =
-
-        `https://discord.com/api/guilds/${FORKS_LAND_SERVER_ID}/widget.json`;
-
-
-
-      try {
-
-
-        const response =
-          await fetch(
-            endpoint,
-            {
-              cache: "no-store"
-            }
-          );
-
-
-
-        if (!response.ok) {
-
-          throw new Error(
-            "Discord widget unavailable"
-          );
-
-        }
-
-
-
-        const data =
-          await response.json();
-
-
-
-        /*
-        SERVER NAME
-        */
-
-        document.getElementById(
-          "discordName"
-        ).textContent =
-          data.name ||
-          "Forks Land";
-
-
-
-        /*
-        SERVER ICON
-        */
-
-        if (data.icon_url) {
-
-          document.getElementById(
-            "discordIcon"
-          ).src =
-            data.icon_url;
-
-        }
-
-
-
-        /*
-        ONLINE MEMBER COUNT
-        */
-
-        document.getElementById(
-          "onlineCount"
-        ).textContent =
-
-          typeof data.presence_count ===
-          "number"
-
-            ? data.presence_count
-
-            : "—";
-
-
-
-        /*
-        USERS DISCORD IS SHOWING
-        */
-
-        const users =
-
-          Array.isArray(data.members)
-
-            ? data.members
-
-            : [];
-
-
-
-        document.getElementById(
-          "shownCount"
-        ).textContent =
-          users.length;
-
-
-
-        /*
-        SERVER STATUS
-        */
-
-        document.getElementById(
-          "serverStatus"
-        ).textContent =
-          "Online";
-
-
-
-        document.getElementById(
-          "discordStatus"
-        ).textContent =
-          "Discord server online";
-
-
-
-        /*
-        SERVER CREATION DATE
-        */
-
-        document.getElementById(
-          "serverCreated"
-        ).textContent =
-          getServerCreationDate(
-            FORKS_LAND_SERVER_ID
-          );
-
-
-
-        /*
-        ONLINE USER LIST
-        */
-
-        const userContainer =
-          document.getElementById(
-            "onlineUsers"
-          );
-
-
-
-        /*
-        Discord only exposes a limited
-        number of users through the widget.
-        */
-
-        const visibleUsers =
-          users.slice(0, 10);
-
-
-
-        if (
-          visibleUsers.length === 0
-        ) {
-
-
-          userContainer.innerHTML =
-
-            `
-              <span class="discord-error">
-                No online users are currently
-                shown by Discord.
-              </span>
-            `;
-
-
-        } else {
-
-
-          userContainer.innerHTML =
-            "";
-
-
-
-          visibleUsers.forEach(
-            user => {
-
-
-              const userElement =
-                document.createElement(
-                  "div"
-                );
-
-
-              userElement.className =
-                "discord-user";
-
-
-
-              const avatar =
-                document.createElement(
-                  "img"
-                );
-
-
-              avatar.src =
-                user.avatar_url ||
-                "logo.webp";
-
-
-              avatar.alt =
-                "";
-
-
-
-              const username =
-                document.createElement(
-                  "span"
-                );
-
-
-              username.textContent =
-                user.username ||
-                "Discord User";
-
-
-
-              userElement.appendChild(
-                avatar
-              );
-
-
-              userElement.appendChild(
-                username
-              );
-
-
-              userContainer.appendChild(
-                userElement
-              );
-
-
-            }
-          );
-
-
-        }
-
-
-      } catch (error) {
-
-
-        console.error(
-          "Forks Land Discord:",
-          error
-        );
-
-
-        showDiscordOffline();
-
-
-      }
-
-    }
-
-
-
-    /*
-    ============================================
-    LOAD DISCORD DATA
-    ============================================
-    */
-
-    loadForksLandDiscord();
-
-
-
-    /*
-    ============================================
-    REFRESH EVERY 60 SECONDS
-    ============================================
-    */
-
-    setInterval(
-      loadForksLandDiscord,
-      60000
-    );
 
 
   </script>
