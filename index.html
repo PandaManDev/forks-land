@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#7b00ff">
+  <meta name="description" content="Forks Land — friends, gaming, chill, and good vibes. Join our Discord community.">
+  <meta property="og:title" content="Forks Land • Community">
+  <meta property="og:description" content="Friends • Gaming • Chill • Good Vibes • More">
+  <meta property="og:image" content="/banner.png">
+  <meta property="og:type" content="website">
+  <title>Forks Land • Community</title>
+  <style>
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;color:#fff;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(circle at 15% 15%,rgba(180,0,255,.20),transparent 28%),
+        radial-gradient(circle at 85% 35%,rgba(80,0,255,.18),transparent 30%),
+        linear-gradient(135deg,#050008,#0b0014 45%,#030006);
+      min-height:100vh;overflow-x:hidden;
+    }
+    body:before{
+      content:"";position:fixed;inset:0;pointer-events:none;opacity:.28;
+      background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+                       linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+      background-size:42px 42px;mask-image:linear-gradient(to bottom,black,transparent 90%);
+    }
+    .wrap{width:min(1120px,92%);margin:auto}
+    nav{
+      position:sticky;top:0;z-index:20;background:rgba(4,0,9,.72);
+      backdrop-filter:blur(18px);border-bottom:1px solid rgba(207,79,255,.22)
+    }
+    .navin{height:72px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.5px}
+    .brand img{width:42px;height:42px;object-fit:cover;border-radius:50%;box-shadow:0 0 22px #9b00ff}
+    .brand span{font-size:1.08rem}
+    .links{display:flex;gap:24px}
+    .links a{color:#ddd;text-decoration:none;font-size:.92rem}
+    .links a:hover{color:#ff54ff}
+    .hero{padding:42px 0 80px}
+    .banner{
+      position:relative;overflow:hidden;border-radius:28px;border:1px solid rgba(220,76,255,.38);
+      box-shadow:0 0 50px rgba(143,0,255,.24),inset 0 0 40px rgba(0,0,0,.25);
+      background:#07000d
+    }
+    .banner img{width:100%;display:block;aspect-ratio:1024/325;object-fit:cover}
+    .heroText{text-align:center;padding:36px 16px 0}
+    .pill{
+      display:inline-block;padding:8px 14px;border:1px solid rgba(255,72,255,.35);
+      background:rgba(145,0,255,.10);border-radius:999px;color:#e5b7ff;font-size:.78rem;
+      text-transform:uppercase;letter-spacing:2px
+    }
+    h1{font-size:clamp(2.4rem,7vw,5.4rem);line-height:.95;margin:18px 0 16px;
+       text-shadow:0 0 28px rgba(213,0,255,.55)}
+    .gradient{background:linear-gradient(90deg,#fff,#d98aff,#ff30e7,#fff);
+      -webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{max-width:700px;margin:auto;color:#cfc4d5;font-size:1.08rem;line-height:1.7}
+    .buttons{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:28px}
+    .btn{border:0;text-decoration:none;color:#fff;padding:14px 22px;border-radius:13px;
+      font-weight:800;display:inline-flex;align-items:center;gap:9px;transition:.2s;cursor:pointer}
+    .primary{background:linear-gradient(135deg,#8b00ff,#ff18d4);box-shadow:0 0 28px rgba(210,0,255,.35)}
+    .secondary{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12)}
+    .btn:hover{transform:translateY(-2px);filter:brightness(1.12)}
+    section{padding:62px 0}
+    .title{text-align:center;margin-bottom:30px}
+    .title h2{font-size:2rem;margin:0 0 8px}
+    .title p{color:#aaa;margin:0}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{
+      background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));
+      border:1px solid rgba(213,80,255,.18);border-radius:20px;padding:25px;
+      box-shadow:0 12px 35px rgba(0,0,0,.2)
+    }
+    .icon{font-size:2rem;margin-bottom:12px}
+    .card h3{margin:0 0 8px}.card p{color:#aaa;line-height:1.6;margin:0}
+    .rules{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .rule{padding:18px 20px;border-radius:16px;background:rgba(255,255,255,.035);
+      border:1px solid rgba(255,255,255,.08)}
+    .rule b{color:#f0c6ff}.rule span{color:#aaa}
+    .join{
+      text-align:center;padding:55px 24px;border-radius:28px;
+      background:radial-gradient(circle at center,rgba(164,0,255,.20),transparent 65%),
+                 rgba(255,255,255,.035);
+      border:1px solid rgba(222,87,255,.25)
+    }
+    .join img{width:100px;height:100px;object-fit:cover;border-radius:50%;
+      border:3px solid #d83cff;box-shadow:0 0 30px #9d00ff;margin-bottom:16px}
+    footer{padding:35px 0 55px;text-align:center;color:#777;font-size:.9rem}
+    .status{display:inline-flex;align-items:center;gap:8px;color:#bcefc7;font-size:.85rem;margin-top:16px}
+    .dot{width:9px;height:9px;background:#48df72;border-radius:50%;box-shadow:0 0 12px #48df72}
+    @media(max-width:760px){
+      .links{display:none}.grid{grid-template-columns:1fr}.rules{grid-template-columns:1fr}
+      .hero{padding-top:22px}.banner{border-radius:18px}.heroText{padding-top:28px}
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <div class="wrap navin">
+    <div class="brand"><img src="logo.webp" alt="Forks Land logo"><span>FORKS LAND</span></div>
+    <div class="links"><a href="#about">About</a><a href="#rules">Rules</a><a href="#join">Join</a></div>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="banner"><img src="banner.png" alt="Forks Land banner"></div>
+      <div class="heroText">
+        <span class="pill">Panda • Community • Good Vibes</span>
+        <h1><span class="gradient">Welcome to Forks Land</span></h1>
+        <p class="lead">A community for friends, gaming, chilling, and making good memories. Come hang out, meet people, and find your place in the Land.</p>
+        <div class="buttons">
+          <!-- Replace the # below with your Forks Land Discord invite -->
+          <a class="btn primary" href="#" id="joinBtn">💜 Join Forks Land</a>
+          <a class="btn secondary" href="#rules">📜 View Rules</a>
+        </div>
+        <div class="status"><span class="dot"></span> Community is open</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="title"><h2>What is Forks Land?</h2><p>Friends, gaming, chill & more.</p></div>
+      <div class="grid">
+        <div class="card"><div class="icon">🎮</div><h3>Gaming</h3><p>Find people to play with, share clips, talk games, and hang out in voice channels.</p></div>
+        <div class="card"><div class="icon">💬</div><h3>Community</h3><p>Chat, make friends, share your interests, and be part of an active community.</p></div>
+        <div class="card"><div class="icon">✨</div><h3>Good Vibes</h3><p>A relaxed place to chill, laugh, listen to music, and enjoy your time online.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rules">
+    <div class="wrap">
+      <div class="title"><h2>Server Rules</h2><p>Keep Forks Land fun and welcoming for everyone.</p></div>
+      <div class="rules">
+        <div class="rule"><b>01 · Respect everyone</b><br><span>No harassment, bullying, or targeted hate.</span></div>
+        <div class="rule"><b>02 · No spam</b><br><span>Keep chats readable and don't flood channels.</span></div>
+        <div class="rule"><b>03 · Follow Discord rules</b><br><span>Discord's Terms and Community Guidelines apply.</span></div>
+        <div class="rule"><b>04 · Use the right channels</b><br><span>Keep conversations where they belong.</span></div>
+        <div class="rule"><b>05 · No unauthorized access</b><br><span>Don't attempt to bypass permissions or access restricted areas.</span></div>
+        <div class="rule"><b>06 · Listen to Staff</b><br><span>Staff decisions and moderation requests should be respected.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="join">
+    <div class="wrap">
+      <div class="join">
+        <img src="logo.webp" alt="Forks Land">
+        <h2>Ready to join the Land?</h2>
+        <p class="lead">Grab an invite and come hang out with the Forks Land community.</p>
+        <div class="buttons"><a class="btn primary" href="#" id="joinBtn2">💜 Join the Discord</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div>© <span id="year"></span> Forks Land · Made for the community</div>
+</footer>
+
+<script>
+  const INVITE = ""; // Example: https://discord.gg/yourinvite
+  document.getElementById("year").textContent = new Date().getFullYear();
+  ["joinBtn","joinBtn2"].forEach(id => {
+    document.getElementById(id).addEventListener("click", e => {
+      e.preventDefault();
+      if (INVITE) location.href = INVITE;
+      else alert("Add your Discord invite in index.html: const INVITE = \"https://discord.gg/yourinvite\";");
+    });
+  });
+</script>
+</body>
+</html>
