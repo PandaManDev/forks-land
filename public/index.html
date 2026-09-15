@@ -1,2659 +1,1831 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#090611">
+
+<meta name="description" content="Forks Land — live Discord server status, members, uptime and system monitoring.">
+<meta property="og:title" content="Forks Land — Server Dashboard">
+<meta property="og:description" content="Live Forks Land Discord server status, members, uptime and system health.">
+<meta property="og:type" content="website">
+
+<title>Forks Land — Server Dashboard</title>
+
+<style>
+:root{
+  --bg:#08050f;
+  --panel:#120c1b;
+  --panel2:#1a1026;
+  --text:#f8f5ff;
+  --muted:#aaa0b8;
+  --border:rgba(255,255,255,.09);
+  --purple:#a855f7;
+  --purple2:#6d28d9;
+  --green:#4ade80;
+  --yellow:#facc15;
+  --red:#fb7185;
+  --radius:22px;
+  --shadow:0 25px 80px rgba(0,0,0,.45);
+}
+
+[data-theme="light"]{
+  --bg:#f5f2f8;
+  --panel:#ffffff;
+  --panel2:#f8f5fb;
+  --text:#18121d;
+  --muted:#716879;
+  --border:rgba(20,10,30,.1);
+  --shadow:0 20px 60px rgba(40,20,60,.15);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--text);
+  font-family:Inter,Arial,Helvetica,sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(168,85,247,.2),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 15%,
+      rgba(109,40,217,.2),
+      transparent 30%
+    ),
+    var(--bg);
+
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,.02) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.02) 1px,
+      transparent 1px
+    );
+
+  background-size:42px 42px;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button{
+  font:inherit;
+}
+
+.container{
+  width:min(1180px,calc(100% - 32px));
+  margin:auto;
+}
 
-  <meta name="theme-color" content="#0b0814">
-  <meta name="description" content="Forks Land — community, Discord server, rules, and live bot status.">
-
-  <meta property="og:title" content="Forks Land">
-  <meta property="og:description" content="Welcome to Forks Land — check the community, live Discord status, bot uptime, and server rules.">
-  <meta property="og:type" content="website">
-
-  <title>Forks Land — Community</title>
+/* NAV */
 
-  <link rel="icon" href="logo.webp">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:100;
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  >
-
-  <style>
-    :root {
-      --bg: #08060d;
-      --bg2: #0e0a18;
+  background:rgba(8,5,15,.75);
+  backdrop-filter:blur(18px);
 
-      --panel: rgba(20, 15, 30, 0.78);
-      --panel2: rgba(28, 20, 42, 0.88);
-
-      --border: rgba(183, 120, 255, 0.20);
-
-      --text: #f5f1fb;
-      --muted: #a99fb7;
-
-      --purple: #9b5cff;
-      --purple2: #6f35d8;
-
-      --green: #55d98a;
-      --red: #ff6262;
-      --amber: #f4b85b;
-
-      --shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
-    }
+  border-bottom:1px solid var(--border);
+}
 
-    html[data-theme="light"] {
-      --bg: #f5f2fa;
-      --bg2: #ebe6f4;
+[data-theme="light"] .topbar{
+  background:rgba(245,242,248,.8);
+}
 
-      --panel: rgba(255, 255, 255, 0.82);
-      --panel2: #ffffff;
+.nav{
+  height:72px;
 
-      --border: rgba(104, 61, 155, 0.18);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 
-      --text: #21182b;
-      --muted: #70677b;
+  gap:20px;
+}
 
-      --shadow: 0 20px 55px rgba(50, 30, 75, 0.13);
-    }
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
 
-    * {
-      box-sizing: border-box;
-    }
+  font-weight:900;
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+.brand img{
+  width:43px;
+  height:43px;
 
-    body {
-      margin: 0;
-      min-height: 100vh;
+  object-fit:cover;
 
-      color: var(--text);
+  border-radius:13px;
 
-      font-family:
-        Inter,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
+  border:1px solid var(--border);
 
-      background:
-        radial-gradient(
-          circle at 15% 0%,
-          rgba(155, 92, 255, 0.18),
-          transparent 34%
-        ),
-        radial-gradient(
-          circle at 90% 20%,
-          rgba(111, 53, 216, 0.14),
-          transparent 30%
-        ),
-        linear-gradient(
-          180deg,
-          var(--bg),
-          var(--bg2)
-        );
+  box-shadow:
+    0 0 30px rgba(168,85,247,.35);
+}
 
-      transition: 0.25s ease;
-    }
+.brand small{
+  display:block;
+  margin-top:2px;
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+  color:var(--muted);
 
-    button {
-      font: inherit;
-    }
+  font-size:10px;
+  font-weight:500;
+}
 
-    .container {
-      width: min(1120px, calc(100% - 32px));
-      margin: auto;
-    }
+.navlinks{
+  display:flex;
+  gap:20px;
 
-    /* NAV */
+  color:var(--muted);
+  font-size:14px;
+}
 
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
+.navlinks a:hover{
+  color:var(--text);
+}
 
-      backdrop-filter: blur(18px);
+.actions{
+  display:flex;
+  gap:7px;
+}
 
-      background:
-        color-mix(
-          in srgb,
-          var(--bg) 78%,
-          transparent
-        );
+.iconbtn,
+.btn{
+  border:1px solid var(--border);
+  background:var(--panel);
+  color:var(--text);
 
-      border-bottom: 1px solid var(--border);
-    }
+  border-radius:12px;
 
-    .nav-inner {
-      height: 70px;
+  padding:10px 14px;
 
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+  cursor:pointer;
 
-      gap: 20px;
-    }
+  transition:.2s;
+}
 
-    .brand {
-      display: flex;
-      align-items: center;
+.iconbtn:hover,
+.btn:hover{
+  transform:translateY(-1px);
 
-      gap: 11px;
+  border-color:rgba(168,85,247,.55);
+}
 
-      font-weight: 800;
-    }
+.btn.primary{
+  border:0;
 
-    .brand img {
-      width: 38px;
-      height: 38px;
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple),
+      var(--purple2)
+    );
 
-      border-radius: 12px;
+  font-weight:800;
+}
 
-      object-fit: cover;
+.btn.ghost{
+  background:transparent;
+}
 
-      border: 1px solid var(--border);
-    }
+/* HERO */
 
-    .brand span {
-      font-size: 15px;
-      letter-spacing: 0.2px;
-    }
+.hero{
+  padding:70px 0 35px;
+}
 
-    .links {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.35fr .65fr;
 
-    .links a,
-    .icon-btn {
-      border: 1px solid transparent;
+  gap:20px;
+}
 
-      padding: 9px 11px;
+.hero-card,
+.panel{
+  background:var(--panel);
 
-      border-radius: 10px;
+  border:1px solid var(--border);
 
-      color: var(--muted);
+  border-radius:var(--radius);
 
-      background: transparent;
+  box-shadow:var(--shadow);
 
-      cursor: pointer;
+  backdrop-filter:blur(18px);
+}
 
-      transition: 0.2s;
-    }
+.hero-card{
+  position:relative;
+  overflow:hidden;
 
-    .links a:hover,
-    .icon-btn:hover {
-      color: var(--text);
+  padding:35px;
+}
 
-      background: var(--panel);
+.hero-card::after{
+  content:"";
 
-      border-color: var(--border);
-    }
+  position:absolute;
 
-    .menu {
-      display: none;
-    }
+  width:350px;
+  height:350px;
 
-    /* HERO */
+  right:-160px;
+  top:-160px;
 
-    .hero {
-      padding: 44px 0 28px;
-    }
+  background:
+    radial-gradient(
+      circle,
+      rgba(168,85,247,.3),
+      transparent 65%
+    );
+}
 
-    .hero-card {
-      min-height: 450px;
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
 
-      border: 1px solid var(--border);
+  padding:8px 12px;
 
-      border-radius: 28px;
+  border:1px solid var(--border);
 
-      overflow: hidden;
+  border-radius:999px;
 
-      position: relative;
+  color:var(--muted);
 
-      display: flex;
-      align-items: flex-end;
+  font-size:12px;
+}
 
-      background: var(--panel);
+.pulse,
+.live-dot{
+  width:8px;
+  height:8px;
 
-      box-shadow: var(--shadow);
-    }
+  border-radius:50%;
 
-    .hero-card::before {
-      content: "";
+  background:var(--green);
 
-      position: absolute;
+  box-shadow:0 0 15px var(--green);
+}
 
-      inset: 0;
+h1{
+  font-size:clamp(42px,7vw,76px);
 
-      background:
-        linear-gradient(
-          90deg,
-          rgba(8, 6, 13, 0.96) 0%,
-          rgba(8, 6, 13, 0.68) 42%,
-          rgba(8, 6, 13, 0.22) 100%
-        ),
-        linear-gradient(
-          0deg,
-          rgba(8, 6, 13, 0.82),
-          transparent 55%
-        ),
-        url("banner.png") center / cover;
+  line-height:.95;
 
-      filter: saturate(1.05);
-    }
+  letter-spacing:-.06em;
 
-    .hero-content {
-      position: relative;
+  margin:24px 0 18px;
+}
 
-      z-index: 1;
+.gradient{
+  background:
+    linear-gradient(
+      90deg,
+      #fff,
+      #d8b4ff,
+      #a855f7
+    );
 
-      max-width: 660px;
+  -webkit-background-clip:text;
+  background-clip:text;
 
-      padding: 54px;
-    }
+  color:transparent;
+}
 
-    .eyebrow {
-      display: inline-flex;
+.hero p{
+  max-width:720px;
 
-      gap: 8px;
+  color:var(--muted);
 
-      align-items: center;
+  font-size:17px;
 
-      color: #d9c6ff;
+  line-height:1.7;
 
-      background: rgba(155, 92, 255, 0.12);
+  margin-bottom:25px;
+}
 
-      border: 1px solid var(--border);
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
 
-      padding: 7px 11px;
+  gap:10px;
+}
 
-      border-radius: 999px;
+/* SERVER CARD */
 
-      font-size: 12px;
+.server-card{
+  padding:26px;
 
-      font-weight: 700;
-    }
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
 
-    .eyebrow i {
-      width: 7px;
-      height: 7px;
+.server-top{
+  display:flex;
+  align-items:center;
 
-      background: var(--green);
+  gap:14px;
+}
 
-      border-radius: 50%;
+.server-icon{
+  width:75px;
+  height:75px;
 
-      box-shadow: 0 0 12px var(--green);
-    }
+  border-radius:20px;
 
-    h1 {
-      font-size: clamp(42px, 7vw, 76px);
+  object-fit:cover;
 
-      line-height: 0.98;
+  background:#17101f;
 
-      margin: 18px 0 15px;
+  border:1px solid var(--border);
+}
 
-      letter-spacing: -3px;
-    }
+.server-card h2{
+  margin:0 0 5px;
 
-    .hero p {
-      font-size: 17px;
+  font-size:22px;
+}
 
-      line-height: 1.7;
+.live-pill{
+  display:flex;
+  align-items:center;
+  gap:7px;
 
-      color: #d2cadb;
+  color:var(--green);
 
-      max-width: 600px;
+  font-size:12px;
+  font-weight:800;
+}
 
-      margin: 0 0 26px;
-    }
+/* SECTIONS */
 
-    .actions {
-      display: flex;
+.section{
+  padding:18px 0;
+}
 
-      flex-wrap: wrap;
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
 
-      gap: 10px;
-    }
+  gap:15px;
 
-    .btn {
-      display: inline-flex;
+  margin:18px 0;
+}
 
-      align-items: center;
-      justify-content: center;
+.section-head h2{
+  margin:0;
 
-      gap: 8px;
+  font-size:25px;
+}
 
-      padding: 12px 17px;
+.section-head p{
+  margin:6px 0 0;
 
-      border-radius: 12px;
+  color:var(--muted);
 
-      border: 1px solid var(--border);
+  font-size:14px;
+}
 
-      font-weight: 700;
+.grid{
+  display:grid;
+  gap:14px;
+}
 
-      transition: 0.2s;
+/* STATS */
 
-      cursor: pointer;
-    }
+.stats{
+  grid-template-columns:repeat(4,1fr);
+}
 
-    .btn.primary {
-      background:
-        linear-gradient(
-          135deg,
-          var(--purple),
-          var(--purple2)
-        );
+.stat{
+  padding:22px;
+}
 
-      border-color: transparent;
+.stat-label{
+  color:var(--muted);
 
-      color: white;
+  font-size:11px;
 
-      box-shadow:
-        0 10px 28px
-        rgba(111, 53, 216, 0.28);
-    }
+  text-transform:uppercase;
 
-    .btn.secondary {
-      background: rgba(255, 255, 255, 0.06);
+  letter-spacing:.1em;
+}
 
-      backdrop-filter: blur(8px);
-    }
+.stat-value{
+  margin-top:9px;
 
-    .btn:hover {
-      transform: translateY(-2px);
-    }
+  font-size:31px;
 
-    /* SECTIONS */
+  font-weight:900;
+}
 
-    section {
-      padding: 44px 0;
-    }
+.stat-sub{
+  margin-top:5px;
 
-    .section-head {
-      display: flex;
+  color:var(--muted);
 
-      justify-content: space-between;
+  font-size:12px;
+}
 
-      align-items: end;
+/* OFFLINE */
 
-      gap: 20px;
+.offline-banner{
+  display:none;
 
-      margin-bottom: 20px;
-    }
+  margin:14px 0;
 
-    .section-head h2 {
-      font-size: 30px;
+  padding:14px;
 
-      margin: 0;
+  border-radius:14px;
 
-      letter-spacing: -1px;
-    }
+  border:1px solid rgba(251,113,133,.25);
 
-    .section-head p {
-      margin: 6px 0 0;
+  background:rgba(251,113,133,.08);
 
-      color: var(--muted);
-    }
+  color:var(--red);
 
-    .grid {
-      display: grid;
+  font-size:13px;
+}
 
-      grid-template-columns:
-        repeat(3, 1fr);
+/* UPTIME */
 
-      gap: 15px;
-    }
+.uptime{
+  padding:25px;
 
-    .card {
-      border: 1px solid var(--border);
+  margin-top:14px;
+}
 
-      background: var(--panel);
+.uptime-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 
-      border-radius: 18px;
+  gap:20px;
+}
 
-      padding: 22px;
+.uptime-main{
+  color:var(--muted);
 
-      box-shadow:
-        0 12px 35px
-        rgba(0, 0, 0, 0.16);
+  font-size:13px;
+}
 
-      backdrop-filter: blur(12px);
-    }
+.health{
+  margin-top:5px;
 
-    .card h3 {
-      margin: 0 0 8px;
+  font-size:17px;
 
-      font-size: 17px;
-    }
+  font-weight:900;
+}
 
-    .card p {
-      margin: 0;
+.health.online{
+  color:var(--green);
+}
 
-      color: var(--muted);
+.health.offline{
+  color:var(--red);
+}
 
-      line-height: 1.65;
-    }
+.health.reconnecting{
+  color:var(--yellow);
+}
 
-    /* DISCORD */
+.timer{
+  display:flex;
 
-    .live-grid {
-      display: grid;
+  gap:9px;
 
-      grid-template-columns:
-        1.05fr 0.95fr;
+  flex-wrap:wrap;
 
-      gap: 18px;
+  margin-top:18px;
+}
 
-      align-items: stretch;
-    }
+.timebox{
+  flex:1;
 
-    .widget {
-      padding: 12px;
+  min-width:90px;
 
-      overflow: hidden;
-    }
+  padding:16px;
 
-    .widget iframe {
-      display: block;
+  text-align:center;
 
-      width: 100%;
+  background:var(--panel2);
 
-      height: 420px;
+  border:1px solid var(--border);
 
-      border: 0;
+  border-radius:16px;
+}
 
-      border-radius: 12px;
-    }
+.timebox strong{
+  display:block;
 
-    /* STATUS */
+  font-size:30px;
+}
 
-    .status-card {
-      padding: 25px;
-    }
+.timebox span{
+  color:var(--muted);
 
-    .status-top {
-      display: flex;
+  font-size:10px;
 
-      align-items: center;
+  text-transform:uppercase;
 
-      justify-content: space-between;
+  letter-spacing:.1em;
+}
 
-      gap: 15px;
+/* SYSTEM */
 
-      margin-bottom: 20px;
-    }
+.status-grid{
+  grid-template-columns:repeat(3,1fr);
+}
 
-    .status-label {
-      font-size: 12px;
+.status-card{
+  padding:20px;
+}
 
-      color: var(--muted);
+.status-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 
-      text-transform: uppercase;
+  gap:10px;
+}
 
-      letter-spacing: 1.2px;
-    }
+.status-title{
+  font-weight:800;
+}
 
-    .status-pill {
-      display: inline-flex;
+.status-value{
+  display:flex;
+  align-items:center;
+  gap:7px;
 
-      align-items: center;
+  font-size:12px;
 
-      gap: 9px;
+  font-weight:800;
+}
 
-      border: 1px solid var(--border);
+.status-indicator{
+  width:9px;
+  height:9px;
 
-      padding: 8px 12px;
+  border-radius:50%;
 
-      border-radius: 999px;
+  background:var(--green);
 
-      background: var(--panel2);
+  box-shadow:0 0 12px var(--green);
+}
 
-      font-size: 13px;
+.status-indicator.warn{
+  background:var(--yellow);
+  box-shadow:0 0 12px var(--yellow);
+}
 
-      white-space: nowrap;
-    }
+.status-indicator.bad{
+  background:var(--red);
+  box-shadow:0 0 12px var(--red);
+}
 
-    .dot {
-      width: 8px;
-      height: 8px;
+.status-meta{
+  margin-top:13px;
 
-      border-radius: 50%;
+  color:var(--muted);
 
-      background: #777;
-    }
+  font-size:12px;
 
-    .dot.online {
-      background: var(--green);
+  line-height:1.6;
+}
 
-      box-shadow:
-        0 0 12px var(--green);
-    }
+/* GRAPH */
 
-    .dot.offline {
-      background: var(--red);
+.graph{
+  padding:20px;
+}
 
-      box-shadow:
-        0 0 12px var(--red);
-    }
+canvas{
+  width:100%;
+  height:180px;
 
-    .dot.reconnecting {
-      background: var(--amber);
+  display:block;
+}
 
-      animation: pulse 1.1s infinite;
-    }
+/* MEMBERS */
 
-    @keyframes pulse {
-      50% {
-        opacity: 0.35;
-      }
-    }
+.members{
+  grid-template-columns:1.2fr .8fr;
+}
 
-    .uptime {
-      display: grid;
+.member-list,
+.info{
+  padding:20px;
+}
 
-      grid-template-columns:
-        repeat(4, 1fr);
+.member-row{
+  display:flex;
+  align-items:center;
 
-      gap: 10px;
+  gap:11px;
 
-      margin: 15px 0 18px;
-    }
+  padding:11px 0;
 
-    .unit,
-    .stat {
-      background: var(--panel2);
+  border-bottom:1px solid var(--border);
+}
 
-      border: 1px solid var(--border);
+.member-row:last-child{
+  border-bottom:0;
+}
 
-      border-radius: 13px;
+.avatar{
+  width:38px;
+  height:38px;
 
-      text-align: center;
+  border-radius:50%;
 
-      padding: 15px 8px;
-    }
+  object-fit:cover;
 
-    .num {
-      font-size: 28px;
+  background:#2a1d37;
+}
 
-      font-weight: 800;
+.member-name{
+  font-size:14px;
+  font-weight:800;
+}
 
-      letter-spacing: -1px;
+.member-tag{
+  color:var(--muted);
 
-      color: var(--purple);
-    }
+  font-size:11px;
+}
 
-    .unit small,
-    .stat small {
-      display: block;
+.online-dot{
+  margin-left:auto;
 
-      color: var(--muted);
+  width:8px;
+  height:8px;
 
-      font-size: 10px;
+  border-radius:50%;
 
-      text-transform: uppercase;
+  background:var(--green);
 
-      letter-spacing: 1px;
+  box-shadow:0 0 12px var(--green);
+}
 
-      margin-top: 4px;
-    }
+.info-row{
+  display:flex;
+  justify-content:space-between;
 
-    .stats {
-      display: grid;
+  gap:20px;
 
-      grid-template-columns:
-        repeat(3, 1fr);
+  padding:14px 0;
 
-      gap: 10px;
-    }
+  border-bottom:1px solid var(--border);
 
-    .stat strong {
-      display: block;
+  font-size:13px;
+}
 
-      font-size: 15px;
+.info-row:last-child{
+  border-bottom:0;
+}
 
-      overflow-wrap: anywhere;
-    }
+.info-row span{
+  color:var(--muted);
+}
 
-    .offline {
-      display: none;
+/* DISCORD */
 
-      margin-top: 14px;
+.widget-wrap{
+  overflow:hidden;
+}
 
-      padding: 11px 13px;
+.widget{
+  display:block;
 
-      border-radius: 11px;
+  width:100%;
+  height:500px;
 
-      background: rgba(255, 98, 98, 0.09);
+  border:0;
 
-      border:
-        1px solid
-        rgba(255, 98, 98, 0.25);
+  background:#111;
+}
 
-      color: #ffb1b1;
+/* TOOLBAR */
 
-      font-size: 13px;
-    }
+.toolbar{
+  display:flex;
+  flex-wrap:wrap;
 
-    .is-offline .offline {
-      display: block;
-    }
+  gap:8px;
+}
 
-    /* RULES */
+/* FOOTER */
 
-    .rules {
-      display: grid;
+.footer{
+  padding:40px 0 60px;
 
-      grid-template-columns:
-        1fr 1fr;
+  text-align:center;
 
-      gap: 15px;
-    }
+  color:var(--muted);
 
-    .rule {
-      display: flex;
+  font-size:12px;
+}
 
-      gap: 14px;
-    }
+/* TOAST */
 
-    .rule-num {
-      width: 32px;
-      height: 32px;
+.toast{
+  position:fixed;
 
-      flex: 0 0 32px;
+  right:18px;
+  bottom:18px;
 
-      display: grid;
+  z-index:200;
 
-      place-items: center;
+  padding:12px 15px;
 
-      border-radius: 9px;
+  background:#181020;
 
-      background:
-        rgba(155, 92, 255, 0.12);
+  color:white;
 
-      color: #c9a8ff;
+  border:1px solid var(--border);
 
-      font-weight: 800;
-    }
+  border-radius:13px;
 
-    .rule h3 {
-      margin: 0 0 5px;
+  opacity:0;
 
-      font-size: 15px;
-    }
+  transform:translateY(12px);
 
-    .rule p {
-      margin: 0;
+  pointer-events:none;
 
-      color: var(--muted);
+  transition:.25s;
+}
 
-      line-height: 1.6;
+.toast.show{
+  opacity:1;
 
-      font-size: 14px;
-    }
+  transform:none;
+}
 
-    .honeypot {
-      border-color:
-        rgba(244, 184, 91, 0.28);
+/* MODAL */
 
-      background:
-        linear-gradient(
-          135deg,
-          rgba(244, 184, 91, 0.08),
-          var(--panel)
-        );
-    }
+.modal{
+  position:fixed;
+  inset:0;
 
-    .honeypot .rule-num {
-      background:
-        rgba(244, 184, 91, 0.12);
+  z-index:150;
 
-      color: var(--amber);
-    }
+  display:none;
 
-    /* JOIN */
+  align-items:center;
+  justify-content:center;
 
-    .join {
-      padding: 45px;
+  padding:20px;
 
-      text-align: center;
+  background:rgba(0,0,0,.65);
+}
 
-      border:
-        1px solid
-        var(--border);
+.modal.show{
+  display:flex;
+}
 
-      border-radius: 24px;
+.modal-card{
+  width:min(500px,100%);
 
-      background:
-        linear-gradient(
-          135deg,
-          rgba(155, 92, 255, 0.11),
-          var(--panel)
-        );
+  padding:24px;
 
-      box-shadow: var(--shadow);
-    }
+  background:var(--panel);
 
-    .join h2 {
-      margin: 0 0 9px;
+  border:1px solid var(--border);
 
-      font-size: 32px;
-    }
+  border-radius:22px;
 
-    .join p {
-      color: var(--muted);
+  box-shadow:var(--shadow);
+}
 
-      margin:
-        0 auto 22px;
+.modal-head{
+  display:flex;
 
-      max-width: 600px;
+  align-items:center;
 
-      line-height: 1.7;
-    }
+  justify-content:space-between;
+}
 
-    footer {
-      padding: 28px 0 40px;
+.setting{
+  display:flex;
 
-      color: var(--muted);
+  align-items:center;
+  justify-content:space-between;
 
-      font-size: 12px;
+  gap:20px;
 
-      text-align: center;
-    }
+  padding:17px 0;
 
-    /* SETTINGS */
+  border-bottom:1px solid var(--border);
+}
 
-    .settings {
-      position: fixed;
+.setting b{
+  display:block;
+}
 
-      inset: 0;
+.setting span{
+  display:block;
 
-      z-index: 100;
+  margin-top:3px;
 
-      display: none;
+  color:var(--muted);
 
-      background:
-        rgba(0, 0, 0, 0.6);
+  font-size:12px;
+}
 
-      backdrop-filter: blur(9px);
-    }
+select{
+  padding:8px;
 
-    .settings.active {
-      display: grid;
+  border-radius:10px;
 
-      place-items: center;
-    }
+  background:var(--panel2);
 
-    .settings-panel {
-      width:
-        min(520px, calc(100% - 28px));
+  color:var(--text);
 
-      background: var(--panel2);
+  border:1px solid var(--border);
+}
 
-      border:
-        1px solid
-        var(--border);
+input[type="checkbox"]{
+  width:20px;
+  height:20px;
 
-      border-radius: 20px;
+  accent-color:var(--purple);
+}
 
-      box-shadow: var(--shadow);
+/* MOBILE */
 
-      overflow: hidden;
-    }
+@media(max-width:850px){
 
-    .settings-head,
-    .settings-foot {
-      padding: 18px 20px;
+  .hero-grid{
+    grid-template-columns:1fr;
+  }
 
-      display: flex;
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
 
-      align-items: center;
+  .status-grid{
+    grid-template-columns:1fr;
+  }
 
-      justify-content: space-between;
+  .members{
+    grid-template-columns:1fr;
+  }
 
-      border-bottom:
-        1px solid
-        var(--border);
-    }
+  .navlinks{
+    display:none;
+  }
+}
 
-    .settings-head h2 {
-      margin: 0;
+@media(max-width:520px){
 
-      font-size: 20px;
-    }
+  .container{
+    width:calc(100% - 20px);
+  }
 
-    .settings-head p {
-      margin: 3px 0 0;
+  .hero{
+    padding-top:42px;
+  }
 
-      color: var(--muted);
+  .hero-card,
+  .server-card{
+    padding:23px;
+  }
 
-      font-size: 12px;
-    }
+  .stats{
+    grid-template-columns:1fr;
+  }
 
-    .settings-body {
-      padding: 18px 20px;
-    }
+  .timebox{
+    min-width:70px;
+  }
 
-    .setting {
-      display: flex;
+  .timebox strong{
+    font-size:24px;
+  }
 
-      justify-content: space-between;
+  h1{
+    font-size:48px;
+  }
 
-      align-items: center;
-
-      gap: 15px;
-
-      padding: 14px 0;
-
-      border-bottom:
-        1px solid
-        var(--border);
-    }
-
-    .setting:last-child {
-      border: 0;
-    }
-
-    .setting strong {
-      display: block;
-
-      font-size: 14px;
-    }
-
-    .setting small {
-      display: block;
-
-      color: var(--muted);
-
-      margin-top: 3px;
-
-      font-size: 12px;
-    }
-
-    select {
-      background: var(--bg2);
-
-      color: var(--text);
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius: 9px;
-
-      padding: 9px;
-    }
-
-    .toggle {
-      width: 46px;
-      height: 25px;
-
-      position: relative;
-    }
-
-    .toggle input {
-      opacity: 0;
-    }
-
-    .toggle span {
-      position: absolute;
-
-      inset: 0;
-
-      background: #443b4e;
-
-      border-radius: 99px;
-
-      cursor: pointer;
-    }
-
-    .toggle span::after {
-      content: "";
-
-      position: absolute;
-
-      width: 19px;
-      height: 19px;
-
-      top: 3px;
-      left: 3px;
-
-      background: white;
-
-      border-radius: 50%;
-
-      transition: 0.2s;
-    }
-
-    .toggle input:checked + span {
-      background: var(--green);
-    }
-
-    .toggle input:checked + span::after {
-      transform:
-        translateX(21px);
-    }
-
-    .settings-foot {
-      border-top:
-        1px solid
-        var(--border);
-
-      border-bottom: 0;
-
-      justify-content: flex-end;
-
-      gap: 8px;
-    }
-
-    .close {
-      border:
-        1px solid
-        var(--border);
-
-      background: transparent;
-
-      color: var(--text);
-
-      border-radius: 9px;
-
-      padding: 9px 12px;
-
-      cursor: pointer;
-    }
-
-    .toast {
-      position: fixed;
-
-      bottom: 22px;
-
-      left: 50%;
-
-      transform:
-        translate(-50%, 80px);
-
-      opacity: 0;
-
-      background: var(--green);
-
-      color: #07130d;
-
-      padding: 10px 15px;
-
-      border-radius: 10px;
-
-      font-weight: 700;
-
-      font-size: 13px;
-
-      transition: 0.25s;
-
-      z-index: 200;
-    }
-
-    .toast.show {
-      transform:
-        translate(-50%, 0);
-
-      opacity: 1;
-    }
-
-    body.compact section {
-      padding: 27px 0;
-    }
-
-    .compact .card {
-      padding: 17px;
-    }
-
-    .compact .hero-content {
-      padding: 40px;
-    }
-
-    /* RESPONSIVE */
-
-    @media (max-width: 850px) {
-      .grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .live-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .rules {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-card {
-        min-height: 500px;
-      }
-
-      .hero-content {
-        padding: 38px;
-      }
-
-      .links a {
-        display: none;
-      }
-
-      .menu {
-        display: block;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .container {
-        width:
-          min(100% - 20px, 1120px);
-      }
-
-      .nav-inner {
-        height: 62px;
-      }
-
-      .hero {
-        padding-top: 18px;
-      }
-
-      .hero-card {
-        min-height: 570px;
-
-        border-radius: 20px;
-      }
-
-      .hero-card::before {
-        background:
-          linear-gradient(
-            0deg,
-            rgba(8, 6, 13, 0.96) 5%,
-            rgba(8, 6, 13, 0.68) 55%,
-            rgba(8, 6, 13, 0.28)
-          ),
-          url("banner.png") center / cover;
-      }
-
-      .hero-content {
-        padding: 25px;
-      }
-
-      .hero h1 {
-        letter-spacing: -2px;
-      }
-
-      .hero p {
-        font-size: 15px;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .uptime,
-      .stats {
-        grid-template-columns:
-          repeat(2, 1fr);
-      }
-
-      .widget iframe {
-        height: 390px;
-      }
-
-      .join {
-        padding: 30px 20px;
-      }
-    }
-  </style>
+  .uptime-top{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- NAVIGATION -->
+<header class="topbar">
 
-  <nav class="nav">
-    <div class="container nav-inner">
+<div class="container nav">
 
-      <a class="brand" href="#home">
-        <img src="logo.webp" alt="Forks Land logo">
-        <span>Forks Land</span>
-      </a>
+<a class="brand" href="#">
+<img src="logo.webp" alt="Forks Land">
+<div>
+Forks Land
+<small>Discord Community</small>
+</div>
+</a>
 
-      <div class="links">
+<nav class="navlinks">
+<a href="#status">Status</a>
+<a href="#members">Members</a>
+<a href="#discord">Discord</a>
+<a href="#info">Info</a>
+</nav>
 
-        <a href="#about">About</a>
-        <a href="#discord">Discord</a>
-        <a href="#status">Status</a>
-        <a href="#rules">Rules</a>
-        <a href="#join">Join</a>
+<div class="actions">
 
-        <button
-          class="icon-btn"
-          id="settingsBtn"
-          aria-label="Open settings"
-        >
-          ⚙
-        </button>
+<button class="iconbtn" id="refreshBtn">
+↻
+</button>
 
-      </div>
+<button class="iconbtn" id="themeBtn">
+☾
+</button>
 
-      <button
-        class="icon-btn menu"
-        id="mobileSettings"
-        aria-label="Open settings"
-      >
-        ☰
-      </button>
+<button class="iconbtn" id="settingsBtn">
+⚙
+</button>
 
-    </div>
-  </nav>
+</div>
 
+</div>
 
-  <main id="home">
+</header>
 
-    <!-- HERO -->
 
-    <div class="container hero">
+<main class="container">
 
-      <div class="hero-card">
+<!-- HERO -->
 
-        <div class="hero-content">
+<section class="hero">
 
-          <span class="eyebrow">
-            <i></i>
-            Forks Land Community
-          </span>
+<div class="hero-grid">
 
-          <h1>
-            Welcome to<br>
-            Forks Land.
-          </h1>
+<div class="hero-card">
 
-          <p>
-            A clean home for the Forks Land community.
-            Check the live Discord, bot uptime, server information,
-            and community rules all in one place.
-          </p>
+<span class="eyebrow">
 
-          <div class="actions">
+<span class="pulse"></span>
 
-            <a
-              class="btn primary"
-              href="https://dc.gg/fork-lands"
-              target="_blank"
-              rel="noopener"
-            >
-              Join Forks Land
-            </a>
+<span id="heroStatus">
+Checking systems…
+</span>
 
-            <a
-              class="btn secondary"
-              href="#status"
-            >
-              View Bot Status
-            </a>
+</span>
 
-          </div>
+<h1>
 
-        </div>
+<span class="gradient">
+Forks Land
+</span>
 
-      </div>
+<br>
 
-    </div>
+Server Dashboard
 
+</h1>
 
-    <!-- ABOUT -->
+<p>
+Live Discord community status, member presence,
+uptime monitoring, API health and server information
+— all in one place.
+</p>
 
-    <section id="about">
+<div class="hero-actions">
 
-      <div class="container">
+<a
+class="btn primary"
+href="https://dc.gg/fork-lands"
+target="_blank"
+rel="noopener"
+>
+Join Forks Land ↗
+</a>
 
-        <div class="section-head">
+<button class="btn" id="copyInvite">
+Copy Invite
+</button>
 
-          <div>
-            <h2>About Forks Land</h2>
-            <p>
-              Everything important, without the clutter.
-            </p>
-          </div>
+<button class="btn ghost" id="scrollStatus">
+View Status ↓
+</button>
 
-        </div>
+</div>
 
-        <div class="grid">
+</div>
 
-          <div class="card">
-            <h3>Community</h3>
 
-            <p>
-              Hang out, chat, meet people, and stay connected
-              with the Forks Land community.
-            </p>
-          </div>
+<div class="server-card panel">
 
-          <div class="card">
-            <h3>Live services</h3>
+<div>
 
-            <p>
-              See the Discord widget and bot uptime directly
-              from this site.
-            </p>
-          </div>
+<div class="server-top">
 
-          <div class="card">
-            <h3>Clear rules</h3>
+<img
+class="server-icon"
+id="serverIcon"
+src="logo.webp"
+alt="Forks Land"
+/>
 
-            <p>
-              Keep the community welcoming by following
-              the server rules and respecting restricted areas.
-            </p>
-          </div>
+<div>
 
-        </div>
+<h2 id="serverName">
+Forks Land
+</h2>
 
-      </div>
+<div class="live-pill">
 
-    </section>
+<span class="live-dot"></span>
 
+<span id="serverLive">
+Checking…
+</span>
 
-    <!-- DISCORD -->
+</div>
 
-    <section id="discord">
+</div>
 
-      <div class="container">
+</div>
 
-        <div class="section-head">
+<p class="muted">
+Live information is refreshed automatically.
+</p>
 
-          <div>
-            <h2>Live Discord</h2>
+</div>
 
-            <p>
-              See the server and join directly from here.
-            </p>
-          </div>
+<div class="toolbar">
 
-        </div>
+<button class="btn" id="copyGuildId">
+Copy Server ID
+</button>
 
+<a
+class="btn"
+href="https://discord.com/widget?id=1544159911875707003&theme=dark"
+target="_blank"
+rel="noopener"
+>
+Open Widget
+</a>
 
-        <div class="live-grid">
+</div>
 
-          <div class="card widget">
+</div>
 
-            <iframe
-              src="https://discord.com/widget?id=1544159911875707003&theme=dark"
-              allowtransparency="true"
-              frameborder="0"
-              sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-              title="Forks Land Discord widget"
-            ></iframe>
+</div>
 
-          </div>
+</section>
 
 
-          <div class="card status-card">
+<!-- STATUS -->
 
-            <div class="status-top">
+<section class="section" id="status">
 
-              <div>
+<div class="section-head">
 
-                <div class="status-label">
-                  Discord bot
-                </div>
+<div>
 
-                <h3
-                  style="
-                    margin:4px 0 0;
-                    font-size:22px;
-                  "
-                >
-                  Service status
-                </h3>
+<h2>
+Live Status
+</h2>
 
-              </div>
+<p>
+Current Forks Land server and monitoring information.
+</p>
 
-              <div class="status-pill">
+</div>
 
-                <span
-                  class="dot"
-                  id="status-dot"
-                ></span>
+<button class="btn" id="refreshBtn2">
+Refresh Now
+</button>
 
-                <span id="status-text">
-                  Connecting…
-                </span>
+</div>
 
-              </div>
 
-            </div>
+<div
+class="offline-banner"
+id="offline-banner"
+>
+Couldn't reach the status API right now —
+this page will keep retrying automatically.
+</div>
 
 
-            <p
-              style="
-                color:var(--muted);
-                line-height:1.7;
-                margin-top:0;
-              "
-            >
-              The status monitor checks the bot automatically
-              and keeps retrying if the API cannot be reached.
-            </p>
+<div class="grid stats">
 
+<div class="panel stat">
 
-            <a
-              class="btn secondary"
-              href="https://dc.gg/fork-lands"
-              target="_blank"
-              rel="noopener"
-            >
-              Open Discord
-            </a>
+<div class="stat-label">
+Members
+</div>
 
-          </div>
+<div
+class="stat-value"
+id="memberCount"
+>
+—
+</div>
 
-        </div>
+<div class="stat-sub">
+Discord server members
+</div>
 
-      </div>
+</div>
 
-    </section>
 
+<div class="panel stat">
 
-    <!-- BOT STATUS -->
+<div class="stat-label">
+Online
+</div>
 
-    <section id="status">
+<div
+class="stat-value"
+id="onlineCount"
+>
+—
+</div>
 
-      <div class="container">
+<div class="stat-sub">
+Members currently visible
+</div>
 
-        <div class="section-head">
+</div>
 
-          <div>
 
-            <h2>Bot uptime</h2>
+<div class="panel stat">
 
-            <p>
-              Live information from the Forks Land uptime API.
-            </p>
+<div class="stat-label">
+API Latency
+</div>
 
-          </div>
+<div
+class="stat-value"
+id="latency"
+>
+—
+</div>
 
-        </div>
+<div class="stat-sub">
+Status API response
+</div>
 
+</div>
 
-        <div class="card status-card">
 
-          <div class="status-top">
+<div class="panel stat">
 
-            <div>
+<div class="stat-label">
+Last Checked
+</div>
 
-              <div class="status-label">
-                Current uptime
-              </div>
+<div
+class="stat-value"
+id="last-checked"
+>
+—
+</div>
 
-              <h3
-                style="
-                  margin:4px 0 0;
-                  font-size:22px;
-                "
-              >
-                Forks Land Bot
-              </h3>
+<div class="stat-sub">
+Automatic monitoring
+</div>
 
-            </div>
+</div>
 
+</div>
 
-            <div class="status-pill">
 
-              <span
-                class="dot"
-                id="status-dot-2"
-              ></span>
+<!-- UPTIME -->
 
-              <span id="status-text-2">
-                Connecting…
-              </span>
+<div class="panel uptime">
 
-            </div>
+<div class="uptime-top">
 
-          </div>
+<div>
 
+<div class="uptime-main">
+Monitored Availability
+</div>
 
-          <!-- UPTIME COUNTER -->
+<div
+class="health offline"
+id="status-text"
+>
+<strong>
+Checking…
+</strong>
+</div>
 
-          <div class="uptime">
+</div>
 
-            <div class="unit">
-              <div
-                class="num"
-                id="d"
-              >
-                00
-              </div>
+<div
+class="muted"
+id="since"
+>
+Waiting for first successful check
+</div>
 
-              <small>Days</small>
-            </div>
+</div>
 
 
-            <div class="unit">
-              <div
-                class="num"
-                id="h"
-              >
-                00
-              </div>
+<div class="timer">
 
-              <small>Hours</small>
-            </div>
+<div class="timebox">
+<strong id="d">00</strong>
+<span>Days</span>
+</div>
 
+<div class="timebox">
+<strong id="h">00</strong>
+<span>Hours</span>
+</div>
 
-            <div class="unit">
-              <div
-                class="num"
-                id="m"
-              >
-                00
-              </div>
+<div class="timebox">
+<strong id="m">00</strong>
+<span>Minutes</span>
+</div>
 
-              <small>Minutes</small>
-            </div>
+<div class="timebox">
+<strong id="s">00</strong>
+<span>Seconds</span>
+</div>
 
+</div>
 
-            <div class="unit">
-              <div
-                class="num"
-                id="s"
-              >
-                00
-              </div>
+</div>
 
-              <small>Seconds</small>
-            </div>
 
-          </div>
+<!-- SYSTEM HEALTH -->
 
+<div class="section-head">
 
-          <!-- SERVER STATS -->
+<div>
 
-          <div class="stats">
+<h2>
+System Health
+</h2>
 
-            <div class="stat">
+<p>
+Independent checks reported by the status API.
+</p>
 
-              <strong id="serverName">
-                —
-              </strong>
+</div>
 
-              <small>
-                Server
-              </small>
+</div>
 
-            </div>
 
+<div class="grid status-grid">
 
-            <div class="stat">
+<div class="panel status-card">
 
-              <strong id="memberCount">
-                —
-              </strong>
+<div class="status-row">
 
-              <small>
-                Members
-              </small>
+<div class="status-title">
+Discord API
+</div>
 
-            </div>
+<div class="status-value">
 
+<span
+class="status-indicator"
+id="discordIndicator"
+></span>
 
-            <div class="stat">
+<span id="discordHealth">
+Checking
+</span>
 
-              <strong id="since">
-                —
-              </strong>
+</div>
 
-              <small>
-                Online since
-              </small>
+</div>
 
-            </div>
+<div
+class="status-meta"
+id="discordMeta"
+>
+Waiting for response…
+</div>
 
-          </div>
+</div>
 
 
-          <!-- OFFLINE MESSAGE -->
+<div class="panel status-card">
 
-          <div
-            class="offline"
-            id="offline-banner"
-          >
-            Couldn't reach the bot right now —
-            this page will keep retrying automatically.
-          </div>
+<div class="status-row">
 
+<div class="status-title">
+Forks Land Status API
+</div>
 
-          <p
-            style="
-              margin:15px 0 0;
-              color:var(--muted);
-              font-size:12px;
-            "
-          >
-            Last checked
+<div class="status-value">
 
-            <strong id="last-checked">
-              —
-            </strong>
-          </p>
+<span
+class="status-indicator"
+id="apiIndicator"
+></span>
 
-        </div>
+<span id="apiHealth">
+Checking
+</span>
 
-      </div>
+</div>
 
-    </section>
+</div>
 
+<div
+class="status-meta"
+id="apiMeta"
+>
+Waiting for response…
+</div>
 
-    <!-- RULES -->
+</div>
 
-    <section id="rules">
 
-      <div class="container">
+<div class="panel status-card">
 
-        <div class="section-head">
+<div class="status-row">
 
-          <div>
+<div class="status-title">
+Automatic Monitoring
+</div>
 
-            <h2>Rules & safety</h2>
+<div class="status-value">
 
-            <p>
-              Keep Forks Land clean, respectful, and secure.
-            </p>
+<span
+class="status-indicator"
+id="monitorIndicator"
+></span>
 
-          </div>
+<span id="monitorHealth">
+Active
+</span>
 
-        </div>
+</div>
 
+</div>
 
-        <div class="rules">
+<div
+class="status-meta"
+id="monitorMeta"
+>
+Checks every 30 seconds by default.
+</div>
 
-          <div class="card rule">
+</div>
 
-            <div class="rule-num">
-              1
-            </div>
+</div>
 
-            <div>
+</section>
 
-              <h3>
-                Respect everyone
-              </h3>
 
-              <p>
-                Treat members and staff respectfully.
-                Harassment and targeted abuse are not welcome.
-              </p>
+<!-- GRAPH -->
 
-            </div>
+<section class="section">
 
-          </div>
+<div class="section-head">
 
+<div>
 
-          <div class="card rule">
+<h2>
+Activity
+</h2>
 
-            <div class="rule-num">
-              2
-            </div>
+<p>
+Recent online-member and API-latency observations.
+</p>
 
-            <div>
+</div>
 
-              <h3>
-                Follow Discord rules
-              </h3>
+</div>
 
-              <p>
-                Follow Discord's Terms, Community Guidelines,
-                and applicable laws while using the server.
-              </p>
+<div class="panel graph">
 
-            </div>
+<canvas
+id="activityChart"
+width="1100"
+height="180"
+></canvas>
 
-          </div>
+</div>
 
+</section>
 
-          <div class="card rule">
 
-            <div class="rule-num">
-              3
-            </div>
+<!-- MEMBERS -->
 
-            <div>
+<section class="section" id="members">
 
-              <h3>
-                No spam or disruption
-              </h3>
+<div class="section-head">
 
-              <p>
-                Avoid spam, malicious links, disruptive behavior,
-                and attempts to interfere with the community.
-              </p>
+<div>
 
-            </div>
+<h2>
+Members
+</h2>
 
-          </div>
+<p>
+People exposed by the official Discord server widget.
+</p>
 
+</div>
 
-          <div class="card rule">
+</div>
 
-            <div class="rule-num">
-              4
-            </div>
 
-            <div>
+<div class="grid members">
 
-              <h3>
-                Respect staff decisions
-              </h3>
+<div
+class="panel member-list"
+id="memberList"
+>
 
-              <p>
-                Use the appropriate support channels if you believe
-                moderation action needs review.
-              </p>
+<div class="muted">
+Loading online members…
+</div>
 
-            </div>
+</div>
 
-          </div>
 
+<div class="panel info">
 
-          <!-- HONEYPOT -->
+<div class="info-row">
+<span>Server</span>
+<strong id="infoServer">
+Forks Land
+</strong>
+</div>
 
-          <div
-            class="card honeypot rule"
-            style="grid-column:1/-1"
-          >
+<div class="info-row">
+<span>Server ID</span>
+<strong>
+1544159911875707003
+</strong>
+</div>
 
-            <div class="rule-num">
-              🍯
-            </div>
+<div class="info-row">
+<span>Online Now</span>
+<strong id="infoOnline">
+—
+</strong>
+</div>
 
-            <div>
+<div class="info-row">
+<span>Last Check</span>
+<strong id="infoChecked">
+—
+</strong>
+</div>
 
-              <h3>
-                Honeypot alert
-              </h3>
+<div class="info-row">
+<span>Monitoring</span>
+<strong>
+Automatic
+</strong>
+</div>
 
-              <p>
-                Think you found a secret channel?
-                Forks Land has an active Honeypot System designed
-                to catch unauthorized access, suspicious activity,
-                and rule-breakers.
+</div>
 
-                Restricted channels may be monitored and activity
-                may be logged for Staff review.
+</div>
 
-                Attempting to bypass permissions or access restricted
-                areas may result in moderation action.
-              </p>
+</section>
 
-            </div>
 
-          </div>
+<!-- DISCORD -->
 
-        </div>
+<section
+class="section"
+id="discord"
+>
 
-      </div>
+<div class="section-head">
 
-    </section>
+<div>
 
+<h2>
+Discord Widget
+</h2>
 
-    <!-- JOIN -->
+<p>
+Official Discord widget for Forks Land.
+</p>
 
-    <section id="join">
+</div>
 
-      <div class="container">
+</div>
 
-        <div class="join">
+<div class="panel widget-wrap">
 
-          <h2>
-            Ready to join Forks Land?
-          </h2>
+<iframe
+class="widget"
+src="https://discord.com/widget?id=1544159911875707003&theme=dark"
+allowtransparency="true"
+frameborder="0"
+sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+title="Forks Land Discord Widget"
+></iframe>
 
-          <p>
-            Jump into the Discord community and see what's happening.
-          </p>
+</div>
 
-          <a
-            class="btn primary"
-            href="https://dc.gg/fork-lands"
-            target="_blank"
-            rel="noopener"
-          >
-            Join the Discord
-          </a>
+</section>
 
-        </div>
 
-      </div>
+<!-- SERVER INFO -->
 
-    </section>
+<section
+class="section"
+id="info"
+>
 
-  </main>
+<div class="section-head">
 
+<div>
 
-  <!-- FOOTER -->
+<h2>
+Server Information
+</h2>
 
-  <footer>
+<p>
+Forks Land dashboard configuration.
+</p>
 
-    ©
-    <span id="year"></span>
-    Forks Land.
-    Built for the community.
+</div>
 
-  </footer>
+</div>
 
 
-  <!-- SETTINGS -->
+<div class="panel info">
 
-  <div
-    class="settings"
-    id="settingsModal"
-    aria-hidden="true"
-  >
+<div class="info-row">
+<span>Community</span>
+<strong>
+Forks Land
+</strong>
+</div>
 
-    <div
-      class="settings-panel"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="settingsTitle"
-    >
+<div class="info-row">
+<span>Discord Server ID</span>
+<strong>
+1544159911875707003
+</strong>
+</div>
 
-      <div class="settings-head">
+<div class="info-row">
+<span>Invite</span>
 
-        <div>
+<a
+href="https://dc.gg/fork-lands"
+target="_blank"
+rel="noopener"
+>
+<strong>
+dc.gg/fork-lands ↗
+</strong>
+</a>
 
-          <h2 id="settingsTitle">
-            Settings
-          </h2>
+</div>
 
-          <p>
-            Customize your Forks Land site.
-          </p>
+<div class="info-row">
+<span>Status API</span>
+<strong>
+/api/uptime
+</strong>
+</div>
 
-        </div>
+<div class="info-row">
+<span>Auto Refresh</span>
+<strong id="infoRefresh">
+30 seconds
+</strong>
+</div>
 
-        <button
-          class="close"
-          id="closeSettings"
-        >
-          ✕
-        </button>
+</div>
 
-      </div>
+</section>
 
+</main>
 
-      <div class="settings-body">
 
-        <!-- LIGHT MODE -->
+<footer class="footer">
 
-        <div class="setting">
+<div class="container">
 
-          <div>
+Forks Land • Discord Community • Status Dashboard
 
-            <strong>
-              Light mode
-            </strong>
+</div>
 
-            <small>
-              Switch between dark and light appearance.
-            </small>
+</footer>
 
-          </div>
 
-          <label class="toggle">
+<div
+class="toast"
+id="toast"
+></div>
 
-            <input
-              id="themeToggle"
-              type="checkbox"
-            >
 
-            <span></span>
+<!-- SETTINGS -->
 
-          </label>
+<div
+class="modal"
+id="settingsModal"
+>
 
-        </div>
+<div class="modal-card">
 
+<div class="modal-head">
 
-        <!-- COMPACT MODE -->
+<h2>
+Dashboard Settings
+</h2>
 
-        <div class="setting">
+<button
+class="iconbtn"
+id="closeSettings"
+>
+×
+</button>
 
-          <div>
+</div>
 
-            <strong>
-              Compact mode
-            </strong>
 
-            <small>
-              Reduce spacing across the page.
-            </small>
+<div class="setting">
 
-          </div>
+<div>
 
-          <label class="toggle">
+<b>
+Theme
+</b>
 
-            <input
-              id="compactToggle"
-              type="checkbox"
-            >
+<span>
+Choose dark or light mode.
+</span>
 
-            <span></span>
+</div>
 
-          </label>
+<select id="settingsTheme">
 
-        </div>
+<option value="dark">
+Dark
+</option>
 
+<option value="light">
+Light
+</option>
 
-        <!-- AUTO REFRESH -->
+</select>
 
-        <div class="setting">
+</div>
 
-          <div>
 
-            <strong>
-              Auto refresh
-            </strong>
+<div class="setting">
 
-            <small>
-              Reload the page periodically.
-            </small>
+<div>
 
-          </div>
+<b>
+Auto Refresh
+</b>
 
-          <label class="toggle">
+<span>
+Keep status information updated.
+</span>
 
-            <input
-              id="autoToggle"
-              type="checkbox"
-            >
+</div>
 
-            <span></span>
+<input
+id="autoRefresh"
+type="checkbox"
+checked
+>
 
-          </label>
+</div>
 
-        </div>
 
+<div class="setting">
 
-        <!-- REFRESH INTERVAL -->
+<div>
 
-        <div class="setting">
+<b>
+Refresh Interval
+</b>
 
-          <div>
+<span>
+How often the API is checked.
+</span>
 
-            <strong>
-              Refresh interval
-            </strong>
+</div>
 
-            <small>
-              Choose how often auto refresh runs.
-            </small>
+<select id="refreshInterval">
 
-          </div>
+<option value="15">
+15 seconds
+</option>
 
-          <select id="interval">
+<option value="30">
+30 seconds
+</option>
 
-            <option value="15">
-              15 seconds
-            </option>
+<option value="60">
+1 minute
+</option>
 
-            <option value="30">
-              30 seconds
-            </option>
+<option value="300">
+5 minutes
+</option>
 
-            <option value="60">
-              1 minute
-            </option>
+</select>
 
-            <option value="300">
-              5 minutes
-            </option>
+</div>
 
-          </select>
 
-        </div>
+<div class="setting">
 
-      </div>
+<div>
 
+<b>
+Compact Mode
+</b>
 
-      <div class="settings-foot">
+<span>
+Reduce dashboard spacing.
+</span>
 
-        <button
-          class="close"
-          id="resetSettings"
-        >
-          Reset
-        </button>
+</div>
 
-        <button
-          class="btn primary"
-          id="saveSettings"
-        >
-          Save
-        </button>
+<input
+id="compactMode"
+type="checkbox"
+>
 
-      </div>
+</div>
 
-    </div>
 
-  </div>
+<div
+class="toolbar"
+style="margin-top:18px"
+>
 
+<button
+class="btn"
+id="resetSettings"
+>
+Reset
+</button>
 
-  <div
-    class="toast"
-    id="toast"
-  >
-    Settings saved!
-  </div>
+<button
+class="btn primary"
+id="saveSettings"
+>
+Save Settings
+</button>
 
+</div>
 
-  <script>
+</div>
 
-    /* =========================================
-       SETTINGS
-    ========================================= */
+</div>
 
-    (() => {
 
-      const SETTINGS_KEY =
-        "forksLandSettings";
-
-      const defaults = {
-        theme: "dark",
-        compact: false,
-        auto: false,
-        interval: "30"
-      };
-
-      const $ =
-        id => document.getElementById(id);
-
-      const modal =
-        $("settingsModal");
-
-
-      function load() {
-
-        try {
-
-          return {
-            ...defaults,
-            ...JSON.parse(
-              localStorage.getItem(
-                SETTINGS_KEY
-              ) || "{}"
-            )
-          };
-
-        } catch {
-
-          return {
-            ...defaults
-          };
-
-        }
-
-      }
-
-
-      function setTheme(theme) {
-
-        document.documentElement.dataset.theme =
-          theme === "light"
-            ? "light"
-            : "dark";
-
-        document
-          .querySelector(
-            'meta[name="theme-color"]'
-          )
-          .content =
-            theme === "light"
-              ? "#f5f2fa"
-              : "#0b0814";
-
-        $("themeToggle").checked =
-          theme === "light";
-
-      }
-
-
-      function apply(settings) {
-
-        setTheme(settings.theme);
-
-        document.body.classList.toggle(
-          "compact",
-          !!settings.compact
-        );
-
-      }
-
-
-      function openSettings() {
-
-        const settings =
-          load();
-
-        apply(settings);
-
-        $("compactToggle").checked =
-          !!settings.compact;
-
-        $("autoToggle").checked =
-          !!settings.auto;
-
-        $("interval").value =
-          settings.interval || "30";
-
-        modal.classList.add("active");
-
-        modal.setAttribute(
-          "aria-hidden",
-          "false"
-        );
-
-        document.body.style.overflow =
-          "hidden";
-
-      }
-
-
-      function closeSettings() {
-
-        modal.classList.remove(
-          "active"
-        );
-
-        modal.setAttribute(
-          "aria-hidden",
-          "true"
-        );
-
-        document.body.style.overflow =
-          "";
-
-      }
-
-
-      function toast(message) {
-
-        $("toast").textContent =
-          message;
-
-        $("toast").classList.add(
-          "show"
-        );
-
-        setTimeout(
-          () =>
-            $("toast").classList.remove(
-              "show"
-            ),
-          2000
-        );
-
-      }
-
-
-      $("settingsBtn").onclick =
-        openSettings;
-
-      $("mobileSettings").onclick =
-        openSettings;
-
-      $("closeSettings").onclick =
-        closeSettings;
-
-
-      modal.addEventListener(
-        "click",
-        event => {
-
-          if (
-            event.target === modal
-          ) {
-            closeSettings();
-          }
-
-        }
-      );
-
-
-      $("themeToggle").onchange =
-        event => {
-
-          setTheme(
-            event.target.checked
-              ? "light"
-              : "dark"
-          );
-
-        };
-
-
-      $("saveSettings").onclick =
-        () => {
-
-          const settings = {
-
-            theme:
-              $("themeToggle").checked
-                ? "light"
-                : "dark",
-
-            compact:
-              $("compactToggle").checked,
-
-            auto:
-              $("autoToggle").checked,
-
-            interval:
-              $("interval").value
-
-          };
-
-
-          localStorage.setItem(
-            SETTINGS_KEY,
-            JSON.stringify(settings)
-          );
-
-
-          apply(settings);
-
-          closeSettings();
-
-          toast(
-            "Settings saved!"
-          );
-
-
-          if (
-            window.__autoRefreshTimer
-          ) {
-
-            clearInterval(
-              window.__autoRefreshTimer
-            );
-
-          }
-
-
-          if (settings.auto) {
-
-            window.__autoRefreshTimer =
-              setInterval(
-                () => location.reload(),
-                Number(
-                  settings.interval
-                ) * 1000
-              );
-
-          }
-
-        };
-
-
-      $("resetSettings").onclick =
-        () => {
-
-          localStorage.removeItem(
-            SETTINGS_KEY
-          );
-
-          apply(defaults);
-
-          $("compactToggle").checked =
-            false;
-
-          $("autoToggle").checked =
-            false;
-
-          $("interval").value =
-            "30";
-
-          toast(
-            "Settings reset!"
-          );
-
-        };
-
-
-      apply(load());
-
-
-      const initial =
-        load();
-
-
-      if (initial.auto) {
-
-        window.__autoRefreshTimer =
-          setInterval(
-            () => location.reload(),
-            Number(
-              initial.interval
-            ) * 1000
-          );
-
-      }
-
-
-      document.addEventListener(
-        "keydown",
-        event => {
-
-          if (
-            event.key === "Escape"
-          ) {
-            closeSettings();
-          }
-
-        }
-      );
-
-
-      $("year").textContent =
-        new Date().getFullYear();
-
-    })();
-
-
-    /* =========================================
-       BOT UPTIME
-    ========================================= */
-
-    (() => {
-
-      const dot1 =
-        document.getElementById(
-          "status-dot"
-        );
-
-      const dot2 =
-        document.getElementById(
-          "status-dot-2"
-        );
-
-
-      const text1 =
-        document.getElementById(
-          "status-text"
-        );
-
-      const text2 =
-        document.getElementById(
-          "status-text-2"
-        );
-
-
-      const d =
-        document.getElementById("d");
-
-      const h =
-        document.getElementById("h");
-
-      const m =
-        document.getElementById("m");
-
-      const s =
-        document.getElementById("s");
-
-
-      const server =
-        document.getElementById(
-          "serverName"
-        );
-
-      const members =
-        document.getElementById(
-          "memberCount"
-        );
-
-      const since =
-        document.getElementById(
-          "since"
-        );
-
-      const last =
-        document.getElementById(
-          "last-checked"
-        );
-
-
-      let base = 0;
-
-      let lastSync =
-        Date.now();
-
-      let online = false;
-
-      let pollDelay = 15000;
-
-      let pollTimer = null;
-
-
-      const MIN = 15000;
-
-      const MAX = 90000;
-
-
-      const pad =
-        number =>
-          String(
-            Math.floor(number)
-          ).padStart(2, "0");
-
-
-      function timer(total) {
-
-        total =
-          Math.max(
-            0,
-            total
-          );
-
-
-        d.textContent =
-          pad(
-            Math.floor(
-              total / 86400
-            )
-          );
-
-
-        h.textContent =
-          pad(
-            Math.floor(
-              (total % 86400) /
-              3600
-            )
-          );
-
-
-        m.textContent =
-          pad(
-            Math.floor(
-              (total % 3600) /
-              60
-            )
-          );
-
-
-        s.textContent =
-          pad(
-            Math.floor(
-              total % 60
-            )
-          );
-
-      }
-
-
-      function status(
-        kind,
-        data
-      ) {
-
-        [
-          dot1,
-          dot2
-        ].forEach(
-          element => {
-
-            element.className =
-              "dot " + kind;
-
-          }
-        );
-
-
-        const label =
-          kind === "online"
-            ? "Online"
-            : kind === "reconnecting"
-              ? "Reconnecting…"
-              : "Offline";
-
-
-        text1.textContent =
-          label;
-
-        text2.textContent =
-          label;
-
-
-        document.body.classList.toggle(
-          "is-offline",
-          kind !== "online"
-        );
-
-
-        online =
-          kind === "online";
-
-
-        if (data) {
-
-          server.textContent =
-            data.serverName ||
-            "—";
-
-
-          members.textContent =
-            data.memberCount != null
-              ? Number(
-                  data.memberCount
-                ).toLocaleString()
-              : "—";
-
-
-          if (data.startedAt) {
-
-            const date =
-              new Date(
-                data.startedAt
-              );
-
-
-            since.textContent =
-              date.toLocaleString(
-                undefined,
-                {
-                  month: "short",
-                  day: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit"
-                }
-              );
-
-          }
-
-        }
-
-      }
-
-
-      async function fetchUptime() {
-
-        const controller =
-          new AbortController();
-
-
-        const timeout =
-          setTimeout(
-            () =>
-              controller.abort(),
-            10000
-          );
-
-
-        try {
-
-          const response =
-            await fetch(
-              "/api/uptime",
-              {
-                cache: "no-store",
-                signal:
-                  controller.signal
-              }
-            );
-
-
-          if (!response.ok) {
-
-            throw new Error(
-              "Request failed (" +
-              response.status +
-              ")"
-            );
-
-          }
-
-
-          return await response.json();
-
-        } finally {
-
-          clearTimeout(
-            timeout
-          );
-
-        }
-
-      }
-
-
-      async function refresh() {
-
-        try {
-
-          const data =
-            await fetchUptime();
-
-
-          status(
-            data.online
-              ? "online"
-              : "offline",
-            data
-          );
-
-
-          base =
-            Number(
-              data.uptimeSeconds
-            ) || 0;
-
-
-          lastSync =
-            Date.now();
-
-
-          timer(base);
-
-
-          last.textContent =
-            "just now";
-
-
-          pollDelay =
-            MIN;
-
-        } catch {
-
-          status(
-            online
-              ? "reconnecting"
-              : "offline"
-          );
-
-
-          pollDelay =
-            Math.min(
-              pollDelay * 1.6,
-              MAX
-            );
-
-        }
-
-
-        clearTimeout(
-          pollTimer
-        );
-
-
-        pollTimer =
-          setTimeout(
-            refresh,
-            pollDelay
-          );
-
-      }
-
-
-      setInterval(
-        () => {
-
-          if (online) {
-
-            timer(
-              base +
-              (
-                Date.now() -
-                lastSync
-              ) / 1000
-            );
-
-          }
-
-        },
-        1000
-      );
-
-
-      setInterval(
-        () => {
-
-          if (online) {
-
-            last.textContent =
-              Math.max(
-                1,
-                Math.round(
-                  (
-                    Date.now() -
-                    lastSync
-                  ) / 1000
-                )
-              ) + "s ago";
-
-          }
-
-        },
-        1000
-      );
-
-
-      refresh();
-
-    })();
-
-  </script>
+<script src="/uptime.js"></script>
 
 </body>
 </html>
