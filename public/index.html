@@ -2,177 +2,1114 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#7b00ff">
-  <meta name="description" content="Forks Land — friends, gaming, chill, and good vibes. Join our Discord community.">
+
+  <meta name="theme-color" content="#8b00ff">
+
+  <meta
+    name="description"
+    content="Forks Land — Friends, Gaming, Chill & Good Vibes. Join the Forks Land Discord community."
+  >
+
   <meta property="og:title" content="Forks Land • Community">
-  <meta property="og:description" content="Friends • Gaming • Chill • Good Vibes • More">
-  <meta property="og:image" content="/banner.png">
+  <meta
+    property="og:description"
+    content="Friends • Gaming • Chill • Good Vibes • More"
+  >
+  <meta property="og:image" content="banner.png">
   <meta property="og:type" content="website">
+
   <title>Forks Land • Community</title>
+
   <style>
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;color:#fff;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+
+      color: white;
+
+      font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
       background:
-        radial-gradient(circle at 15% 15%,rgba(180,0,255,.20),transparent 28%),
-        radial-gradient(circle at 85% 35%,rgba(80,0,255,.18),transparent 30%),
-        linear-gradient(135deg,#050008,#0b0014 45%,#030006);
-      min-height:100vh;overflow-x:hidden;
+        radial-gradient(
+          circle at 15% 15%,
+          rgba(180, 0, 255, 0.22),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 85% 30%,
+          rgba(80, 0, 255, 0.18),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 50% 100%,
+          rgba(255, 0, 220, 0.12),
+          transparent 35%
+        ),
+        linear-gradient(
+          135deg,
+          #030006,
+          #0a0013 45%,
+          #040007
+        );
     }
-    body:before{
-      content:"";position:fixed;inset:0;pointer-events:none;opacity:.28;
-      background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-                       linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
-      background-size:42px 42px;mask-image:linear-gradient(to bottom,black,transparent 90%);
+
+    body::before {
+      content: "";
+
+      position: fixed;
+      inset: 0;
+
+      pointer-events: none;
+
+      opacity: 0.25;
+
+      background-image:
+        linear-gradient(
+          rgba(255, 255, 255, 0.025) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.025) 1px,
+          transparent 1px
+        );
+
+      background-size: 42px 42px;
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black,
+          transparent 90%
+        );
     }
-    .wrap{width:min(1120px,92%);margin:auto}
-    nav{
-      position:sticky;top:0;z-index:20;background:rgba(4,0,9,.72);
-      backdrop-filter:blur(18px);border-bottom:1px solid rgba(207,79,255,.22)
+
+    .container {
+      width: min(1120px, 92%);
+      margin: auto;
     }
-    .navin{height:72px;display:flex;align-items:center;justify-content:space-between}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.5px}
-    .brand img{width:42px;height:42px;object-fit:cover;border-radius:50%;box-shadow:0 0 22px #9b00ff}
-    .brand span{font-size:1.08rem}
-    .links{display:flex;gap:24px}
-    .links a{color:#ddd;text-decoration:none;font-size:.92rem}
-    .links a:hover{color:#ff54ff}
-    .hero{padding:42px 0 80px}
-    .banner{
-      position:relative;overflow:hidden;border-radius:28px;border:1px solid rgba(220,76,255,.38);
-      box-shadow:0 0 50px rgba(143,0,255,.24),inset 0 0 40px rgba(0,0,0,.25);
-      background:#07000d
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+
+      background: rgba(4, 0, 9, 0.75);
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      border-bottom:
+        1px solid rgba(210, 70, 255, 0.25);
     }
-    .banner img{width:100%;display:block;aspect-ratio:1024/325;object-fit:cover}
-    .heroText{text-align:center;padding:36px 16px 0}
-    .pill{
-      display:inline-block;padding:8px 14px;border:1px solid rgba(255,72,255,.35);
-      background:rgba(145,0,255,.10);border-radius:999px;color:#e5b7ff;font-size:.78rem;
-      text-transform:uppercase;letter-spacing:2px
+
+    .nav-inner {
+      height: 72px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-    h1{font-size:clamp(2.4rem,7vw,5.4rem);line-height:.95;margin:18px 0 16px;
-       text-shadow:0 0 28px rgba(213,0,255,.55)}
-    .gradient{background:linear-gradient(90deg,#fff,#d98aff,#ff30e7,#fff);
-      -webkit-background-clip:text;background-clip:text;color:transparent}
-    .lead{max-width:700px;margin:auto;color:#cfc4d5;font-size:1.08rem;line-height:1.7}
-    .buttons{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:28px}
-    .btn{border:0;text-decoration:none;color:#fff;padding:14px 22px;border-radius:13px;
-      font-weight:800;display:inline-flex;align-items:center;gap:9px;transition:.2s;cursor:pointer}
-    .primary{background:linear-gradient(135deg,#8b00ff,#ff18d4);box-shadow:0 0 28px rgba(210,0,255,.35)}
-    .secondary{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12)}
-    .btn:hover{transform:translateY(-2px);filter:brightness(1.12)}
-    section{padding:62px 0}
-    .title{text-align:center;margin-bottom:30px}
-    .title h2{font-size:2rem;margin:0 0 8px}
-    .title p{color:#aaa;margin:0}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{
-      background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));
-      border:1px solid rgba(213,80,255,.18);border-radius:20px;padding:25px;
-      box-shadow:0 12px 35px rgba(0,0,0,.2)
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      font-weight: 900;
+      letter-spacing: 1px;
     }
-    .icon{font-size:2rem;margin-bottom:12px}
-    .card h3{margin:0 0 8px}.card p{color:#aaa;line-height:1.6;margin:0}
-    .rules{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .rule{padding:18px 20px;border-radius:16px;background:rgba(255,255,255,.035);
-      border:1px solid rgba(255,255,255,.08)}
-    .rule b{color:#f0c6ff}.rule span{color:#aaa}
-    .join{
-      text-align:center;padding:55px 24px;border-radius:28px;
-      background:radial-gradient(circle at center,rgba(164,0,255,.20),transparent 65%),
-                 rgba(255,255,255,.035);
-      border:1px solid rgba(222,87,255,.25)
+
+    .brand img {
+      width: 44px;
+      height: 44px;
+
+      object-fit: cover;
+
+      border-radius: 50%;
+
+      border: 2px solid #b700ff;
+
+      box-shadow:
+        0 0 12px #9c00ff,
+        0 0 28px rgba(174, 0, 255, 0.5);
     }
-    .join img{width:100px;height:100px;object-fit:cover;border-radius:50%;
-      border:3px solid #d83cff;box-shadow:0 0 30px #9d00ff;margin-bottom:16px}
-    footer{padding:35px 0 55px;text-align:center;color:#777;font-size:.9rem}
-    .status{display:inline-flex;align-items:center;gap:8px;color:#bcefc7;font-size:.85rem;margin-top:16px}
-    .dot{width:9px;height:9px;background:#48df72;border-radius:50%;box-shadow:0 0 12px #48df72}
-    @media(max-width:760px){
-      .links{display:none}.grid{grid-template-columns:1fr}.rules{grid-template-columns:1fr}
-      .hero{padding-top:22px}.banner{border-radius:18px}.heroText{padding-top:28px}
+
+    .brand span {
+      font-size: 1.05rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 26px;
+    }
+
+    .nav-links a {
+      color: #ddd;
+
+      text-decoration: none;
+
+      font-size: 0.92rem;
+      font-weight: 600;
+
+      transition: 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #f04dff;
+
+      text-shadow:
+        0 0 12px rgba(240, 77, 255, 0.7);
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      padding: 42px 0 80px;
+    }
+
+    .banner {
+      position: relative;
+
+      overflow: hidden;
+
+      border-radius: 28px;
+
+      border:
+        1px solid rgba(220, 76, 255, 0.4);
+
+      background: #06000c;
+
+      box-shadow:
+        0 0 45px rgba(143, 0, 255, 0.25),
+        inset 0 0 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .banner img {
+      display: block;
+
+      width: 100%;
+
+      aspect-ratio: 1024 / 325;
+
+      object-fit: cover;
+    }
+
+    .hero-content {
+      text-align: center;
+
+      padding: 38px 16px 0;
+    }
+
+    .badge {
+      display: inline-block;
+
+      padding: 8px 15px;
+
+      border-radius: 999px;
+
+      border:
+        1px solid rgba(255, 72, 255, 0.4);
+
+      background:
+        rgba(145, 0, 255, 0.12);
+
+      color: #e9bdff;
+
+      font-size: 0.75rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: 2px;
+
+      box-shadow:
+        0 0 18px rgba(174, 0, 255, 0.12);
+    }
+
+    h1 {
+      margin: 20px 0 16px;
+
+      font-size:
+        clamp(2.5rem, 7vw, 5.5rem);
+
+      line-height: 0.95;
+
+      font-weight: 950;
+
+      text-shadow:
+        0 0 30px rgba(213, 0, 255, 0.55);
+    }
+
+    .gradient-text {
+      background:
+        linear-gradient(
+          90deg,
+          #ffffff,
+          #dc8aff,
+          #ff2ee6,
+          #ffffff
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      color: transparent;
+
+      background-size: 250% auto;
+
+      animation:
+        gradientMove 5s linear infinite;
+    }
+
+    @keyframes gradientMove {
+      to {
+        background-position: 250% center;
+      }
+    }
+
+    .description {
+      max-width: 720px;
+
+      margin: auto;
+
+      color: #cfc5d5;
+
+      font-size: 1.08rem;
+
+      line-height: 1.7;
+    }
+
+    /* =========================
+       BUTTONS
+    ========================= */
+
+    .buttons {
+      display: flex;
+
+      justify-content: center;
+
+      gap: 12px;
+
+      flex-wrap: wrap;
+
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 9px;
+
+      padding: 14px 23px;
+
+      border-radius: 13px;
+
+      text-decoration: none;
+
+      color: white;
+
+      font-weight: 850;
+
+      transition:
+        transform 0.2s,
+        filter 0.2s,
+        box-shadow 0.2s;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+
+      filter: brightness(1.12);
+    }
+
+    .primary {
+      background:
+        linear-gradient(
+          135deg,
+          #8500ff,
+          #ff18d4
+        );
+
+      box-shadow:
+        0 0 25px rgba(210, 0, 255, 0.4);
+    }
+
+    .secondary {
+      background:
+        rgba(255, 255, 255, 0.05);
+
+      border:
+        1px solid rgba(255, 255, 255, 0.13);
+    }
+
+    .status {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      margin-top: 18px;
+
+      color: #bcefc7;
+
+      font-size: 0.85rem;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+
+      border-radius: 50%;
+
+      background: #48df72;
+
+      box-shadow:
+        0 0 12px #48df72;
+    }
+
+    /* =========================
+       SECTIONS
+    ========================= */
+
+    section {
+      padding: 65px 0;
+    }
+
+    .section-title {
+      text-align: center;
+
+      margin-bottom: 30px;
+    }
+
+    .section-title h2 {
+      font-size: 2.1rem;
+
+      margin-bottom: 8px;
+    }
+
+    .section-title p {
+      color: #aaa;
+    }
+
+    /* =========================
+       CARDS
+    ========================= */
+
+    .cards {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 18px;
+    }
+
+    .card {
+      padding: 26px;
+
+      border-radius: 20px;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,0.055),
+          rgba(255,255,255,0.025)
+        );
+
+      border:
+        1px solid rgba(213, 80, 255, 0.18);
+
+      box-shadow:
+        0 12px 35px rgba(0,0,0,0.25);
+
+      transition:
+        transform 0.25s,
+        border-color 0.25s,
+        box-shadow 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+
+      border-color:
+        rgba(222, 85, 255, 0.45);
+
+      box-shadow:
+        0 15px 40px rgba(145, 0, 255, 0.16);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+
+      margin-bottom: 13px;
+    }
+
+    .card h3 {
+      margin-bottom: 9px;
+    }
+
+    .card p {
+      color: #aaa;
+
+      line-height: 1.6;
+    }
+
+    /* =========================
+       RULES
+    ========================= */
+
+    .rules {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 14px;
+    }
+
+    .rule {
+      padding: 20px;
+
+      border-radius: 16px;
+
+      background:
+        rgba(255,255,255,0.035);
+
+      border:
+        1px solid rgba(255,255,255,0.08);
+
+      transition: 0.2s;
+    }
+
+    .rule:hover {
+      border-color:
+        rgba(213, 70, 255, 0.35);
+
+      background:
+        rgba(150, 0, 255, 0.06);
+    }
+
+    .rule-title {
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: #f1c6ff;
+
+      font-weight: 850;
+
+      font-size: 1rem;
+    }
+
+    .rule-text {
+      color: #aaa;
+
+      line-height: 1.55;
+    }
+
+    /* =========================
+       HONEYPOT
+    ========================= */
+
+    .honeypot {
+      margin-top: 30px;
+
+      padding: 28px;
+
+      text-align: center;
+
+      border-radius: 22px;
+
+      border:
+        1px solid rgba(255, 190, 50, 0.3);
+
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(255, 170, 0, 0.1),
+          transparent 65%
+        ),
+        rgba(255,255,255,0.025);
+
+      box-shadow:
+        0 0 35px rgba(255, 170, 0, 0.07);
+    }
+
+    .honeypot h3 {
+      margin-bottom: 10px;
+
+      font-size: 1.35rem;
+    }
+
+    .honeypot p {
+      max-width: 700px;
+
+      margin: auto;
+
+      color: #aaa;
+
+      line-height: 1.6;
+    }
+
+    /* =========================
+       JOIN
+    ========================= */
+
+    .join-box {
+      position: relative;
+
+      overflow: hidden;
+
+      text-align: center;
+
+      padding: 60px 25px;
+
+      border-radius: 28px;
+
+      border:
+        1px solid rgba(222, 87, 255, 0.3);
+
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(164, 0, 255, 0.2),
+          transparent 65%
+        ),
+        rgba(255,255,255,0.035);
+    }
+
+    .join-box::before {
+      content: "";
+
+      position: absolute;
+
+      width: 300px;
+      height: 300px;
+
+      top: -160px;
+      left: -100px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(255, 0, 255, 0.08);
+
+      filter: blur(50px);
+    }
+
+    .join-logo {
+      width: 105px;
+      height: 105px;
+
+      object-fit: cover;
+
+      border-radius: 50%;
+
+      border:
+        3px solid #d83cff;
+
+      box-shadow:
+        0 0 30px #9d00ff;
+
+      margin-bottom: 18px;
+    }
+
+    .join-box h2 {
+      font-size: 2rem;
+
+      margin-bottom: 10px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      padding: 35px 0 55px;
+
+      text-align: center;
+
+      color: #777;
+
+      font-size: 0.9rem;
+    }
+
+    .footer-name {
+      color: #b75cff;
+
+      font-weight: 800;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 760px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 22px;
+      }
+
+      .banner {
+        border-radius: 18px;
+      }
+
+      .hero-content {
+        padding-top: 28px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .rules {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 3rem;
+      }
+
+      .description {
+        font-size: 1rem;
+      }
+
+      .button {
+        width: 100%;
+        max-width: 330px;
+      }
     }
   </style>
 </head>
+
 <body>
-<nav>
-  <div class="wrap navin">
-    <div class="brand"><img src="logo.webp" alt="Forks Land logo"><span>FORKS LAND</span></div>
-    <div class="links"><a href="#about">About</a><a href="#rules">Rules</a><a href="#join">Join</a></div>
-  </div>
-</nav>
 
-<main>
-  <section class="hero">
-    <div class="wrap">
-      <div class="banner"><img src="banner.png" alt="Forks Land banner"></div>
-      <div class="heroText">
-        <span class="pill">Panda • Community • Good Vibes</span>
-        <h1><span class="gradient">Welcome to Forks Land</span></h1>
-        <p class="lead">A community for friends, gaming, chilling, and making good memories. Come hang out, meet people, and find your place in the Land.</p>
-        <div class="buttons">
-          <!-- Replace the # below with your Forks Land Discord invite -->
-          <a class="btn primary" href="#" id="joinBtn">💜 Join Forks Land</a>
-          <a class="btn secondary" href="#rules">📜 View Rules</a>
+  <!-- =========================
+       NAVIGATION
+  ========================== -->
+
+  <nav>
+    <div class="container nav-inner">
+
+      <div class="brand">
+        <img
+          src="logo.webp"
+          alt="Forks Land Logo"
+        >
+
+        <span>FORKS LAND</span>
+      </div>
+
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#rules">Rules</a>
+        <a href="#join">Join</a>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <main>
+
+    <section class="hero">
+
+      <div class="container">
+
+        <div class="banner">
+
+          <img
+            src="banner.png"
+            alt="Forks Land Banner"
+          >
+
         </div>
-        <div class="status"><span class="dot"></span> Community is open</div>
+
+
+        <div class="hero-content">
+
+          <span class="badge">
+            PANDA • COMMUNITY • GOOD VIBES
+          </span>
+
+          <h1>
+            <span class="gradient-text">
+              Welcome to Forks Land
+            </span>
+          </h1>
+
+          <p class="description">
+            Friends, gaming, chilling, and good vibes.
+            Come hang out, meet new people, share your interests,
+            and become part of the Forks Land community.
+          </p>
+
+
+          <div class="buttons">
+
+            <a
+              class="button primary"
+              href="https://dc.gg/fork-lands"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              💜 Join Forks Land
+            </a>
+
+            <a
+              class="button secondary"
+              href="#rules"
+            >
+              🍯 View Server Rules
+            </a>
+
+          </div>
+
+
+          <div class="status">
+
+            <span class="status-dot"></span>
+
+            Forks Land Community
+
+          </div>
+
+        </div>
+
       </div>
-    </div>
-  </section>
 
-  <section id="about">
-    <div class="wrap">
-      <div class="title"><h2>What is Forks Land?</h2><p>Friends, gaming, chill & more.</p></div>
-      <div class="grid">
-        <div class="card"><div class="icon">🎮</div><h3>Gaming</h3><p>Find people to play with, share clips, talk games, and hang out in voice channels.</p></div>
-        <div class="card"><div class="icon">💬</div><h3>Community</h3><p>Chat, make friends, share your interests, and be part of an active community.</p></div>
-        <div class="card"><div class="icon">✨</div><h3>Good Vibes</h3><p>A relaxed place to chill, laugh, listen to music, and enjoy your time online.</p></div>
+    </section>
+
+
+    <!-- =========================
+         ABOUT
+    ========================== -->
+
+    <section id="about">
+
+      <div class="container">
+
+        <div class="section-title">
+
+          <h2>
+            What is Forks Land?
+          </h2>
+
+          <p>
+            Friends • Gaming • Chill • More
+          </p>
+
+        </div>
+
+
+        <div class="cards">
+
+          <div class="card">
+
+            <div class="card-icon">
+              🎮
+            </div>
+
+            <h3>
+              Gaming
+            </h3>
+
+            <p>
+              Find people to play with, share clips,
+              talk about games, and hang out in voice channels.
+            </p>
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="card-icon">
+              💬
+            </div>
+
+            <h3>
+              Community
+            </h3>
+
+            <p>
+              Meet new people, chat about your interests,
+              share content, and become part of the community.
+            </p>
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="card-icon">
+              ✨
+            </div>
+
+            <h3>
+              Good Vibes
+            </h3>
+
+            <p>
+              Relax, listen to music, joke around,
+              and enjoy your time in Forks Land.
+            </p>
+
+          </div>
+
+        </div>
+
       </div>
-    </div>
-  </section>
 
-  <section id="rules">
-    <div class="wrap">
-      <div class="title"><h2>Server Rules</h2><p>Keep Forks Land fun and welcoming for everyone.</p></div>
-      <div class="rules">
-        <div class="rule"><b>🍯 FORKS LAND — HONEYPOT ALERT</b><br><span>🚨 Think you found a secret channel? Think again.</span></div>
-        <div class="rule"><b>🔒 Honeypot System</b><br><span>Forks Land has an active Honeypot System designed to catch unauthorized access, suspicious activity, and rule-breakers.</span></div>
-        <div class="rule"><b>📋 Monitoring</b><br><span>Honeypot channels are monitored. Activity may be logged for Staff review.</span></div>
-        <div class="rule"><b>⚠️ Unauthorized Access</b><br><span>Attempting to bypass permissions or access restricted areas may result in moderation action.</span></div>
-        <div class="rule"><b>🛡️ Stay Safe</b><br><span>Stay safe. Follow the rules. Enjoy Forks Land!</span></div>
-        <div class="rule"><b>🍯 Staff Team</b><br><span>If you found this message… you might already be in the trap.</span></div>
+    </section>
+
+
+    <!-- =========================
+         RULES
+    ========================== -->
+
+    <section id="rules">
+
+      <div class="container">
+
+        <div class="section-title">
+
+          <h2>
+            🍯 Forks Land Server Rules
+          </h2>
+
+          <p>
+            Think you found a secret channel? Think again.
+          </p>
+
+        </div>
+
+
+        <div class="rules">
+
+          <div class="rule">
+
+            <span class="rule-title">
+              🍯 FORKS LAND — HONEYPOT ALERT
+            </span>
+
+            <span class="rule-text">
+              🚨 Think you found a secret channel?
+              Think again.
+            </span>
+
+          </div>
+
+
+          <div class="rule">
+
+            <span class="rule-title">
+              🔒 Honeypot System
+            </span>
+
+            <span class="rule-text">
+              Forks Land has an active Honeypot System
+              designed to catch unauthorized access,
+              suspicious activity, and rule-breakers.
+            </span>
+
+          </div>
+
+
+          <div class="rule">
+
+            <span class="rule-title">
+              🔒 Honeypot Channels
+            </span>
+
+            <span class="rule-text">
+              Honeypot channels are monitored.
+              Activity may be logged for Staff review.
+            </span>
+
+          </div>
+
+
+          <div class="rule">
+
+            <span class="rule-title">
+              📋 Staff Review
+            </span>
+
+            <span class="rule-text">
+              Activity inside monitored areas may be
+              reviewed by the Forks Land Staff Team.
+            </span>
+
+          </div>
+
+
+          <div class="rule">
+
+            <span class="rule-title">
+              ⚠️ Unauthorized Access
+            </span>
+
+            <span class="rule-text">
+              Attempting to bypass permissions or access
+              restricted areas may result in moderation action.
+            </span>
+
+          </div>
+
+
+          <div class="rule">
+
+            <span class="rule-title">
+              🛡️ Stay Safe
+            </span>
+
+            <span class="rule-text">
+              Stay safe. Follow the rules.
+              Enjoy Forks Land!
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- HONEYPOT NOTICE -->
+
+        <div class="honeypot">
+
+          <h3>
+            🍯 You might already be in the trap...
+          </h3>
+
+          <p>
+            Forks Land uses monitored honeypot areas to help
+            identify unauthorized access and suspicious activity.
+            If you found this message unexpectedly,
+            remember that restricted areas are monitored.
+          </p>
+
+        </div>
+
       </div>
-    </div>
-  </section>
 
-  <section id="join">
-    <div class="wrap">
-      <div class="join">
-        <img src="logo.webp" alt="Forks Land">
-        <h2>Ready to join the Land?</h2>
-        <p class="lead">Grab an invite and come hang out with the Forks Land community.</p>
-        <div class="buttons"><a class="btn primary" href="#" id="joinBtn2">💜 Join the Discord</a></div>
+    </section>
+
+
+    <!-- =========================
+         JOIN
+    ========================== -->
+
+    <section id="join">
+
+      <div class="container">
+
+        <div class="join-box">
+
+          <img
+            class="join-logo"
+            src="logo.webp"
+            alt="Forks Land Logo"
+          >
+
+          <h2>
+            Ready to join the Land?
+          </h2>
+
+          <p class="description">
+            Grab an invite and come hang out
+            with the Forks Land community.
+          </p>
+
+
+          <div class="buttons">
+
+            <a
+              class="button primary"
+              href="https://dc.gg/fork-lands"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              💜 Join the Discord
+            </a>
+
+          </div>
+
+        </div>
+
       </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <div class="container">
+
+      © <span id="year"></span>
+
+      <span class="footer-name">
+        Forks Land
+      </span>
+
+      · Community • Good Vibes • Friends
+
     </div>
-  </section>
-</main>
 
-<footer>
-  <div>© <span id="year"></span> Forks Land · Made for the community</div>
-</footer>
+  </footer>
 
-<script>
-  const INVITE = ""; // Example: https://discord.gg/yourinvite
-  document.getElementById("year").textContent = new Date().getFullYear();
-  ["joinBtn","joinBtn2"].forEach(id => {
-    document.getElementById(id).addEventListener("click", e => {
-      e.preventDefault();
-      if (INVITE) location.href = INVITE;
-      else alert("Add your Discord invite in index.html: const INVITE = \"https://discord.gg/yourinvite\";");
-    });
-  });
-</script>
+
+  <script>
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+  </script>
+
 </body>
 </html>
