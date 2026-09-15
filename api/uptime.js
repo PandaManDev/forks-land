@@ -1,265 +1,92 @@
-// uptime.js
-(function () {
-  'use strict';
+export default async function handler(req, res) {
+  // Forks Land Discord Server
+  const GUILD_ID = "1544159911875707003";
 
-  const dot = document.getElementById('status-dot');
-  const ring = document.getElementById('crest-ring');
-  const statusText = document.getElementById('status-text');
-
-  const dEl = document.getElementById('d');
-  const hEl = document.getElementById('h');
-  const mEl = document.getElementById('m');
-  const sEl = document.getElementById('s');
-
-  const serverNameEl = document.getElementById('serverName');
-  const memberCountEl = document.getElementById('memberCount');
-  const sinceEl = document.getElementById('since');
-  const lastCheckedEl = document.getElementById('last-checked');
-
-  let baseUptimeSeconds = 0;
-  let lastSyncAt = Date.now();
-  let isOnline = false;
-
-  let pollDelay = 15000;
-
-  const MIN_DELAY = 15000;
-  const MAX_DELAY = 90000;
-
-  function pad(number) {
-    return String(number).padStart(2, '0');
-  }
-
-  function renderTimer(totalSeconds) {
-    totalSeconds = Math.max(0, totalSeconds);
-
-    const days = Math.floor(totalSeconds / 86400);
-    const hours = Math.floor((totalSeconds % 86400) / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = Math.floor(totalSeconds % 60);
-
-    if (dEl) dEl.textContent = pad(days);
-    if (hEl) hEl.textContent = pad(hours);
-    if (mEl) mEl.textContent = pad(minutes);
-    if (sEl) sEl.textContent = pad(seconds);
-  }
-
-  function tick() {
-    if (!isOnline) return;
-
-    const elapsed = (Date.now() - lastSyncAt) / 1000;
-
-    renderTimer(baseUptimeSeconds + elapsed);
-  }
-
-  function setStatus(kind, data) {
-    // kind = online | offline | reconnecting
-
-    document.body.classList.toggle(
-      'is-offline',
-      kind !== 'online'
+  try {
+    const response = await fetch(
+      `https://discord.com/api/guilds/${GUILD_ID}/widget.json`,
+      {
+        method: "GET",
+        headers: {
+          "User-Agent": "Forks-Land-Status/1.0"
+        },
+        cache: "no-store"
+      }
     );
 
-    if (dot) {
-      dot.className =
-        'status-dot ' +
-        (kind === 'reconnecting'
-          ? 'reconnecting'
-          : kind);
+    if (!response.ok) {
+      return res.status(502).json({
+        online: false,
+        serverName: "Forks Land",
+        memberCount: null,
+        uptimeSeconds: 0,
+        startedAt: null,
+        error: `Discord returned HTTP ${response.status}`
+      });
     }
 
-    if (ring) {
-      ring.className =
-        'crest-ring ' +
-        (kind === 'reconnecting'
-          ? 'reconnecting'
-          : kind);
+    const discord = await response.json();
+
+    /*
+      Discord's widget doesn't provide the bot's actual process uptime.
+
+      This endpoint uses the time the Vercel function first sees the
+      server as available. For REAL bot uptime, your bot should expose
+      its own uptime value.
+    */
+
+    const now = Date.now();
+
+    // Keep a simple server-side start time for this function instance.
+    if (!globalThis.forksLandStartedAt) {
+      globalThis.forksLandStartedAt = now;
     }
 
-    if (kind === 'online') {
-      if (statusText) {
-        statusText.innerHTML = '<strong>Online</strong>';
-      }
+    const startedAt =
+      globalThis.forksLandStartedAt;
 
-      isOnline = true;
+    const uptimeSeconds =
+      Math.floor((now - startedAt) / 1000);
 
-    } else if (kind === 'reconnecting') {
+    return res.status(200).json({
+      online: true,
 
-      if (statusText) {
-        statusText.textContent = 'Reconnecting…';
-      }
+      serverName:
+        discord.name || "Forks Land",
 
-      isOnline = false;
+      memberCount:
+        discord.presence_count ??
+        discord.members?.length ??
+        0,
 
-    } else {
+      uptimeSeconds,
 
-      if (statusText) {
-        statusText.innerHTML = '<strong>Offline</strong>';
-      }
+      startedAt:
+        new Date(startedAt).toISOString(),
 
-      isOnline = false;
-    }
+      onlineMembers:
+        discord.presence_count ?? 0,
 
-    // Update server information
-    if (data) {
+      users:
+        Array.isArray(discord.members)
+          ? discord.members
+          : []
+    });
 
-      if (serverNameEl) {
-        serverNameEl.textContent =
-          data.serverName || '—';
-      }
+  } catch (error) {
 
-      if (memberCountEl) {
-        memberCountEl.textContent =
-          data.memberCount != null
-            ? Number(data.memberCount).toLocaleString()
-            : '—';
-      }
+    console.error(
+      "Forks Land uptime error:",
+      error
+    );
 
-      if (sinceEl && data.startedAt) {
-
-        const startDate =
-          new Date(data.startedAt);
-
-        sinceEl.textContent =
-          startDate.toLocaleString(undefined, {
-            month: 'short',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-          });
-      }
-    }
+    return res.status(500).json({
+      online: false,
+      serverName: "Forks Land",
+      memberCount: null,
+      uptimeSeconds: 0,
+      startedAt: null,
+      error: "Unable to reach Discord"
+    });
   }
-
-  async function fetchUptime() {
-
-    const controller =
-      new AbortController();
-
-    // Stop requests that hang forever
-    const timeout =
-      setTimeout(() => {
-        controller.abort();
-      }, 10000);
-
-    try {
-
-      const response =
-        await fetch('/api/uptime', {
-          cache: 'no-store',
-          signal: controller.signal
-        });
-
-      if (!response.ok) {
-        throw new Error(
-          'Request failed (' +
-          response.status +
-          ')'
-        );
-      }
-
-      return await response.json();
-
-    } finally {
-
-      clearTimeout(timeout);
-    }
-  }
-
-  async function refresh() {
-
-    try {
-
-      const data =
-        await fetchUptime();
-
-      setStatus(
-        data.online
-          ? 'online'
-          : 'offline',
-        data
-      );
-
-      baseUptimeSeconds =
-        Number(data.uptimeSeconds) || 0;
-
-      lastSyncAt =
-        Date.now();
-
-      renderTimer(
-        baseUptimeSeconds
-      );
-
-      if (lastCheckedEl) {
-        lastCheckedEl.textContent =
-          'just now';
-      }
-
-      // Successful request:
-      // reset retry delay
-      pollDelay =
-        MIN_DELAY;
-
-    } catch (error) {
-
-      console.error(
-        'Forks Land uptime error:',
-        error
-      );
-
-      setStatus(
-        isOnline
-          ? 'reconnecting'
-          : 'offline'
-      );
-
-      // Exponential-ish backoff
-      pollDelay =
-        Math.min(
-          pollDelay * 1.6,
-          MAX_DELAY
-        );
-    }
-
-    clearTimeout(pollTimer);
-
-    pollTimer =
-      setTimeout(
-        refresh,
-        pollDelay
-      );
-  }
-
-  let pollTimer = null;
-
-  // Update uptime every second
-  setInterval(
-    tick,
-    1000
-  );
-
-  // Update "last checked"
-  setInterval(() => {
-
-    if (!isOnline) return;
-
-    if (lastCheckedEl) {
-
-      const secondsAgo =
-        Math.max(
-          1,
-          Math.round(
-            (Date.now() - lastSyncAt) /
-            1000
-          )
-        );
-
-      lastCheckedEl.textContent =
-        secondsAgo + 's ago';
-    }
-
-  }, 1000);
-
-  // Start monitoring
-  refresh();
-
-})();
+}
