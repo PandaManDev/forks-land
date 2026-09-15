@@ -1,236 +1,153 @@
-export default async function handler(req, res) {
+const { supabaseRequest } = require("./_lib/supabase");
 
-  const GUILD_ID =
-    "1544159911875707003";
+const DISCORD_WIDGET =
+  "https://discord.com/api/guilds/1544159911875707003/widget.json";
+
+module.exports = async function handler(req, res) {
+  res.setHeader(
+    "Cache-Control",
+    "no-store, max-age=0"
+  );
 
   try {
+    const now = Date.now();
 
-    const start =
-      Date.now();
+    const [
+      botRows,
+      settingsRows,
+      incidents,
+      announcements,
+      history
+    ] = await Promise.all([
+      supabaseRequest(
+        "bot_status?id=eq.1&select=*"
+      ),
 
+      supabaseRequest(
+        "site_settings?id=eq.1&select=*"
+      ),
 
-    const response =
-      await fetch(
+      supabaseRequest(
+        "incidents?select=*&order=created_at.desc&limit=20"
+      ),
 
-        `https://discord.com/api/guilds/${GUILD_ID}/widget.json`,
+      supabaseRequest(
+        "announcements?select=*&order=created_at.desc&limit=10"
+      ),
 
-        {
-          method:"GET",
+      supabaseRequest(
+        "uptime_history?select=*&order=checked_at.desc&limit=2880"
+      )
+    ]);
 
-          headers:{
-            "User-Agent":
-              "Forks-Land-Status-Dashboard/1.0",
+    let discord = null;
 
-            "Accept":
-              "application/json"
-          },
+    try {
+      const discordResponse =
+        await fetch(DISCORD_WIDGET, {
+          cache: "no-store"
+        });
 
-          cache:"no-store"
-        }
-
-      );
-
-
-    const latency =
-      Date.now() - start;
-
-
-    if(
-      !response.ok
-    ){
-
-      return res.status(502).json({
-
-        online:false,
-
-        serverName:
-          "Forks Land",
-
-        guildId:
-          GUILD_ID,
-
-        memberCount:null,
-
-        onlineMembers:0,
-
-        uptimeSeconds:0,
-
-        startedAt:null,
-
-        latencyMs:
-          latency,
-
-        error:
-          `Discord returned HTTP ${response.status}`
-
-      });
-
+      if (discordResponse.ok) {
+        discord = await discordResponse.json();
+      }
+    } catch {
+      discord = null;
     }
 
+    const bot = botRows?.[0] || null;
 
-    const discord =
-      await response.json();
+    let botOnline = false;
+    let uptimeSeconds = 0;
 
+    if (bot?.last_heartbeat) {
+      const heartbeatAge =
+        now - new Date(bot.last_heartbeat).getTime();
 
-    /*
-      Discord's widget API does not provide
-      actual Discord bot process uptime.
+      // Consider bot offline after 90 seconds.
+      botOnline =
+        heartbeatAge <= 90000;
 
-      This timer measures the lifetime of the
-      current Vercel monitoring instance.
-
-      For real bot uptime, your bot needs to
-      send heartbeat information to a persistent
-      database or health endpoint.
-    */
-
-
-    if(
-      !globalThis.forksLandStartedAt
-    ){
-
-      globalThis.forksLandStartedAt =
-        Date.now();
-
+      if (
+        botOnline &&
+        bot.started_at
+      ) {
+        uptimeSeconds = Math.max(
+          0,
+          Math.floor(
+            (now -
+              new Date(bot.started_at).getTime()) /
+              1000
+          )
+        );
+      }
     }
-
-
-    const startedAt =
-      globalThis.forksLandStartedAt;
-
-
-    const users =
-      Array.isArray(
-        discord.members
-      )
-      ?
-      discord.members.map(
-        member => ({
-
-          username:
-            member.username ||
-            member.nick ||
-            "Discord user",
-
-          nick:
-            member.nick ||
-            null,
-
-          avatar_url:
-            member.avatar_url ||
-            null,
-
-          status:
-            "online"
-
-        })
-      )
-      :
-      [];
-
-
-    const memberCount =
-      typeof discord.member_count ===
-      "number"
-
-      ?
-
-      discord.member_count
-
-      :
-
-      users.length;
-
-
-    const onlineMembers =
-      typeof discord.presence_count ===
-      "number"
-
-      ?
-
-      discord.presence_count
-
-      :
-
-      users.length;
-
-
-    const uptimeSeconds =
-      Math.floor(
-        (
-          Date.now() -
-          startedAt
-        ) / 1000
-      );
-
 
     return res.status(200).json({
+      ok: true,
 
-      online:true,
+      maintenance:
+        settingsRows?.[0]?.maintenance || false,
 
-      serverName:
-        discord.name ||
-        "Forks Land",
+      maintenanceMessage:
+        settingsRows?.[0]?.maintenance_message ||
+        "Forks Land is currently undergoing maintenance.",
 
-      guildId:
-        GUILD_ID,
+      honeypotEnabled:
+        settingsRows?.[0]?.honeypot_enabled !== false,
 
-      memberCount,
+      bot: {
+        online: botOnline,
+        name: bot?.bot_name || "Forks Land Bot",
+        version: bot?.version || "1.0.0",
+        latencyMs: bot?.latency_ms || 0,
+        startedAt: bot?.started_at || null,
+        lastHeartbeat:
+          bot?.last_heartbeat || null,
+        uptimeSeconds
+      },
 
-      onlineMembers,
+      discord: discord
+        ? {
+            onlineMembers:
+              discord.presence_count || 0,
 
-      users,
+            users:
+              Array.isArray(discord.members)
+                ? discord.members
+                : [],
 
-      icon:
-        discord.icon_url ||
-        null,
+            icon:
+              discord.icon || null,
 
-      uptimeSeconds,
+            name:
+              discord.name || "Forks Land",
 
-      startedAt:
-        new Date(
-          startedAt
-        ).toISOString(),
+            guildId:
+              discord.id ||
+              "1544159911875707003"
+          }
+        : null,
 
-      latencyMs:
-        latency
+      incidents:
+        incidents || [],
 
+      announcements:
+        announcements || [],
+
+      history:
+        history || [],
+
+      checkedAt:
+        new Date().toISOString()
     });
 
-
-  }
-
-  catch(error){
-
-    console.error(
-      "Forks Land API Error:",
-      error
-    );
-
+  } catch (error) {
+    console.error(error);
 
     return res.status(500).json({
-
-      online:false,
-
-      serverName:
-        "Forks Land",
-
-      guildId:
-        GUILD_ID,
-
-      memberCount:null,
-
-      onlineMembers:0,
-
-      uptimeSeconds:0,
-
-      startedAt:null,
-
-      error:
-        "Unable to reach Discord widget API"
-
+      ok: false,
+      error: "Status API unavailable."
     });
-
   }
-
-}
+};
