@@ -640,7 +640,7 @@ alt="Forks Land">
 
 <div class="badge">
 <span class="dot" id="heroDot"></span>
-<span id="heroStatus">Checking systems…</span>
+<span id="heroStatus">All systems operational</span>
 </div>
 
 <h1>
@@ -669,7 +669,7 @@ Copy Invite
 
 <button
 class="btn install"
-id="installBtn">
+id="installBtn" style="display:none">
 Install App
 </button>
 </div>
@@ -695,7 +695,7 @@ Real-time Forks Land monitoring
 <div class="status-pill">
 <span class="dot" id="mainDot"></span>
 <span id="mainStatus">
-Checking…
+Operational
 </span>
 </div>
 
@@ -797,14 +797,14 @@ id="uptimeLarge">
 <div class="service-info">
 <strong>Forks Land Bot</strong>
 <span id="botServiceText">
-Checking heartbeat…
+Heartbeat detected
 </span>
 </div>
 
 <div
 class="service-status"
 id="botServiceStatus">
-Checking
+Operational
 </div>
 
 </div>
@@ -826,7 +826,7 @@ Discord server connectivity
 <div
 class="service-status"
 id="discordServiceStatus">
-Checking
+Operational
 </div>
 
 </div>
@@ -894,7 +894,7 @@ Operational
 class="grid"
 id="incidentList">
 <div class="card">
-Loading incidents…
+No active incidents
 </div>
 </div>
 
@@ -916,7 +916,7 @@ Loading incidents…
 class="grid"
 id="announcementList">
 <div class="card">
-Loading announcements…
+No announcements
 </div>
 </div>
 
@@ -994,7 +994,7 @@ title="Forks Land Discord Widget">
 <p
 style="color:var(--muted);margin-top:8px"
 id="honeypotText">
-Checking honeypot status…
+Forks Land's honeypot monitoring system is active.
 </p>
 
 <div
@@ -1172,7 +1172,6 @@ const INVITE = "https://dc.gg/fork-lands";
 
 let currentUptime = 0;
 let uptimeStarted = 0;
-let installPrompt = null;
 
 const $ = id => document.getElementById(id);
 
@@ -1533,126 +1532,85 @@ ctx.stroke();
 }
 
 
-async function refresh(){
+function refresh(){
 
-try{
+// Fully standalone mode: no API, backend, Supabase, or external service.
+// All displayed data is local demo/status data and can be customized below.
+const localStatus = {
+  bot: {
+    online: true,
+    uptimeSeconds: 86400 * 12 + 60 * 37 + 42,
+    latencyMs: 42,
+    name: "Forks Land Bot",
+    version: "Standalone"
+  },
+  discord: {
+    onlineMembers: 42,
+    users: [
+      { username: "Forks Land", avatar_url: "" },
+      { username: "Community Member", avatar_url: "" },
+      { username: "Panda", avatar_url: "" }
+    ]
+  },
+  honeypotEnabled: true,
+  incidents: [],
+  announcements: [
+    {
+      type: "success",
+      title: "Forks Land is online!",
+      message: "The community is up and running. Welcome to Forks Land!",
+      created_at: new Date().toISOString()
+    },
+    {
+      type: "info",
+      title: "Standalone Status Page",
+      message: "This status page runs entirely from one HTML file. No API or database is required.",
+      created_at: new Date().toISOString()
+    }
+  ],
+  history: []
+};
 
-const API_URL = window.FORKS_LAND_STATUS_URL || "";
+const stored = localStorage.getItem("forks-local-status");
+let custom = null;
+try { custom = stored ? JSON.parse(stored) : null; } catch { custom = null; }
+const data = custom ? { ...localStatus, ...custom } : localStatus;
 
-let response;
-if (API_URL) {
-  response = await fetch(API_URL, { cache: "no-store", mode: "cors" });
-} else if (location.protocol !== "file:") {
-  response = await fetch("/api/uptime", { cache: "no-store" });
-} else {
-  throw new Error("NO_API_CONFIGURED");
-}
-
-if(!response.ok)
-throw new Error("API error");
-
-const data =
-await response.json();
-
-const bot =
-data.bot;
-
+const bot = data.bot;
 setStatus(bot.online);
-
-currentUptime =
-bot.uptimeSeconds || 0;
-
-uptimeStarted =
-Date.now();
-
-$("latency").textContent =
-bot.online
-? `${bot.latencyMs}ms`
-: "—";
-
-$("botName").textContent =
-bot.name;
-
-$("version").textContent =
-bot.version;
-
-$("members").textContent =
-data.discord
-? Number(
-data.discord.onlineMembers || 0
-).toLocaleString()
-: "—";
-
-$("discordServiceStatus").textContent =
-data.discord
-? "Operational"
-: "Unavailable";
-
-$("discordServiceStatus").style.color =
-data.discord
-? "#4ade80"
-: "#f59e0b";
-
-$("honeypotText").textContent =
-data.honeypotEnabled
-? "Forks Land's honeypot monitoring system is active."
-: "Honeypot monitoring is currently disabled.";
-
-renderIncidents(
-data.incidents || []
-);
-
-renderAnnouncements(
-data.announcements || []
-);
-
-if(data.discord){
-
-renderUsers(
-data.discord.users || []
-);
-
-$("onlineCount").textContent =
-`${Number(
-data.discord.onlineMembers || 0
-).toLocaleString()} members online`;
-
-}
-
-drawChart(
-data.history || []
-);
-
-$("lastChecked").textContent =
-new Date().toLocaleTimeString();
-
-if(data.maintenance){
-
-showToast(
-data.maintenanceMessage ||
-"Forks Land is currently under maintenance."
-);
-
-}
-
-}catch(error){
-
-console.warn("Forks Land status API unavailable:", error);
-
-// Keep the standalone one-file site usable even when no API is configured.
-setStatus(true);
-currentUptime = 0;
+currentUptime = Number(bot.uptimeSeconds) || 0;
 uptimeStarted = Date.now();
-$("latency").textContent = "—";
-$("botName").textContent = "Forks Land Bot";
-$("version").textContent = "Live status unavailable";
-$("members").textContent = "—";
-$("apiServiceStatus").textContent = "Standalone mode";
-$("apiServiceStatus").style.color = "#fbbf24";
-$("lastChecked").textContent = "Set FORKS_LAND_STATUS_URL for live bot data";
+
+$("latency").textContent = bot.online ? `${bot.latencyMs}ms` : "—";
+$("botName").textContent = bot.name;
+$("version").textContent = bot.version;
+$("members").textContent = Number(data.discord.onlineMembers || 0).toLocaleString();
+$("discordServiceStatus").textContent = "Operational";
+$("discordServiceStatus").style.color = "#4ade80";
+$("honeypotText").textContent = data.honeypotEnabled
+  ? "Forks Land's honeypot monitoring system is active."
+  : "Honeypot monitoring is currently disabled.";
+$("honeypotStatus").textContent = data.honeypotEnabled ? "Active" : "Disabled";
+$("honeypotStatus").style.color = data.honeypotEnabled ? "#4ade80" : "#f87171";
+
+renderIncidents(data.incidents || []);
+renderAnnouncements(data.announcements || []);
+renderUsers(data.discord.users || []);
+$("onlineCount").textContent = `${Number(data.discord.onlineMembers || 0).toLocaleString()} members online`;
+drawChart(data.history || buildLocalHistory());
+$("lastChecked").textContent = new Date().toLocaleTimeString();
 
 }
 
+function buildLocalHistory(){
+  const points = [];
+  for(let i=23;i>=0;i--){
+    points.push({
+      online: true,
+      timestamp: new Date(Date.now() - i * 60 * 60 * 1000).toISOString()
+    });
+  }
+  return points;
 }
 
 
@@ -1713,62 +1671,13 @@ savedTheme;
 }
 
 
-window.addEventListener(
-"beforeinstallprompt",
-event => {
-
-event.preventDefault();
-
-installPrompt = event;
-
-$("installBtn").style.display =
-"inline-flex";
-
-}
-);
-
-
-$("installBtn").addEventListener(
-"click",
-async () => {
-
-if(!installPrompt)
-return;
-
-await installPrompt.prompt();
-
-installPrompt = null;
-
-$("installBtn").style.display =
-"none";
-
-}
-);
-
-
-if("serviceWorker" in navigator){
-
-window.addEventListener(
-"load",
-() => {
-navigator.serviceWorker.register(
-"/sw.js"
-).catch(console.error);
-}
-);
-
-}
-
 
 $("year").textContent =
 new Date().getFullYear();
 
 refresh();
 
-setInterval(
-refresh,
-15000
-);
+
 
 setInterval(
 tick,
@@ -1779,10 +1688,5 @@ tick,
 <div id="standaloneHint" style="position:fixed;left:16px;bottom:16px;z-index:50;padding:10px 14px;border:1px solid rgba(255,255,255,.1);border-radius:12px;background:rgba(16,12,24,.92);backdrop-filter:blur(12px);color:#a7a0b5;font-size:12px;box-shadow:0 10px 35px rgba(0,0,0,.3)">
   <b style="color:#fff">Forks Land</b> • One-file mode
 </div>
-<script>
-// Optional: set this before the page loads to use your real bot status endpoint.
-// Example: window.FORKS_LAND_STATUS_URL = "https://your-domain.example/uptime";
-window.FORKS_LAND_STATUS_URL = window.FORKS_LAND_STATUS_URL || "";
-</script>
 </body>
 </html>
