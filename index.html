@@ -5,13 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Forks Land | Discord Community</title>
-  <meta name="description" content="Forks Land — a Discord community for gaming, friends, voice chats, events, and good vibes.">
+
+  <meta
+    name="description"
+    content="Forks Land — a Discord community for gaming, friends, voice chats, events, and good vibes."
+  >
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
+
     * {
       margin: 0;
       padding: 0;
@@ -24,87 +33,148 @@
 
     body {
       font-family: "Inter", sans-serif;
+
       background:
-        radial-gradient(circle at 50% 20%, rgba(117, 45, 255, .18), transparent 35%),
-        radial-gradient(circle at 15% 60%, rgba(0, 120, 255, .12), transparent 30%),
+        radial-gradient(
+          circle at 50% 20%,
+          rgba(117, 45, 255, .18),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at 15% 60%,
+          rgba(0, 120, 255, .12),
+          transparent 30%
+        ),
         #030313;
+
       color: #fff;
+
       overflow-x: hidden;
     }
 
-    /* =========================
-       BACKGROUND
-    ========================= */
-
     body::before {
       content: "";
+
       position: fixed;
+
       inset: 0;
+
       pointer-events: none;
+
       z-index: -2;
+
       background:
-        radial-gradient(circle at 20% 20%, rgba(125, 45, 255, .12), transparent 22%),
-        radial-gradient(circle at 80% 35%, rgba(0, 160, 255, .10), transparent 25%),
-        radial-gradient(circle at 50% 90%, rgba(140, 30, 255, .12), transparent 30%);
+        radial-gradient(
+          circle at 20% 20%,
+          rgba(125, 45, 255, .12),
+          transparent 22%
+        ),
+        radial-gradient(
+          circle at 80% 35%,
+          rgba(0, 160, 255, .10),
+          transparent 25%
+        ),
+        radial-gradient(
+          circle at 50% 90%,
+          rgba(140, 30, 255, .12),
+          transparent 30%
+        );
     }
 
     body::after {
       content: "";
+
       position: fixed;
+
       inset: 0;
+
       pointer-events: none;
+
       z-index: -1;
+
       opacity: .25;
+
       background-image:
-        radial-gradient(circle, #fff 1px, transparent 1px);
+        radial-gradient(
+          circle,
+          #fff 1px,
+          transparent 1px
+        );
+
       background-size: 120px 120px;
+
       animation: stars 20s linear infinite;
     }
 
     @keyframes stars {
+
       from {
         transform: translateY(0);
       }
+
       to {
         transform: translateY(-120px);
       }
+
     }
+
 
     /* =========================
        HEADER
     ========================= */
 
     header {
+
       position: fixed;
+
       top: 0;
       left: 0;
       right: 0;
-      height: 92px;
+
+      height: 94px;
+
       z-index: 1000;
 
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
 
       padding: 0 5%;
 
-      background: rgba(3, 3, 19, .78);
+      background:
+        linear-gradient(
+          180deg,
+          rgba(4, 3, 24, .92),
+          rgba(4, 3, 24, .72)
+        );
+
       backdrop-filter: blur(20px);
+
       -webkit-backdrop-filter: blur(20px);
 
-      border-bottom: 1px solid rgba(122, 61, 255, .35);
+      border-bottom:
+        1px solid rgba(122, 61, 255, .35);
     }
 
+
     .brand {
+
       display: flex;
+
       align-items: center;
+
       gap: 13px;
 
       color: #fff;
+
       text-decoration: none;
 
       font-size: 27px;
+
       font-weight: 800;
+
       font-style: italic;
 
       text-shadow:
@@ -112,14 +182,19 @@
         0 0 25px #7b36ff;
     }
 
+
     .brand-icon {
+
       width: 42px;
+
       height: 42px;
 
       display: grid;
+
       place-items: center;
 
       font-size: 38px;
+
       color: #fff;
 
       text-shadow:
@@ -128,81 +203,116 @@
         0 0 40px #7d45ff;
     }
 
+
     nav {
+
       display: flex;
+
       align-items: center;
+
       gap: 42px;
     }
 
+
     nav a {
+
       position: relative;
 
       color: #c9c8dd;
+
       text-decoration: none;
 
       font-size: 15px;
+
       font-weight: 500;
 
       transition: .25s ease;
     }
 
+
     nav a:hover,
     nav a.active {
+
       color: #fff;
-      text-shadow: 0 0 12px #9d57ff;
+
+      text-shadow:
+        0 0 12px #9d57ff;
     }
 
+
     nav a.active::after {
+
       content: "";
+
       position: absolute;
 
       left: 0;
       right: 0;
+
       bottom: -15px;
 
       height: 3px;
 
       border-radius: 10px;
 
-      background: linear-gradient(
-        90deg,
-        #8c35ff,
-        #bc5cff
-      );
+      background:
+        linear-gradient(
+          90deg,
+          #8c35ff,
+          #bc5cff
+        );
 
-      box-shadow: 0 0 12px #9d43ff;
+      box-shadow:
+        0 0 12px #9d43ff;
     }
 
+
     .header-actions {
+
       display: flex;
+
       align-items: center;
+
       gap: 18px;
     }
 
+
     .theme-toggle {
+
       width: 88px;
+
       height: 42px;
 
       border-radius: 30px;
 
-      border: 1px solid rgba(133, 140, 210, .55);
+      border:
+        1px solid rgba(133, 140, 210, .55);
 
-      background: rgba(15, 16, 40, .7);
+      background:
+        rgba(15, 16, 40, .7);
 
       display: flex;
+
       align-items: center;
+
       justify-content: space-around;
 
       color: white;
 
       cursor: pointer;
+
       font-size: 19px;
     }
 
+
     .discord-btn {
+
       display: inline-flex;
+
       align-items: center;
+
       justify-content: center;
+
       gap: 11px;
 
       padding: 15px 27px;
@@ -211,15 +321,17 @@
 
       border: none;
 
-      background: linear-gradient(
-        135deg,
-        #6941ff,
-        #8d48ff
-      );
+      background:
+        linear-gradient(
+          135deg,
+          #6941ff,
+          #8d48ff
+        );
 
       color: #fff;
 
       font-weight: 700;
+
       text-decoration: none;
 
       box-shadow:
@@ -229,63 +341,122 @@
       transition: .25s ease;
     }
 
+
     .discord-btn:hover {
-      transform: translateY(-2px) scale(1.02);
+
+      transform:
+        translateY(-2px)
+        scale(1.02);
 
       box-shadow:
         0 0 25px rgba(141, 70, 255, .75),
         0 0 50px rgba(100, 40, 255, .3);
     }
 
+
     .discord-icon {
+
       font-size: 21px;
     }
+
 
     /* =========================
        HERO
     ========================= */
 
     .hero {
+
       min-height: 810px;
 
-      padding: 150px 20px 70px;
+      isolation: isolate;
+
+      padding:
+        150px
+        20px
+        70px;
 
       display: flex;
+
       align-items: center;
+
       justify-content: center;
 
       position: relative;
+
       overflow: hidden;
 
       background:
+
+        linear-gradient(
+          180deg,
+          rgba(2, 2, 16, .18),
+          rgba(2, 2, 16, .88)
+        ),
+
         radial-gradient(
-          circle at 50% 42%,
-          rgba(117, 45, 255, .26),
+          ellipse at 50% 34%,
+          rgba(125, 47, 255, .40),
+          transparent 30%
+        ),
+
+        radial-gradient(
+          ellipse at 16% 58%,
+          rgba(24, 65, 255, .26),
           transparent 28%
         ),
+
         radial-gradient(
-          circle at 15% 45%,
-          rgba(0, 90, 255, .16),
-          transparent 25%
-        ),
-        radial-gradient(
-          circle at 85% 45%,
-          rgba(120, 20, 255, .15),
-          transparent 25%
+          ellipse at 84% 55%,
+          rgba(149, 24, 255, .25),
+          transparent 28%
         );
     }
 
+
+    .hero-glow {
+
+      position: absolute;
+
+      width: 760px;
+
+      height: 760px;
+
+      left: 50%;
+
+      top: 55px;
+
+      transform:
+        translateX(-50%);
+
+      border-radius: 50%;
+
+      border:
+        1px solid rgba(151, 70, 255, .16);
+
+      box-shadow:
+        0 0 80px rgba(106, 39, 255, .10),
+        inset 0 0 80px rgba(106, 39, 255, .06);
+
+      pointer-events: none;
+    }
+
+
     .hero::before {
+
       content: "";
 
       position: absolute;
+
       width: 650px;
+
       height: 650px;
 
       top: 70px;
+
       left: 50%;
 
-      transform: translateX(-50%);
+      transform:
+        translateX(-50%);
 
       border-radius: 50%;
 
@@ -297,27 +468,42 @@
         );
 
       filter: blur(20px);
+
+      z-index: 0;
     }
 
+
     .hero-content {
+
       position: relative;
+
       z-index: 2;
 
-      width: min(900px, 100%);
+      width:
+        min(
+          900px,
+          100%
+        );
 
       text-align: center;
     }
 
+
     .fork-symbol {
-      width: 150px;
+
+      width: 170px;
+
       height: 150px;
 
-      margin: 0 auto 15px;
+      margin:
+        0 auto 15px;
 
       display: grid;
+
       place-items: center;
 
-      font-size: 125px;
+      font-size: 132px;
+
       line-height: 1;
 
       color: white;
@@ -328,50 +514,79 @@
         0 0 35px #8f4dff,
         0 0 70px #541aff;
 
-      animation: floating 4s ease-in-out infinite;
+      animation:
+        floating 4s ease-in-out infinite;
     }
 
+
     @keyframes floating {
-      0%, 100% {
+
+      0%,
+      100% {
         transform: translateY(0);
       }
 
       50% {
         transform: translateY(-9px);
       }
+
     }
 
+
     .hero-title {
-      font-size: clamp(60px, 9vw, 118px);
+
+      font-size:
+        clamp(
+          60px,
+          9vw,
+          118px
+        );
+
       line-height: .9;
 
       font-weight: 900;
+
       font-style: italic;
+
       letter-spacing: -5px;
 
-      background: linear-gradient(
-        100deg,
-        #d85bff,
-        #9f48ff 38%,
-        #54d9ff 75%,
-        #9aeaff
-      );
+      background:
+        linear-gradient(
+          100deg,
+          #d85bff,
+          #9f48ff 38%,
+          #54d9ff 75%,
+          #9aeaff
+        );
 
       -webkit-background-clip: text;
+
       background-clip: text;
+
       color: transparent;
 
       filter:
-        drop-shadow(0 0 8px rgba(187, 73, 255, .9))
-        drop-shadow(0 0 22px rgba(85, 99, 255, .5));
+        drop-shadow(
+          0 0 8px
+          rgba(187, 73, 255, .9)
+        )
+        drop-shadow(
+          0 0 22px
+          rgba(85, 99, 255, .5)
+        );
 
       margin-bottom: 30px;
     }
 
+
     .hero-tags {
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
+
       flex-wrap: wrap;
 
       gap: 18px;
@@ -381,32 +596,46 @@
       color: #d58cff;
 
       font-size: 15px;
+
       font-weight: 700;
+
       letter-spacing: .8px;
     }
 
+
     .hero-tags span:nth-child(3n) {
+
       color: #63dfff;
     }
 
+
     .dot {
+
       color: #a855f7 !important;
     }
 
+
     .hero-description {
+
       max-width: 700px;
 
-      margin: 0 auto 30px;
+      margin:
+        0 auto 30px;
 
       color: #e2e1ed;
 
       font-size: 17px;
+
       line-height: 1.7;
     }
 
+
     .hero-buttons {
+
       display: flex;
+
       justify-content: center;
+
       align-items: center;
 
       gap: 18px;
@@ -414,22 +643,33 @@
       margin-bottom: 28px;
     }
 
+
     .hero-buttons .discord-btn {
+
       min-width: 260px;
-      padding: 17px 28px;
+
+      padding:
+        17px 28px;
     }
 
+
     .learn-btn {
+
       min-width: 170px;
 
-      padding: 16px 28px;
+      padding:
+        16px 28px;
 
       border-radius: 20px;
 
-      border: 1px solid rgba(157, 126, 255, .8);
+      border:
+        1px solid
+        rgba(157, 126, 255, .8);
 
       color: #fff;
-      background: rgba(10, 12, 35, .55);
+
+      background:
+        rgba(10, 12, 35, .55);
 
       text-decoration: none;
 
@@ -438,27 +678,45 @@
       transition: .25s ease;
     }
 
+
     .learn-btn:hover {
-      background: rgba(100, 50, 200, .2);
+
+      background:
+        rgba(100, 50, 200, .2);
 
       box-shadow:
-        0 0 20px rgba(130, 70, 255, .3);
+        0 0 20px
+        rgba(130, 70, 255, .3);
 
-      transform: translateY(-2px);
+      transform:
+        translateY(-2px);
     }
 
+
+    /* =========================
+       REAL DISCORD ONLINE COUNT
+    ========================= */
+
     .online {
+
       display: flex;
+
       justify-content: center;
+
       align-items: center;
+
       gap: 9px;
 
       color: #d9d8e8;
+
       font-size: 14px;
     }
 
+
     .online-dot {
+
       width: 11px;
+
       height: 11px;
 
       border-radius: 50%;
@@ -467,13 +725,18 @@
 
       box-shadow:
         0 0 8px #00ed91,
-        0 0 15px rgba(0, 237, 145, .6);
+        0 0 15px
+        rgba(0, 237, 145, .6);
 
-      animation: pulse 1.7s infinite;
+      animation:
+        pulse 1.7s infinite;
     }
 
+
     @keyframes pulse {
-      0%, 100% {
+
+      0%,
+      100% {
         transform: scale(1);
         opacity: 1;
       }
@@ -482,50 +745,86 @@
         transform: scale(1.35);
         opacity: .65;
       }
+
     }
+
+
+    #onlineCount {
+
+      font-weight: 800;
+
+      color: #fff;
+
+      text-shadow:
+        0 0 8px
+        rgba(255,255,255,.25);
+    }
+
 
     /* =========================
        FEATURES
     ========================= */
 
     .features-section {
+
       position: relative;
 
       max-width: 1220px;
 
-      margin: -15px auto 0;
+      margin:
+        -5px auto 0;
 
-      padding: 20px 20px 45px;
+      padding:
+        20px 20px 45px;
 
       z-index: 5;
     }
 
+
     .features {
+
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+
+      grid-template-columns:
+        repeat(5, 1fr);
+
       gap: 18px;
 
       padding: 20px;
 
-      border: 1px solid rgba(105, 53, 255, .45);
+      border:
+        1px solid
+        rgba(105, 53, 255, .45);
 
       border-radius: 15px;
 
-      background: rgba(5, 5, 25, .58);
+      background:
+        linear-gradient(
+          180deg,
+          rgba(8, 7, 32, .78),
+          rgba(4, 5, 24, .66)
+        );
 
       box-shadow:
-        0 0 35px rgba(79, 35, 200, .10);
+        0 0 35px
+        rgba(79, 35, 200, .10);
 
-      backdrop-filter: blur(15px);
+      backdrop-filter:
+        blur(15px);
     }
 
-    .feature-card {
-      min-height: 215px;
 
-      padding: 25px 18px;
+    .feature-card {
+
+      min-height: 220px;
+
+      padding:
+        25px 18px;
 
       display: flex;
+
       flex-direction: column;
+
       align-items: center;
 
       text-align: center;
@@ -539,24 +838,38 @@
           rgba(5, 7, 26, .75)
         );
 
-      border: 1px solid rgba(92, 116, 255, .35);
+      border:
+        1px solid
+        rgba(101, 83, 220, .38);
+
+      box-shadow:
+        inset 0 1px
+        rgba(255,255,255,.025);
 
       transition: .3s ease;
     }
 
-    .feature-card:hover {
-      transform: translateY(-7px);
 
-      border-color: #994fff;
+    .feature-card:hover {
+
+      transform:
+        translateY(-7px);
+
+      border-color:
+        #994fff;
 
       box-shadow:
-        0 0 25px rgba(129, 57, 255, .22);
+        0 0 25px
+        rgba(129, 57, 255, .22);
     }
 
+
     .feature-icon {
+
       height: 60px;
 
       display: flex;
+
       align-items: center;
 
       font-size: 42px;
@@ -570,105 +883,151 @@
         0 0 25px currentColor;
     }
 
-    .feature-card:nth-child(2) .feature-icon,
-    .feature-card:nth-child(4) .feature-icon {
+
+    .feature-card:nth-child(2)
+    .feature-icon,
+
+    .feature-card:nth-child(4)
+    .feature-icon {
+
       color: #20d9ff;
     }
 
+
     .feature-card h3 {
+
       margin-bottom: 12px;
 
       font-size: 18px;
+
       font-weight: 700;
     }
 
+
     .feature-card p {
+
       color: #c2c2d8;
 
       font-size: 14px;
+
       line-height: 1.55;
     }
 
+
     .feature-line {
+
       width: 40px;
+
       height: 4px;
 
       margin-top: auto;
-      padding-top: 0;
 
       border-radius: 20px;
 
       background: #bb50ff;
 
-      box-shadow: 0 0 12px #bb50ff;
+      box-shadow:
+        0 0 12px #bb50ff;
     }
 
-    .feature-card:nth-child(2) .feature-line,
-    .feature-card:nth-child(4) .feature-line {
+
+    .feature-card:nth-child(2)
+    .feature-line,
+
+    .feature-card:nth-child(4)
+    .feature-line {
+
       background: #16d9ff;
-      box-shadow: 0 0 12px #16d9ff;
+
+      box-shadow:
+        0 0 12px #16d9ff;
     }
+
 
     /* =========================
-       ABOUT
+       CONTENT
     ========================= */
 
     section.content-section {
+
       max-width: 1050px;
-      margin: 80px auto;
+
+      margin:
+        80px auto;
+
       padding: 20px;
+
       text-align: center;
     }
 
+
     .section-title {
+
       font-size: 42px;
+
       margin-bottom: 15px;
 
-      background: linear-gradient(
-        90deg,
-        #c64cff,
-        #5edfff
-      );
+      background:
+        linear-gradient(
+          90deg,
+          #c64cff,
+          #5edfff
+        );
 
       -webkit-background-clip: text;
+
       background-clip: text;
+
       color: transparent;
     }
 
+
     .section-text {
+
       color: #bcbcd0;
+
       line-height: 1.8;
+
       font-size: 16px;
     }
+
 
     /* =========================
        FOOTER
     ========================= */
 
     footer {
+
       max-width: 900px;
 
-      margin: 30px auto 0;
+      margin:
+        30px auto 0;
 
-      padding: 35px 20px 45px;
+      padding:
+        35px 20px 45px;
 
       text-align: center;
     }
 
+
     .footer-line {
+
       height: 1px;
 
-      background: linear-gradient(
-        90deg,
-        transparent,
-        #5d34ad,
-        transparent
-      );
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          #5d34ad,
+          transparent
+        );
 
       margin-bottom: 25px;
     }
 
+
     .footer-brand {
+
       color: #8d56ff;
 
       font-size: 28px;
@@ -677,10 +1036,15 @@
         0 0 12px #743bff;
     }
 
+
     .footer-nav {
+
       display: flex;
+
       justify-content: center;
+
       flex-wrap: wrap;
+
       gap: 17px;
 
       margin: 15px 0;
@@ -688,3 +1052,1146 @@
       color: #9f9ebc;
 
       font-size: 13px;
+    }
+
+
+    .footer-nav a {
+
+      color: inherit;
+
+      text-decoration: none;
+    }
+
+
+    .footer-nav a:hover {
+
+      color: #c36cff;
+    }
+
+
+    .copyright {
+
+      color: #65647e;
+
+      font-size: 12px;
+    }
+
+
+    /* =========================
+       MOBILE MENU
+    ========================= */
+
+    .mobile-menu {
+
+      display: none;
+
+      border: none;
+
+      background: transparent;
+
+      color: white;
+
+      font-size: 28px;
+
+      cursor: pointer;
+    }
+
+
+    /* =========================
+       LIGHT MODE
+    ========================= */
+
+    body.light-mode {
+
+      background:
+        radial-gradient(
+          circle at 50% 10%,
+          rgba(130, 70, 255, .12),
+          transparent 35%
+        ),
+        #eef0ff;
+
+      color: #151526;
+    }
+
+
+    body.light-mode header {
+
+      background:
+        rgba(245, 246, 255, .82);
+
+      border-bottom-color:
+        rgba(104, 73, 220, .25);
+    }
+
+
+    body.light-mode nav a,
+    body.light-mode .hero-description,
+    body.light-mode .online,
+    body.light-mode .section-text {
+
+      color: #34334a;
+    }
+
+
+    body.light-mode .feature-card,
+    body.light-mode .features {
+
+      background:
+        rgba(255,255,255,.72);
+    }
+
+
+    /* =========================
+       TABLET
+    ========================= */
+
+    @media (max-width: 1000px) {
+
+      nav {
+        gap: 20px;
+      }
+
+      .features {
+
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+      .feature-card:last-child {
+
+        grid-column:
+          1 / -1;
+      }
+
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 780px) {
+
+      header {
+
+        height: 75px;
+
+        padding:
+          0 20px;
+      }
+
+
+      .brand {
+
+        font-size: 21px;
+      }
+
+
+      .brand-icon {
+
+        font-size: 30px;
+      }
+
+
+      nav {
+
+        display: none;
+
+        position: absolute;
+
+        top: 75px;
+
+        left: 0;
+
+        right: 0;
+
+        padding: 25px;
+
+        flex-direction: column;
+
+        gap: 25px;
+
+        background:
+          rgba(4, 4, 22, .96);
+
+        border-bottom:
+          1px solid
+          rgba(125, 55, 255, .35);
+      }
+
+
+      nav.open {
+
+        display: flex;
+      }
+
+
+      nav a.active::after {
+
+        display: none;
+      }
+
+
+      .header-actions {
+
+        gap: 8px;
+      }
+
+
+      .theme-toggle {
+
+        display: none;
+      }
+
+
+      .header-actions .discord-btn {
+
+        padding:
+          11px 15px;
+
+        font-size: 12px;
+      }
+
+
+      .mobile-menu {
+
+        display: block;
+      }
+
+
+      .hero {
+
+        min-height: 750px;
+
+        padding-top: 110px;
+      }
+
+
+      .hero-glow {
+
+        width: 520px;
+
+        height: 520px;
+      }
+
+
+      .fork-symbol {
+
+        font-size: 90px;
+
+        width: 110px;
+
+        height: 110px;
+      }
+
+
+      .hero-title {
+
+        font-size: 55px;
+
+        letter-spacing: -3px;
+      }
+
+
+      .hero-tags {
+
+        gap: 10px;
+
+        font-size: 12px;
+      }
+
+
+      .hero-description {
+
+        font-size: 14px;
+
+        padding:
+          0 15px;
+      }
+
+
+      .hero-buttons {
+
+        flex-direction: column;
+      }
+
+
+      .hero-buttons .discord-btn,
+      .learn-btn {
+
+        width:
+          min(320px, 90%);
+      }
+
+
+      .features {
+
+        grid-template-columns: 1fr;
+      }
+
+
+      .feature-card:last-child {
+
+        grid-column: auto;
+      }
+
+
+      .section-title {
+
+        font-size: 32px;
+      }
+
+    }
+
+
+    /* =========================
+       SMALL PHONES
+    ========================= */
+
+    @media (max-width: 450px) {
+
+      .brand {
+
+        font-size: 18px;
+      }
+
+
+      .brand-icon {
+
+        font-size: 26px;
+      }
+
+
+      .header-actions .discord-btn {
+
+        display: none;
+      }
+
+
+      .hero-title {
+
+        font-size: 45px;
+      }
+
+
+      .hero-tags {
+
+        max-width: 330px;
+
+        margin-left: auto;
+
+        margin-right: auto;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       HEADER
+  ========================= -->
+
+  <header>
+
+    <a
+      href="#home"
+      class="brand"
+    >
+
+      <span class="brand-icon">
+        Ψ
+      </span>
+
+      <span>
+        Forks Land
+      </span>
+
+    </a>
+
+
+    <nav id="nav">
+
+      <a
+        href="#home"
+        class="active"
+      >
+        Home
+      </a>
+
+      <a href="#about">
+        About
+      </a>
+
+      <a href="#features">
+        Features
+      </a>
+
+      <a href="#commands">
+        Commands
+      </a>
+
+      <a href="#community">
+        Community
+      </a>
+
+    </nav>
+
+
+    <div class="header-actions">
+
+
+      <button
+        class="theme-toggle"
+        id="themeToggle"
+        aria-label="Toggle theme"
+      >
+
+        ☼
+
+        <span>
+          ☾
+        </span>
+
+      </button>
+
+
+      <a
+        href="https://discord.gg/z4SaguKyxu"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="discord-btn"
+      >
+
+        <span class="discord-icon">
+          ◉
+        </span>
+
+        Join Our Discord
+
+      </a>
+
+
+      <button
+        class="mobile-menu"
+        id="mobileMenu"
+        aria-label="Open menu"
+      >
+
+        ☰
+
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       MAIN
+  ========================= -->
+
+  <main>
+
+
+    <!-- HERO -->
+
+    <section
+      class="hero"
+      id="home"
+    >
+
+      <div class="hero-glow"></div>
+
+
+      <div class="hero-content">
+
+
+        <div class="fork-symbol">
+          Ψ
+        </div>
+
+
+        <h1 class="hero-title">
+          FORKS LAND
+        </h1>
+
+
+        <div class="hero-tags">
+
+          <span>
+            GAMING
+          </span>
+
+          <span class="dot">
+            •
+          </span>
+
+          <span>
+            FRIENDS
+          </span>
+
+          <span class="dot">
+            •
+          </span>
+
+          <span>
+            VOICE CHATS
+          </span>
+
+          <span class="dot">
+            •
+          </span>
+
+          <span>
+            EVENTS
+          </span>
+
+          <span class="dot">
+            •
+          </span>
+
+          <span>
+            GOOD VIBES
+          </span>
+
+        </div>
+
+
+        <p class="hero-description">
+
+          Welcome to Forks Land — a Discord community
+          where gamers, friends, and good vibes come
+          together. Join today and be part of something
+          special!
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+
+          <a
+            href="https://discord.gg/z4SaguKyxu"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="discord-btn"
+          >
+
+            <span class="discord-icon">
+              ◉
+            </span>
+
+            Join Our Discord →
+
+          </a>
+
+
+          <a
+            href="#about"
+            class="learn-btn"
+          >
+
+            ⓘ &nbsp; Learn More
+
+          </a>
+
+        </div>
+
+
+        <!-- REAL DISCORD COUNT -->
+
+        <div class="online">
+
+          <span class="online-dot"></span>
+
+          <span>
+
+            <strong id="onlineCount">
+              Loading...
+            </strong>
+
+            Members Online
+
+          </span>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         FEATURES
+    ========================= -->
+
+    <section
+      class="features-section"
+      id="features"
+    >
+
+      <div class="features">
+
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+            🎮
+          </div>
+
+          <h3>
+            Gaming
+          </h3>
+
+          <p>
+            Play, share, and find new games
+            with awesome people.
+          </p>
+
+          <div class="feature-line"></div>
+
+        </div>
+
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+            🎙
+          </div>
+
+          <h3>
+            Voice Chats
+          </h3>
+
+          <p>
+            Join voice channels, chill,
+            and talk with the community.
+          </p>
+
+          <div class="feature-line"></div>
+
+        </div>
+
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+            📅
+          </div>
+
+          <h3>
+            Events
+          </h3>
+
+          <p>
+            Regular events, giveaways,
+            and fun activities.
+          </p>
+
+          <div class="feature-line"></div>
+
+        </div>
+
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+            👥
+          </div>
+
+          <h3>
+            Community
+          </h3>
+
+          <p>
+            Make new friends and be part
+            of a supportive crew.
+          </p>
+
+          <div class="feature-line"></div>
+
+        </div>
+
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+            ♡
+          </div>
+
+          <h3>
+            Good Vibes
+          </h3>
+
+          <p>
+            A friendly, drama-free space
+            for everyone.
+          </p>
+
+          <div class="feature-line"></div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         ABOUT
+    ========================= -->
+
+    <section
+      class="content-section"
+      id="about"
+    >
+
+      <h2 class="section-title">
+        Welcome to Forks Land
+      </h2>
+
+      <p class="section-text">
+
+        Forks Land is built around gaming,
+        friendship, community, voice chats,
+        events, and good vibes.
+
+        Come hang out, meet new people,
+        and find your place in the community.
+
+      </p>
+
+    </section>
+
+
+    <!-- =========================
+         COMMANDS
+    ========================= -->
+
+    <section
+      class="content-section"
+      id="commands"
+    >
+
+      <h2 class="section-title">
+        Commands
+      </h2>
+
+      <p class="section-text">
+
+        Explore the Forks Land Discord
+        and discover everything our
+        community has to offer.
+
+      </p>
+
+    </section>
+
+
+    <!-- =========================
+         COMMUNITY
+    ========================= -->
+
+    <section
+      class="content-section"
+      id="community"
+    >
+
+      <h2 class="section-title">
+        Join the Community
+      </h2>
+
+      <p class="section-text">
+
+        Ready to hang out?
+
+        Join Forks Land on Discord
+        and become part of the community.
+
+      </p>
+
+      <br>
+
+
+      <a
+        href="https://discord.gg/z4SaguKyxu"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="discord-btn"
+      >
+
+        ◉ &nbsp; Join Forks Land
+
+      </a>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
+  <footer>
+
+    <div class="footer-line"></div>
+
+
+    <div class="footer-brand">
+      Ψ
+    </div>
+
+
+    <div class="footer-nav">
+
+      <a href="#home">
+        Forks Land
+      </a>
+
+      <span>
+        •
+      </span>
+
+      <a href="#features">
+        Gaming
+      </a>
+
+      <span>
+        •
+      </span>
+
+      <a href="#community">
+        Friends
+      </a>
+
+      <span>
+        •
+      </span>
+
+      <a href="#commands">
+        Events
+      </a>
+
+      <span>
+        •
+      </span>
+
+      <a href="#community">
+        Good Vibes
+      </a>
+
+    </div>
+
+
+    <div class="copyright">
+
+      © 2026 Forks Land.
+      All rights reserved.
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
+  <script>
+
+
+    /* =========================
+       DISCORD SERVER
+    ========================= */
+
+    const DISCORD_SERVER_ID =
+      "1544159911875707003";
+
+
+    /* =========================
+       REAL DISCORD ONLINE COUNT
+    ========================= */
+
+    async function updateDiscordOnlineCount() {
+
+      const onlineCount =
+        document.getElementById(
+          "onlineCount"
+        );
+
+
+      if (!onlineCount) {
+        return;
+      }
+
+
+      try {
+
+        onlineCount.textContent =
+          "Loading...";
+
+
+        const response =
+          await fetch(
+            `https://discord.com/api/guilds/${DISCORD_SERVER_ID}/widget.json`,
+            {
+              cache: "no-store"
+            }
+          );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            "Discord server widget is unavailable."
+          );
+
+        }
+
+
+        const data =
+          await response.json();
+
+
+        const count =
+          Number(
+            data.presence_count || 0
+          );
+
+
+        onlineCount.textContent =
+          count.toLocaleString();
+
+
+      } catch (error) {
+
+        console.error(
+          "Discord online count error:",
+          error
+        );
+
+
+        onlineCount.textContent =
+          "Unavailable";
+
+      }
+
+    }
+
+
+    /* Load immediately */
+
+    updateDiscordOnlineCount();
+
+
+    /* Refresh every minute */
+
+    setInterval(
+      updateDiscordOnlineCount,
+      60000
+    );
+
+
+    /* =========================
+       MOBILE MENU
+    ========================= */
+
+    const mobileMenu =
+      document.getElementById(
+        "mobileMenu"
+      );
+
+
+    const nav =
+      document.getElementById(
+        "nav"
+      );
+
+
+    mobileMenu.addEventListener(
+      "click",
+      () => {
+
+        nav.classList.toggle(
+          "open"
+        );
+
+      }
+    );
+
+
+    /* =========================
+       CLOSE MOBILE MENU
+    ========================= */
+
+    document
+      .querySelectorAll("nav a")
+      .forEach(link => {
+
+        link.addEventListener(
+          "click",
+          () => {
+
+            nav.classList.remove(
+              "open"
+            );
+
+          }
+        );
+
+      });
+
+
+    /* =========================
+       ACTIVE NAVIGATION
+    ========================= */
+
+    const sections =
+      document.querySelectorAll(
+        "section[id]"
+      );
+
+
+    const navLinks =
+      document.querySelectorAll(
+        "nav a"
+      );
+
+
+    window.addEventListener(
+      "scroll",
+      () => {
+
+        let current = "";
+
+
+        sections.forEach(
+          section => {
+
+            const sectionTop =
+              section.offsetTop - 150;
+
+
+            if (
+              window.scrollY >=
+              sectionTop
+            ) {
+
+              current =
+                section.getAttribute(
+                  "id"
+                );
+
+            }
+
+          }
+        );
+
+
+        navLinks.forEach(
+          link => {
+
+            link.classList.remove(
+              "active"
+            );
+
+
+            if (
+              link.getAttribute(
+                "href"
+              ) === "#" + current
+            ) {
+
+              link.classList.add(
+                "active"
+              );
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+
+    /* =========================
+       THEME TOGGLE
+    ========================= */
+
+    const themeToggle =
+      document.getElementById(
+        "themeToggle"
+      );
+
+
+    themeToggle.addEventListener(
+      "click",
+      () => {
+
+        document.body.classList.toggle(
+          "light-mode"
+        );
+
+      }
+    );
+
+
+    /* =========================
+       SMOOTH SCROLL
+    ========================= */
+
+    document
+      .querySelectorAll(
+        'a[href^="#"]'
+      )
+      .forEach(anchor => {
+
+        anchor.addEventListener(
+          "click",
+          function(event) {
+
+            const target =
+              document.querySelector(
+                this.getAttribute(
+                  "href"
+                )
+              );
+
+
+            if (!target) {
+              return;
+            }
+
+
+            event.preventDefault();
+
+
+            target.scrollIntoView({
+
+              behavior: "smooth",
+
+              block: "start"
+
+            });
+
+          }
+        );
+
+      });
+
+
+  </script>
+
+</body>
+</html>
